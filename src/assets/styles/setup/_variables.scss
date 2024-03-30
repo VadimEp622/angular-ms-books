@@ -8,11 +8,13 @@ $map-clr: (
     "transparent": (
         "transparent-black-1": rgba(0, 0, 0, 0.75)
     ),
-    "main-gold": (
-        "gold-0": #baaa51,
-        "gold-1": #dbc865b8
+    "main": (
+        "main-0": #F8F6E3,
+        "main-1": #97E7E1,
+        "main-2": #6AD4DD,
+        "main-3": #7AA2E3,
     ),
-    "main-blue": (
+    "blue": (
         "blue-0": #001c30,
         "blue-1": #1b2838,
         "blue-2": #171a21,
@@ -20,17 +22,17 @@ $map-clr: (
         "blue-4": #176b87,
         "blue-5": #42b6dde5
     ),
-    "main-gray": (
+    "gray": (
         "gray-0": #dcdcdc,
         "gray-1": #858f7e,
         "gray-2": #8f98a0,
         "gray-3": #cccccc
     ),
-    "main-red": (
+    "red": (
         "red-0": #f98460,
         "red-1": #ff4500
     ),
-    "main-green": (
+    "green": (
         "green-0": #adff2f
     )
 );
