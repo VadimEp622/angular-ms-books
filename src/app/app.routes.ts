@@ -21,7 +21,6 @@ export const routes: Routes = [
         component: DynamicLayoutComponent,
         loadChildren: () => import('./pages/about/about.routes').then(m => m.routes)
     },
-
     {
         path: '**',
         title: 'error',
