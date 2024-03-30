@@ -9,26 +9,28 @@ import { filter } from 'rxjs/operators'
   providedIn: 'root'
 })
 export class LayoutService {
-  private layout: string = 'main-layout'
 
   constructor(private router: Router) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      this.updateLayout()
+      this._updateLayout()
     })
   }
 
-  private updateLayout() {
+  private layout: string = 'main-layout'
+
+  public getLayout() {
+    return this.layout
+  }
+
+  // --------- Private Functions ---------
+  private _updateLayout() {
     const url = this.router.url
     if (url === '/about' || url === '/book') {
       this.layout = 'details-layout'
     } else {
       this.layout = 'main-layout'
     }
-  }
-
-  getLayout() {
-    return this.layout
   }
 }
