@@ -1,0 +1,278 @@
+// ======================== Colors ========================
+@each $colorType, $colors in $map-clr {
+    @each $colorName, $colorValue in $colors {
+        .clr-#{$colorName} {
+            color: $colorValue;
+        }
+
+        .bg-clr-#{$colorName} {
+            background-color: $colorValue;
+        }
+    }
+}
+
+// ======================= Font Size =======================
+@each $class-name, $font-size in $map-font-size {
+    .fs#{$class-name} {
+        font-size: rem($font-size);
+    }
+}
+
+// ======================= Font Weight =======================
+@each $class-name, $font-weight in $map-font-weight {
+    .fw#{$class-name} {
+        font-weight: $font-weight;
+    }
+}
+
+// ======================== Padding ========================
+// ******** Padding ********
+@each $class-name, $padding in $map-padding {
+    .pd-#{$class-name} {
+        padding: $padding;
+    }
+}
+
+// ******** Padding Inline ********
+@each $class-name, $padding-inline in $map-padding-inline {
+    .pd-in-#{$class-name} {
+        padding-inline: $padding-inline;
+    }
+}
+
+// ******** Padding Inline Start ********
+@each $class-name, $padding-inline-start in $map-padding-inline-start {
+    .pd-in-st-#{$class-name} {
+        padding-inline-start: $padding-inline-start;
+    }
+}
+
+// ******** Padding Inline End ********
+@each $class-name, $padding-inline-end in $map-padding-inline-end {
+    .pd-in-ed-#{$class-name} {
+        padding-inline-end: $padding-inline-end;
+    }
+}
+
+// ******** Padding Block ********
+@each $class-name, $padding-block in $map-padding-block {
+    .pd-bl-#{$class-name} {
+        padding-block: $padding-block;
+    }
+}
+
+// ******** Padding Block Start ********
+@each $class-name, $padding-block-start in $map-padding-block-start {
+    .pd-bl-st-#{$class-name} {
+        padding-block-start: $padding-block-start;
+    }
+}
+
+// ******** Padding Block End ********
+@each $class-name, $padding-block-end in $map-padding-block-end {
+    .pd-bl-ed-#{$class-name} {
+        padding-block-end: $padding-block-end;
+    }
+}
+
+// ======================== Margin ========================
+// ******** Margin ********
+@each $class-name, $margin in $map-margin {
+    .mg-#{$class-name} {
+        margin: $margin;
+    }
+}
+
+// ******** Margin Inline ********
+@each $class-name, $margin-inline in $map-margin-inline {
+    .mg-in-#{$class-name} {
+        margin-inline: $margin-inline;
+    }
+}
+
+// ******** Margin Inline Start ********
+@each $class-name, $margin-inline-start in $map-margin-inline-start {
+    .mg-in-st-#{$class-name} {
+        margin-inline-start: $margin-inline-start;
+    }
+}
+
+// ******** Margin Inline End ********
+@each $class-name, $margin-inline-end in $map-margin-inline-end {
+    .mg-in-ed-#{$class-name} {
+        margin-inline-end: $margin-inline-end;
+    }
+}
+
+// ******** Margin Block ********
+@each $class-name, $margin-block in $map-margin-block {
+    .mg-bl-#{$class-name} {
+        margin-block: $margin-block;
+    }
+}
+
+// ******** Margin Block Start ********
+@each $class-name, $margin-block-start in $map-margin-block-start {
+    .mg-bl-st-#{$class-name} {
+        margin-block-start: $margin-block-start;
+    }
+}
+
+// ******** Margin Block End ********
+@each $class-name, $margin-block-end in $map-margin-block-end {
+    .mg-bl-ed-#{$class-name} {
+        margin-block-end: $margin-block-end;
+    }
+}
+
+// ======================== Flex & Grid ========================
+.flex,
+.grid {
+    // ******** Align & Justify ********
+    &.justify-start {
+        justify-content: flex-start;
+    }
+
+    &.justify-center {
+        justify-content: center;
+    }
+
+    &.justify-end {
+        justify-content: flex-end;
+    }
+
+    &.space-between {
+        justify-content: space-between;
+    }
+
+    &.space-evenly {
+        justify-content: space-evenly;
+    }
+
+    &.align-center {
+        align-items: center;
+    }
+
+    &.align-baseline {
+        align-items: baseline;
+    }
+
+    &.align-content-start {
+        align-content: flex-start;
+    }
+
+    // ******** Gaps ********
+    @each $class-name, $gap in $map-gap {
+        &.gap#{$class-name} {
+            gap: $gap;
+        }
+    }
+}
+
+.flex {
+    display: flex;
+
+    > *.full {
+        flex: 1;
+    }
+
+    > *.no-grow-shrink {
+        flex: 0 0 auto;
+    }
+
+    &.column {
+        flex-direction: column;
+    }
+}
+
+.grid {
+    display: grid;
+}
+
+// ======================= Display =======================
+.dis-block {
+    display: block;
+}
+
+// ======================= Text =======================
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-start {
+    text-align: start;
+}
+
+.text-align-end {
+    text-align: end;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.white-space-nowrap {
+    white-space: nowrap;
+}
+
+// ======================= Position =======================
+.pos-rel {
+    position: relative;
+}
+
+.pos-abs {
+    position: absolute;
+}
+
+.pos-fix {
+    position: fixed;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.right-0 {
+    right: 0;
+}
+
+.bottom-0 {
+    bottom: 0;
+}
+
+.left-0 {
+    left: 0;
+}
+
+// ======================= Sizes =======================
+.width-full {
+    width: 100%;
+}
+
+.height-full {
+    height: 100%;
+}
+
+.width-10 {
+    width: 10px;
+}
+
+.width-300 {
+    width: 300px;
+}

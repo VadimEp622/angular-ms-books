@@ -1,0 +1,67 @@
+/* =================== Regular =================== */
+// 375px - 1049px
+@include for-screen(mobile) {
+    // ...
+}
+
+// 1050px - 1439px
+@include for-screen(tablet) {
+    // ...
+}
+
+// 1440px - infinity
+@include for-screen(desktop) {
+    // ...
+    // .main-layout {
+    //     grid-template-columns: 20px 1fr 20px;
+    // }
+
+    // .details-layout {
+    //     grid-template-columns: 73px 1fr 73px;
+    // }
+}
+
+/* =================== from-to =================== */
+// 0 - 374px
+@include for-screen(null-to-mobile) {
+    // ...
+}
+
+// 0 - 1049px
+@include for-screen(null-to-tablet) {
+    header {
+        & .app-header-desktop {
+            display: none;
+        }
+    }
+    // ...
+}
+
+// 0 - 1439px
+@include for-screen(null-to-desktop) {
+    // ...
+    // .main-layout,
+    // .details-layout {
+    //     grid-template-columns: 5px 1fr 5px;
+    // }
+}
+
+// 375px - 1439px
+@include for-screen(mobile-to-desktop) {
+    // ...
+}
+
+// 375px - infinity
+@include for-screen(mobile-to-infinity) {
+    // ...
+}
+
+// 1050px - infinity
+@include for-screen(tablet-to-infinity) {
+    header {
+        & .app-header-mobile {
+            display: none;
+        }
+    }
+    // ...
+}

@@ -1,0 +1,10 @@
+@import '../../../assets/styles/setup/_variables.scss';
+
+nav a {
+    padding-block: 10px;
+    padding-inline: 10px;
+
+    &:hover{
+        background-color: map-get($map-clr, "main-gray", "gray-3");
+    }
+}

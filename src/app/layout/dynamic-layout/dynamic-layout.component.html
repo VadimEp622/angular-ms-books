@@ -1,0 +1,12 @@
+<section
+    [ngClass]="layoutService.getLayout()"
+    class="main-app"
+>
+    <app-header
+        [ngClass]="['full' ,layoutService.getLayout()]"
+        layout="{{layoutService.getLayout()}}"
+    />
+    <main [ngClass]="['full' ,layoutService.getLayout()]">
+        <router-outlet></router-outlet>
+    </main>
+</section>
