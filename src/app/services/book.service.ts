@@ -12,7 +12,7 @@ const ENTITY = 'book'
 // ================================================================================================
 
 
-// TODO: for each book object, resturcture to leave only what we need
+// TODO: render books by genre to book-list.component
 
 
 @Injectable({
@@ -62,7 +62,10 @@ export class BookService {
         .pipe(
           map((dataArr: any[]) => {
             console.log('fetchnig data from API')
-            const transformedBooksObjects = dataArr.map((data: any) => this._createBooksBySubject(data?.name, data?.works))
+            const transformedBooksObjects = dataArr.map((data: any) => {
+              const transformedBooks = data?.works.map((book: any) => this._createMiniBook(book))
+              return this._createBooksBySubject(data?.name, transformedBooks)
+            })
             this.utilService.saveToStorage(ENTITY, transformedBooksObjects)
             return transformedBooksObjects
           })
@@ -84,6 +87,24 @@ export class BookService {
     return {
       genre,
       books
+    }
+  }
+
+  private _createMiniBook(book: any) {
+    const title = book?.title
+    const authors = book?.authors
+    const openLibBookId = book?.key.replace('/works/', '')
+    const openLibCoverId = book?.cover_id
+    return this._createMiniBookObject(title, authors, openLibBookId, openLibCoverId)
+  }
+
+  private _createMiniBookObject(title: string, authors: string[], openLibBookId: string, openLibCoverId: number) {
+    return {
+      _id: openLibBookId,
+      title,
+      authors,
+      openLibBookId,
+      openLibCoverId
     }
   }
 }
