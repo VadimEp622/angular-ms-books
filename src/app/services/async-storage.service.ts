@@ -10,6 +10,8 @@ export const storageService = {
     remove
 }
 
+// TODO: remake service as a class, for consistency and better testability
+
 type Entity = Book | User
 
 async function query(entityType: string, delay = 10): Promise<Entity[]> {
