@@ -1,14 +1,46 @@
 import { Injectable } from '@angular/core';
 import { UtilService } from './util.service';
+import { BehaviorSubject, Observable, forkJoin, from, map, of, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 const ENTITY = 'book'
+
+// ================================================================================================
+// A) Local-storage will act as DB
+// B) Local-storage will be divided into: booksBySubject, Users
+// C) booksBySubject will be an array of objects: [{ genre: 'love', books: [...] }, ...]
+// ================================================================================================
+
+
+// TODO: for each book object, resturcture to leave only what we need
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
-  constructor(private utilService: UtilService) { }
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService
+  ) { }
+
+  private _tempBookObj$ = new BehaviorSubject<any>({})
+  public tempBookObj$ = this._tempBookObj$.asObservable()
+
+
+  public queryBySubjects(subjects: string[] = ['love', 'fiction']) {
+    return this._getBooksBySubjects(subjects)
+      .pipe(
+        tap(data => {
+          const booksBySubject = data
+          this._tempBookObj$.next(booksBySubject)
+        })
+      )
+  }
+
+
+
 
 
   // TODO: Decide if we get real book data or not.
@@ -22,19 +54,36 @@ export class BookService {
   //      ** do we make a new list for new user created books? -> list title: "Check out out our new exclusives".
 
 
-
-
   // ------------------ Private Functions ------------------
-
-  private _getBooks(entity: any) {
-    const lsBooks = this.utilService.loadFromStorage(ENTITY)
-    if (!lsBooks || lsBooks.length < 1) {
-
-      // TODO: get from API + save to local storage + return fetched data
-
+  private _getBooksBySubjects(subjects: string[]) {
+    const lsBooksBySubject = this.utilService.loadFromStorage(ENTITY)
+    if (!lsBooksBySubject || lsBooksBySubject.length < 1) {
+      return this._fetchBooksBySubjects(subjects)
+        .pipe(
+          map((dataArr: any[]) => {
+            console.log('fetchnig data from API')
+            const transformedBooksObjects = dataArr.map((data: any) => this._createBooksBySubject(data?.name, data?.works))
+            this.utilService.saveToStorage(ENTITY, transformedBooksObjects)
+            return transformedBooksObjects
+          })
+        )
     }
-    return lsBooks
+    console.log('getting data from Local-storage')
+    return of(lsBooksBySubject)
   }
 
+  private _fetchBooksBySubjects(subjects: string[]) {
+    return forkJoin(subjects.map(subject => this._fetchBooksBySubjectAPI(subject)))
+  }
 
+  private _fetchBooksBySubjectAPI(subject: string) {
+    return this.http.get(`http://openlibrary.org/subjects/${subject}.json`)
+  }
+
+  private _createBooksBySubject(genre: string, books: any[]) {
+    return {
+      genre,
+      books
+    }
+  }
 }
