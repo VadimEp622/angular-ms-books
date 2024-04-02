@@ -17,7 +17,7 @@ const ENTITY = 'book'
 //      Need to make it so, that we ONLY UPDATE local-storage (in book data) with missing data, and NEVER remove any.
 //      ** if decide to do this, then it opens possibility of old untouched data in local-storage. maybe give each book genre object, a life of 24hrs?
 
-// TODO: research Angular observables error handling practices
+// TODO: research Angular observables error handling practices, and common mistakes, before attempting to tackle it.
 
 
 @Injectable({
@@ -128,4 +128,11 @@ export class BookService {
       openLibCoverId
     }
   }
+
+  private _handleError(err: HttpErrorResponse) {
+    console.log('err:', err)
+    return throwError(() => err)
+  }
 }
+
+
