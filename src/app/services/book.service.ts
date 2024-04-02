@@ -105,7 +105,7 @@ export class BookService {
     return this._createMiniBookObject(title, authors, openLibBookId, openLibCoverId)
   }
 
-  private _createMiniBookObject(title: string, authors: string[], openLibBookId: string, openLibCoverId: number) {
+  private _createMiniBookObject(title: string, authors: object[], openLibBookId: string, openLibCoverId: number) {
     return {
       _id: openLibBookId,
       title,
