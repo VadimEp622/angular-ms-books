@@ -12,7 +12,10 @@ const ENTITY = 'book'
 // ================================================================================================
 
 
-// TODO: render books by genre to book-list.component
+// TODO: right now, for each genre in genre array, we check if we have matching data in local-storage.
+//      if we have even 1 missing genre, we fetch data from API, remove all book data from local-storage, and replace with fetched data.
+//      Need to make it so, that we ONLY UPDATE local-storage (in book data) with missing data, and NEVER remove any.
+//      ** if decide to do this, then it opens possibility of old untouched data in local-storage. maybe give each book genre object, a life of 24hrs?
 
 
 @Injectable({
@@ -25,12 +28,12 @@ export class BookService {
     private utilService: UtilService
   ) { }
 
-  private _booksByGenres$ = new BehaviorSubject<any>({})
+  private _booksByGenres$ = new BehaviorSubject<any>([])
   public booksByGenres$ = this._booksByGenres$.asObservable()
 
 
-  public queryByGenres(subjects: string[] = ['love', 'fiction']) {
-    return this._getBooksByGenres(subjects)
+  public queryByGenres(genres: string[] = []) {
+    return this._getBooksByGenres(genres)
       .pipe(
         tap(data => {
           this._booksByGenres$.next(data)
@@ -54,10 +57,15 @@ export class BookService {
 
 
   // ------------------ Private Functions ------------------
-  private _getBooksByGenres(subjects: string[]) {
-    const lsBooksByGenre = this.utilService.loadFromStorage(ENTITY)
-    if (!lsBooksByGenre || lsBooksByGenre.length < 1) {
-      return this._fetchBooksByGenres(subjects)
+  private _getBooksByGenres(genres: string[]) {
+    const lsBooksByGenres = this.utilService.loadFromStorage(ENTITY)
+    if (
+      !lsBooksByGenres
+      || !Array.isArray(lsBooksByGenres)
+      || lsBooksByGenres.length < 1
+      || !genres.every(genre => lsBooksByGenres.some((booksByGenre: any) => booksByGenre.genre === genre))
+    ) {
+      return this._fetchBooksByGenres(genres)
         .pipe(
           map((dataArr: any[]) => {
             console.log('fetchnig data from API')
@@ -71,7 +79,7 @@ export class BookService {
         )
     }
     console.log('getting data from Local-storage')
-    return of(lsBooksByGenre)
+    return of(lsBooksByGenres)
   }
 
   private _fetchBooksByGenres(genres: string[]) {

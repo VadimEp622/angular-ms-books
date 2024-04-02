@@ -11,7 +11,7 @@ export class UtilService {
     localStorage.setItem(key, JSON.stringify(value))
   }
 
-  public loadFromStorage(key: any) {
+  public loadFromStorage(key: any): object | object[] | undefined {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
   }

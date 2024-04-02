@@ -1,33 +1,37 @@
-import { Observable, Subscription } from 'rxjs';
-import { BookService } from './../../../services/book.service';
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Observable, take } from 'rxjs'
+import { AsyncPipe, NgFor, NgIf } from '@angular/common'
+import { Component, OnInit } from '@angular/core'
+import { BookService } from './../../../services/book.service'
+import { BookListComponent } from '../../../cmps/book-list/book-list.component'
 
 
 @Component({
   selector: 'book-index',
   standalone: true,
-  imports: [],
+  imports: [BookListComponent, NgIf, NgFor, AsyncPipe],
   templateUrl: './book-index.component.html',
   styleUrl: './book-index.component.scss'
 })
-export class BookIndexComponent implements OnInit, OnDestroy {
+export class BookIndexComponent implements OnInit {
 
   constructor(private bookService: BookService) { }
 
   booksByGenres$!: Observable<any>
 
-  subscription1!: Subscription
-  subscription2!: Subscription
+  // TODO: make book preview card
+  // TODO: consider again, how the book-list (per genre) cmps should be structured in book-index, it's potential styling,
+  //          and whether we make an api fetch for each indiviual genre, or all at once.
+  //          also consider where we might use book-list in the WHOLE APP (maybe in user profile?, or in another route for a specific porpuse?).
+  // TODO: make book list scroll cards horizontally
+
 
   ngOnInit() {
     this.booksByGenres$ = this.bookService.booksByGenres$
 
-    this.subscription1 = this.bookService.queryByGenres().subscribe()
-    this.subscription2 = this.booksByGenres$.subscribe(data => console.log(data))
-  }
-
-  ngOnDestroy() {
-    this.subscription1.unsubscribe()
-    this.subscription2.unsubscribe()
+    this.bookService.queryByGenres(['romance', 'love', 'fiction'])
+      .pipe(take(1))
+      .subscribe({
+        error: (err) => console.log(err)
+      })
   }
 }
