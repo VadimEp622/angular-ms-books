@@ -33,7 +33,7 @@ export class BookIndexComponent implements OnInit {
     this.bookService.queryByGenres(this.currentGenres)
       .pipe(take(1)) // observable takes 1, then completes. upon observable error OR completion, it AUTOMATICALLY unsubscribes.
       .subscribe({
-        error: (err) => console.log(err)
+        error: (err) => console.log('Err from book-index', err)
       })
   }
 }

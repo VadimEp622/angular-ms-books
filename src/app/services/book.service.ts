@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UtilService } from './util.service';
-import { BehaviorSubject, Observable, forkJoin, from, map, of, tap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, catchError, forkJoin, from, map, of, retry, tap, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 const ENTITY = 'book'
 
@@ -16,6 +16,8 @@ const ENTITY = 'book'
 //      if we have even 1 missing genre, we fetch data from API, remove all book data from local-storage, and replace with fetched data.
 //      Need to make it so, that we ONLY UPDATE local-storage (in book data) with missing data, and NEVER remove any.
 //      ** if decide to do this, then it opens possibility of old untouched data in local-storage. maybe give each book genre object, a life of 24hrs?
+
+// TODO: research Angular observables error handling practices
 
 
 @Injectable({
@@ -70,6 +72,7 @@ export class BookService {
           map((dataArr: any[]) => {
             console.log('fetchnig data from API')
             const transformedBooksObjects = dataArr.map((data: any) => {
+
               const transformedBooks = data?.works.map((book: any) => this._createMiniBook(book))
               return this._createBooksByGenre(data?.name, transformedBooks)
             })
@@ -79,15 +82,26 @@ export class BookService {
         )
     }
     console.log('getting data from Local-storage')
-    return of(lsBooksByGenres)
+    return of(lsBooksByGenres as object[])
   }
 
   private _fetchBooksByGenres(genres: string[]) {
-    return forkJoin(genres.map(genre => this._fetchBooksByGenreAPI(genre)))
+    return forkJoin(genres.map(genre => this._fetchBooksByGenre(genre)))
   }
 
-  private _fetchBooksByGenreAPI(genre: string) {
-    return this.http.get(`http://openlibrary.org/subjects/${genre}.json`)
+  private _fetchBooksByGenre(genre: string) {
+    return this.http.get(this._getUrlBooksByGenre(genre))
+      .pipe(
+        retry(1),
+        catchError((error: HttpErrorResponse) => {
+          console.error(`Error fetching books for genre ${genre}:`, error);
+          return throwError(() => `Error fetching books for genre ${genre}`)
+        })
+      )
+  }
+
+  private _getUrlBooksByGenre(genre: string) {
+    return `http://openlibrary.org/subjects/${genre}.json`
   }
 
   private _createBooksByGenre(genre: string, books: any[]) {
