@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core'
 import { BookService } from './../../../services/book.service'
 import { BookListComponent } from '../../../cmps/book-list/book-list.component'
 
+type genre = 'romance' | 'love' | 'fiction' | 'adventure'
 
 @Component({
   selector: 'book-index',
@@ -17,6 +18,7 @@ export class BookIndexComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   booksByGenres$!: Observable<any>
+  currentGenres: genre[] = ['romance']
 
   // TODO: make book preview card
   // TODO: consider again, how the book-list (per genre) cmps should be structured in book-index, it's potential styling,
@@ -28,8 +30,8 @@ export class BookIndexComponent implements OnInit {
   ngOnInit() {
     this.booksByGenres$ = this.bookService.booksByGenres$
 
-    this.bookService.queryByGenres(['romance', 'love', 'fiction'])
-      .pipe(take(1))
+    this.bookService.queryByGenres(this.currentGenres)
+      .pipe(take(1)) // observable takes 1, then completes. upon observable error OR completion, it AUTOMATICALLY unsubscribes.
       .subscribe({
         error: (err) => console.log(err)
       })
