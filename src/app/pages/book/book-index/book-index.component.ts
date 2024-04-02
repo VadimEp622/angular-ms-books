@@ -14,16 +14,16 @@ export class BookIndexComponent implements OnInit, OnDestroy {
 
   constructor(private bookService: BookService) { }
 
-  booksBySubject$!: Observable<any>
+  booksByGenres$!: Observable<any>
 
   subscription1!: Subscription
   subscription2!: Subscription
 
   ngOnInit() {
-    this.booksBySubject$ = this.bookService.tempBookObj$
+    this.booksByGenres$ = this.bookService.booksByGenres$
 
-    this.subscription1 = this.bookService.queryBySubjects().subscribe()
-    this.subscription2 = this.booksBySubject$.subscribe(data => console.log(data))
+    this.subscription1 = this.bookService.queryByGenres().subscribe()
+    this.subscription2 = this.booksByGenres$.subscribe(data => console.log(data))
   }
 
   ngOnDestroy() {

@@ -25,16 +25,15 @@ export class BookService {
     private utilService: UtilService
   ) { }
 
-  private _tempBookObj$ = new BehaviorSubject<any>({})
-  public tempBookObj$ = this._tempBookObj$.asObservable()
+  private _booksByGenres$ = new BehaviorSubject<any>({})
+  public booksByGenres$ = this._booksByGenres$.asObservable()
 
 
-  public queryBySubjects(subjects: string[] = ['love', 'fiction']) {
-    return this._getBooksBySubjects(subjects)
+  public queryByGenres(subjects: string[] = ['love', 'fiction']) {
+    return this._getBooksByGenres(subjects)
       .pipe(
         tap(data => {
-          const booksBySubject = data
-          this._tempBookObj$.next(booksBySubject)
+          this._booksByGenres$.next(data)
         })
       )
   }
@@ -55,16 +54,16 @@ export class BookService {
 
 
   // ------------------ Private Functions ------------------
-  private _getBooksBySubjects(subjects: string[]) {
-    const lsBooksBySubject = this.utilService.loadFromStorage(ENTITY)
-    if (!lsBooksBySubject || lsBooksBySubject.length < 1) {
-      return this._fetchBooksBySubjects(subjects)
+  private _getBooksByGenres(subjects: string[]) {
+    const lsBooksByGenre = this.utilService.loadFromStorage(ENTITY)
+    if (!lsBooksByGenre || lsBooksByGenre.length < 1) {
+      return this._fetchBooksByGenres(subjects)
         .pipe(
           map((dataArr: any[]) => {
             console.log('fetchnig data from API')
             const transformedBooksObjects = dataArr.map((data: any) => {
               const transformedBooks = data?.works.map((book: any) => this._createMiniBook(book))
-              return this._createBooksBySubject(data?.name, transformedBooks)
+              return this._createBooksByGenre(data?.name, transformedBooks)
             })
             this.utilService.saveToStorage(ENTITY, transformedBooksObjects)
             return transformedBooksObjects
@@ -72,18 +71,18 @@ export class BookService {
         )
     }
     console.log('getting data from Local-storage')
-    return of(lsBooksBySubject)
+    return of(lsBooksByGenre)
   }
 
-  private _fetchBooksBySubjects(subjects: string[]) {
-    return forkJoin(subjects.map(subject => this._fetchBooksBySubjectAPI(subject)))
+  private _fetchBooksByGenres(genres: string[]) {
+    return forkJoin(genres.map(genre => this._fetchBooksByGenreAPI(genre)))
   }
 
-  private _fetchBooksBySubjectAPI(subject: string) {
-    return this.http.get(`http://openlibrary.org/subjects/${subject}.json`)
+  private _fetchBooksByGenreAPI(genre: string) {
+    return this.http.get(`http://openlibrary.org/subjects/${genre}.json`)
   }
 
-  private _createBooksBySubject(genre: string, books: any[]) {
+  private _createBooksByGenre(genre: string, books: any[]) {
     return {
       genre,
       books
