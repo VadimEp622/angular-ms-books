@@ -1,6 +1,8 @@
-<ng-container *ngIf="booksByGenres$ | async as booksByGenres">
-    <book-list
+<section class="book-index mg-bl-20">
+    <ng-container *ngIf="booksByGenres$ | async as booksByGenres">
+        <book-list
         *ngFor="let booksByGenre of booksByGenres"
         [booksByGenre]="booksByGenre"
-    ></book-list>
-</ng-container>
+        ></book-list>
+    </ng-container>
+</section>

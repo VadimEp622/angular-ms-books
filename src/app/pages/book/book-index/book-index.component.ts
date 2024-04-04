@@ -22,7 +22,7 @@ export class BookIndexComponent implements OnInit {
   booksByGenres$!: Observable<BooksByGenre[]>
   currentGenres: Genre[] = ['romance']
 
-  // TODO: make book preview card
+  
   // TODO: consider again, how the book-list (per genre) cmps should be structured in book-index, it's potential styling,
   //          and whether we make an api fetch for each indiviual genre, or all at once.
   //          also consider where we might use book-list in the WHOLE APP (maybe in user profile?, or in another route for a specific porpuse?).

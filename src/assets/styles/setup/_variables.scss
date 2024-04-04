@@ -141,6 +141,7 @@ $map-margin-inline-end: (
 // ************** Margin Block Map **************
 $map-margin-block: (
     "0": map-get($map-spacing, "0"),
+    "5": map-get($map-spacing, "5"),
     "20": map-get($map-spacing, "20"),
     "40": map-get($map-spacing, "40")
 );

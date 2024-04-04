@@ -1,1 +1,11 @@
-<pre><code>{{ book | json }}</code></pre>
+<!-- <pre><code>{{ book | json }}</code></pre> -->
+<section class="book-preview flex">
+    <section class="book-img">
+        <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverId }}-S.jpg" alt="book">
+    </section>
+    <section class="book-info">
+        <h3>{{ book.title }}</h3>
+        <p class="mg-bl-5">{{ book.authors[0].name }}</p>
+        <!-- <p>{{ book.openLibBookId }}</p> -->
+    </section>
+</section>
