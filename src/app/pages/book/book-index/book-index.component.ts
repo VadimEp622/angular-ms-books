@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core'
 import { BookService } from './../../../services/book.service'
 import { BookListComponent } from '../../../cmps/book-list/book-list.component'
 import { Genre } from '../../../models/genre.model'
+import { BooksByGenre } from '../../../models/books-by-genre.model'
 
 
 
@@ -18,7 +19,7 @@ export class BookIndexComponent implements OnInit {
 
   constructor(private bookService: BookService) { }
 
-  booksByGenres$!: Observable<any>
+  booksByGenres$!: Observable<BooksByGenre[]>
   currentGenres: Genre[] = ['romance']
 
   // TODO: make book preview card
