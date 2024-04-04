@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { BooksByGenre } from '../models/books-by-genre.model'
 import { Book } from '../models/book.model'
 import { BookMini } from '../models/book-mini.model'
+import { Genre } from '../models/genre.model'
 
 const ENTITY = 'book'
 
@@ -42,7 +43,7 @@ export class BookService {
   public booksByGenres$ = this._booksByGenres$.asObservable()
 
 
-  public queryByGenres(genres: string[] = []) {
+  public queryByGenres(genres: Genre[] = []) {
     return this._getBooksByGenres(genres)
       .pipe(
         tap(data => {
@@ -67,7 +68,7 @@ export class BookService {
 
 
   // ------------------ Private Functions ------------------
-  private _getBooksByGenres(genres: string[]) {
+  private _getBooksByGenres(genres: Genre[]) {
     const lsBooksByGenres = this.utilService.loadFromStorage(ENTITY)
     if (
       !lsBooksByGenres
@@ -93,11 +94,11 @@ export class BookService {
     return of(lsBooksByGenres as BooksByGenre[])
   }
 
-  private _fetchBooksByGenres(genres: string[]) {
+  private _fetchBooksByGenres(genres: Genre[]) {
     return forkJoin(genres.map(genre => this._fetchBooksByGenre(genre)))
   }
 
-  private _fetchBooksByGenre(genre: string) {
+  private _fetchBooksByGenre(genre: Genre) {
     return this.http.get(this._getUrlBooksByGenre(genre))
       .pipe(
         // TODO: check if fetched data is valid/correct format. if not, handle it.
@@ -106,11 +107,11 @@ export class BookService {
       )
   }
 
-  private _getUrlBooksByGenre(genre: string) {
+  private _getUrlBooksByGenre(genre: Genre) {
     return `http://openlibrary.org/subjects/${genre}.json`
   }
 
-  private _createBooksByGenre(genre: string, books: BookMini[]): BooksByGenre {
+  private _createBooksByGenre(genre: Genre, books: BookMini[]): BooksByGenre {
     return {
       genre,
       books
@@ -135,7 +136,7 @@ export class BookService {
     }
   }
 
-  private _handleError(error: HttpErrorResponse, genre: string) {
+  private _handleError(error: HttpErrorResponse, genre: Genre) {
     console.error(`Failed fetching books for genre ${genre}:`, error)
     return of({
       genre: genre,

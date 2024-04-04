@@ -3,8 +3,9 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { BookService } from './../../../services/book.service'
 import { BookListComponent } from '../../../cmps/book-list/book-list.component'
+import { Genre } from '../../../models/genre.model'
 
-type genre = 'romance' | 'love' | 'fiction' | 'adventure'
+
 
 @Component({
   selector: 'book-index',
@@ -18,7 +19,7 @@ export class BookIndexComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   booksByGenres$!: Observable<any>
-  currentGenres: genre[] = ['romance']
+  currentGenres: Genre[] = ['romance']
 
   // TODO: make book preview card
   // TODO: consider again, how the book-list (per genre) cmps should be structured in book-index, it's potential styling,

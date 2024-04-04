@@ -1,0 +1,1 @@
+export type Genre = 'romance' | 'love' | 'fiction' | 'adventure'
