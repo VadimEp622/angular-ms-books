@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
-import { UtilService } from './util.service';
-import { BehaviorSubject, Observable, catchError, forkJoin, from, map, of, retry, tap, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core'
+import { UtilService } from './util.service'
+import { BehaviorSubject, catchError, forkJoin, map, of, retry, tap } from 'rxjs'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { BooksByGenre } from '../models/books-by-genre.model'
+import { Book } from '../models/book.model'
+import { BookMini } from '../models/book-mini.model'
 
 const ENTITY = 'book'
 
@@ -17,7 +20,12 @@ const ENTITY = 'book'
 //      Need to make it so, that we ONLY UPDATE local-storage (in book data) with missing data, and NEVER remove any.
 //      ** if decide to do this, then it opens possibility of old untouched data in local-storage. maybe give each book genre object, a life of 24hrs?
 
-// TODO: research Angular observables error handling practices, and common mistakes, before attempting to tackle it.
+// TODO: research advanced angular error handling (specifically, error$ observable).
+
+// TODO: improve typescript for fetched data, and enforce expected data structure. 
+
+// TODO: don't store BookMini objects with 'error' key, in local-storage.
+
 
 
 @Injectable({
@@ -30,7 +38,7 @@ export class BookService {
     private utilService: UtilService
   ) { }
 
-  private _booksByGenres$ = new BehaviorSubject<any>([])
+  private _booksByGenres$ = new BehaviorSubject<BooksByGenre[]>([])
   public booksByGenres$ = this._booksByGenres$.asObservable()
 
 
@@ -72,8 +80,8 @@ export class BookService {
           map((dataArr: any[]) => {
             console.log('fetchnig data from API')
             const transformedBooksObjects = dataArr.map((data: any) => {
-
-              const transformedBooks = data?.works.map((book: any) => this._createMiniBook(book))
+              if (data.error) return data
+              const transformedBooks = data?.works.map((book: Book) => this._createMiniBook(book))
               return this._createBooksByGenre(data?.name, transformedBooks)
             })
             this.utilService.saveToStorage(ENTITY, transformedBooksObjects)
@@ -82,7 +90,7 @@ export class BookService {
         )
     }
     console.log('getting data from Local-storage')
-    return of(lsBooksByGenres as object[])
+    return of(lsBooksByGenres as BooksByGenre[])
   }
 
   private _fetchBooksByGenres(genres: string[]) {
@@ -92,11 +100,9 @@ export class BookService {
   private _fetchBooksByGenre(genre: string) {
     return this.http.get(this._getUrlBooksByGenre(genre))
       .pipe(
+        // TODO: check if fetched data is valid/correct format. if not, handle it.
         retry(1),
-        catchError((error: HttpErrorResponse) => {
-          console.error(`Error fetching books for genre ${genre}:`, error);
-          return throwError(() => `Error fetching books for genre ${genre}`)
-        })
+        catchError((error) => this._handleError(error, genre))
       )
   }
 
@@ -104,22 +110,22 @@ export class BookService {
     return `http://openlibrary.org/subjects/${genre}.json`
   }
 
-  private _createBooksByGenre(genre: string, books: any[]) {
+  private _createBooksByGenre(genre: string, books: BookMini[]): BooksByGenre {
     return {
       genre,
       books
     }
   }
 
-  private _createMiniBook(book: any) {
-    const title = book?.title
-    const authors = book?.authors
-    const openLibBookId = book?.key.replace('/works/', '')
-    const openLibCoverId = book?.cover_id
+  private _createMiniBook(apiBook: any): BookMini {
+    const title = apiBook?.title
+    const authors = apiBook?.authors
+    const openLibBookId = apiBook?.key.replace('/works/', '')
+    const openLibCoverId = apiBook?.cover_id
     return this._createMiniBookObject(title, authors, openLibBookId, openLibCoverId)
   }
 
-  private _createMiniBookObject(title: string, authors: object[], openLibBookId: string, openLibCoverId: number) {
+  private _createMiniBookObject(title: string, authors: object[], openLibBookId: string, openLibCoverId: number): BookMini {
     return {
       _id: openLibBookId,
       title,
@@ -129,9 +135,13 @@ export class BookService {
     }
   }
 
-  private _handleError(err: HttpErrorResponse) {
-    console.log('err:', err)
-    return throwError(() => err)
+  private _handleError(error: HttpErrorResponse, genre: string) {
+    console.error(`Failed fetching books for genre ${genre}:`, error)
+    return of({
+      genre: genre,
+      books: [],
+      error: `Failed fetching books for genre ${genre}`
+    })
   }
 }
 
