@@ -23,7 +23,7 @@ export class BookIndexComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   booksByGenres$!: Observable<BooksByGenre[]>
-  currentGenres: Genre[] = ['adventure', 'love']
+  currentGenres: Genre[] = ['romance']
 
 
   // TODO: consider again, how the book-list (per genre) cmps should be structured in book-index, it's potential styling,
