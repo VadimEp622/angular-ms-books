@@ -15,7 +15,9 @@ export class BookCarouselComponent {
 
   responsiveOptions: any[] = this.getResponsiveOptions()
 
-  // TODO: add preview text break/overflow with ellipsis
+  // TODO: increase book picture's dimensions
+  // TODO: rethink if it's better for horizontal carousel to only have book pictures,
+  //          and have lists for books + title + authors that are either not carousels or maybe horizontal carousels?
 
   constructor() { }
 
