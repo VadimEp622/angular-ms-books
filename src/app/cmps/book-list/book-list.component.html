@@ -1,4 +1,3 @@
-<book-preview
-    *ngFor="let book of booksByGenre.books"
-    [book]="book"
-></book-preview>
+<section class="book-list">
+    <book-carousel [booksByGenre]="booksByGenre"></book-carousel>
+</section>

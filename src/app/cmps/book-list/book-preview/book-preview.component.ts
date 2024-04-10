@@ -5,6 +5,7 @@ import { Component, Input } from '@angular/core'
   selector: 'book-preview',
   standalone: true,
   imports: [JsonPipe],
+  host: { class: '' },
   templateUrl: './book-preview.component.html',
   styleUrl: './book-preview.component.scss'
 })

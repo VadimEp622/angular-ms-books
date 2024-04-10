@@ -8,6 +8,11 @@
         &.full {
             grid-column: 1 /-1;
         }
+
+        &:not(.full) {
+            min-width: 0; // super important for child elements of this class, which are flexed, and have dynamic content
+            //               and need to be sized based on said dynamic content
+        }
     }
 }
 

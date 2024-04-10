@@ -27,7 +27,7 @@ export class LayoutService {
   // --------- Private Functions ---------
   private _updateLayout() {
     const url = this.router.url
-    if (url === '/about' || url === '/book') {
+    if (url === '/about') {
       this.layout = 'details-layout'
     } else {
       this.layout = 'main-layout'

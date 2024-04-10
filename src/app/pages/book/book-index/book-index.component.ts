@@ -12,6 +12,9 @@ import { BooksByGenre } from '../../../models/books-by-genre.model'
   selector: 'book-index',
   standalone: true,
   imports: [BookListComponent, NgIf, NgFor, AsyncPipe],
+  host: {
+    class: 'full main-layout'
+  },
   templateUrl: './book-index.component.html',
   styleUrl: './book-index.component.scss'
 })
@@ -20,9 +23,9 @@ export class BookIndexComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   booksByGenres$!: Observable<BooksByGenre[]>
-  currentGenres: Genre[] = ['romance']
+  currentGenres: Genre[] = ['adventure', 'love']
 
-  
+
   // TODO: consider again, how the book-list (per genre) cmps should be structured in book-index, it's potential styling,
   //          and whether we make an api fetch for each indiviual genre, or all at once.
   //          also consider where we might use book-list in the WHOLE APP (maybe in user profile?, or in another route for a specific porpuse?).

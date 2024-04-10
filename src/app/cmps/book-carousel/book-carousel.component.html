@@ -1,0 +1,14 @@
+<p-carousel
+    [value]="booksByGenre.books"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+>
+    <ng-template
+        let-book
+        pTemplate="item"
+    >
+        <book-preview [book]="book"></book-preview>
+    </ng-template>
+</p-carousel>
