@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { UtilService } from './util.service'
-import { BehaviorSubject, catchError, forkJoin, map, of, retry, tap } from 'rxjs'
+import { BehaviorSubject, catchError, delay, forkJoin, map, of, retry, tap } from 'rxjs'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { BooksByGenre } from '../models/books-by-genre.model'
 import { Book } from '../models/book.model'
@@ -15,8 +15,12 @@ const ENTITY = 'book'
 // C) booksBySubject will be an array of objects: [{ genre: 'love', books: [...] }, ...]
 // ================================================================================================
 
+// INFO: RIGHT NOW, using "queryByGenres()" we fetch all books by genres from the API,
+//          so that each API call per genre: 1. if one fails, all other calls will continue.
+//                                           2. only when all calls are done, _booksByGenres$ observable will recieve all the data
 
-// TODO: right now, for each genre in genre array, we check if we have matching data in local-storage.
+
+// TODO: RIGHT NOW, for each genre in genre array, we check if we have matching data in local-storage.
 //      if we have even 1 missing genre, we fetch data from API, remove all book data from local-storage, and replace with fetched data.
 //      Need to make it so, that we ONLY UPDATE local-storage (in book data) with missing data, and NEVER remove any.
 //      ** if decide to do this, then it opens possibility of old untouched data in local-storage. maybe give each book genre object, a life of 24hrs?
@@ -102,6 +106,7 @@ export class BookService {
     return this.http.get(this._getUrlBooksByGenre(genre))
       .pipe(
         // TODO: check if fetched data is valid/correct format. if not, handle it.
+        // delay(1000),
         retry(1),
         catchError((error) => this._handleError(error, genre))
       )
