@@ -15,6 +15,8 @@ export class BookCarouselComponent {
 
   responsiveOptions: any[] = this.getResponsiveOptions()
 
+  // TODO: add title (carousel header?)
+  // TODO: add spacing
 
   constructor() { }
 
@@ -23,17 +25,17 @@ export class BookCarouselComponent {
       {
         breakpoint: '2000px',
         numVisible: 6,
-        numScroll: 6
+        numScroll: 3
       },
       {
         breakpoint: '1700px',
         numVisible: 5,
-        numScroll: 5
+        numScroll: 3
       },
       {
         breakpoint: '1400px',
         numVisible: 4,
-        numScroll: 4
+        numScroll: 3
       },
       {
         breakpoint: '1100px',
