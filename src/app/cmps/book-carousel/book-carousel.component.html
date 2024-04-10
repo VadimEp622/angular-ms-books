@@ -4,7 +4,12 @@
     [numScroll]="3"
     [circular]="false"
     [responsiveOptions]="responsiveOptions"
+    indicatorsContentClass="pd-20"
 >
+    <ng-template pTemplate="header">
+        <h1 class="capitalize pd-10">{{booksByGenre.genre}}</h1>
+    </ng-template>
+
     <ng-template
         let-book
         pTemplate="item"

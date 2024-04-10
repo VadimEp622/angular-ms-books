@@ -4,6 +4,7 @@
             <book-list
                 *ngFor="let booksByGenre of booksByGenres"
                 [booksByGenre]="booksByGenre"
+                class="mg-bl-20"
             ></book-list>
         </ng-container>
         <ng-template #loading>

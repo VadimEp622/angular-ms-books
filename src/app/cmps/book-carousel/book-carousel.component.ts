@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { CarouselModule } from 'primeng/carousel'
 import { BooksByGenre } from '../../models/books-by-genre.model'
 import { BookPreviewComponent } from '../book-list/book-preview/book-preview.component'
@@ -15,8 +15,7 @@ export class BookCarouselComponent {
 
   responsiveOptions: any[] = this.getResponsiveOptions()
 
-  // TODO: add title (carousel header?)
-  // TODO: add spacing
+  // TODO: add preview text break/overflow with ellipsis
 
   constructor() { }
 
