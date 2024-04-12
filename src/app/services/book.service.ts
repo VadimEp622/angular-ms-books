@@ -113,7 +113,7 @@ export class BookService {
   }
 
   private _getUrlBooksByGenre(genre: Genre) {
-    return `http://openlibrary.org/subjects/${genre}.json`
+    return `https://openlibrary.org/subjects/${genre}.json`
   }
 
   private _createBooksByGenre(genre: Genre, books: BookMini[]): BooksByGenre {
