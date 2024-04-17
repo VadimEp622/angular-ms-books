@@ -1,0 +1,171 @@
+// ======================== COLORS ========================
+// ************** Color Map **************
+$map-clr: (
+    "pure": (
+        "white": white,
+        "black": black
+    ),
+    "transparent": (
+        "transparent-black-1": rgba(0, 0, 0, 0.75)
+    ),
+    "main": (
+        "main-0": #f8f6e3,
+        "main-1": #97e7e1,
+        "main-2": #6ad4dd,
+        "main-3": #7aa2e3
+    ),
+    "blue": (
+        "blue-0": #001c30,
+        "blue-1": #1b2838,
+        "blue-2": #171a21,
+        "blue-3": #64ccc5,
+        "blue-4": #176b87,
+        "blue-5": #42b6dde5
+    ),
+    "gray": (
+        "gray-0": #dcdcdc,
+        "gray-1": #858f7e,
+        "gray-2": #8f98a0,
+        "gray-3": #cccccc
+    ),
+    "red": (
+        "red-0": #f98460,
+        "red-1": #ff4500
+    ),
+    "green": (
+        "green-0": #adff2f
+    )
+);
+
+/* =================== Breakpoints =================== */
+$mobile-breakpoint: 375px;
+$tablet-breakpoint: 1050px;
+$desktop-breakpoint: 1440px;
+
+// ======================== FONTS ========================
+// ************** Font Size Map **************
+$map-font-size: (
+    "18": 18px,
+    "20": 20px,
+    "25": 25px,
+    "34": 34px
+);
+
+// ************** Font Weight Map **************
+$map-font-weight: (
+    "100": 100,
+    "200": 200,
+    "300": 300,
+    "400": 400,
+    "500": 500,
+    "600": 600,
+    "700": 700,
+    "800": 800,
+    "900": 900
+);
+
+// ======================== SPACING ========================
+// ************** Spacing Map **************
+$map-spacing: (
+    "0": 0,
+    "5": 5px,
+    "10": 10px,
+    "15": 15px,
+    "20": 20px,
+    "40": 40px
+);
+
+// ************** Padding Map **************
+$map-padding: (
+    "0": map-get($map-spacing, "0"),
+    "5": map-get($map-spacing, "5"),
+    "10": map-get($map-spacing, "10"),
+    "20": map-get($map-spacing, "20")
+);
+
+// ************** Padding Inline Map **************
+$map-padding-inline: (
+    "0": map-get($map-spacing, "0"),
+    "10": map-get($map-spacing, "10")
+);
+
+$map-padding-inline-start: (
+    "0": map-get($map-spacing, "0")
+);
+
+$map-padding-inline-end: (
+    "0": map-get($map-spacing, "0"),
+    "10": map-get($map-spacing, "10")
+);
+
+// ************** Padding Block Map **************
+$map-padding-block: (
+    "0": map-get($map-spacing, "0"),
+    "5": map-get($map-spacing, "5"),
+    "10": map-get($map-spacing, "10"),
+    "15": map-get($map-spacing, "15"),
+    "20": map-get($map-spacing, "20")
+);
+
+$map-padding-block-start: (
+    "0": map-get($map-spacing, "0"),
+    "15": map-get($map-spacing, "15"),
+    "20": map-get($map-spacing, "20")
+);
+
+$map-padding-block-end: (
+    "0": map-get($map-spacing, "0"),
+    "5": map-get($map-spacing, "5"),
+    "10": map-get($map-spacing, "10")
+);
+
+// ************** Margin Map **************
+$map-margin: (
+    "0": map-get($map-spacing, "0"),
+    "20": map-get($map-spacing, "20"),
+    "40": map-get($map-spacing, "40")
+);
+
+// ************** Margin Inline Map **************
+$map-margin-inline: (
+    "auto": auto,
+    "0": map-get($map-spacing, "0"),
+    "10": map-get($map-spacing, "10"),
+    "20": map-get($map-spacing, "20")
+);
+
+$map-margin-inline-start: (
+    "0": map-get($map-spacing, "0"),
+    "5": map-get($map-spacing, "5")
+);
+
+$map-margin-inline-end: (
+    "0": map-get($map-spacing, "0")
+);
+
+// ************** Margin Block Map **************
+$map-margin-block: (
+    "0": map-get($map-spacing, "0"),
+    "5": map-get($map-spacing, "5"),
+    "20": map-get($map-spacing, "20"),
+    "40": map-get($map-spacing, "40")
+);
+
+$map-margin-block-start: (
+    "0": map-get($map-spacing, "0"),
+    "10": map-get($map-spacing, "10"),
+    "20": map-get($map-spacing, "20")
+);
+
+$map-margin-block-end: (
+    "0": map-get($map-spacing, "0")
+);
+
+// ************** Gap Map **************
+$map-gap: (
+    "0": map-get($map-spacing, "0"),
+    "5": map-get($map-spacing, "5"),
+    "10": map-get($map-spacing, "10"),
+    "20": map-get($map-spacing, "20"),
+    "40": map-get($map-spacing, "40")
+);
