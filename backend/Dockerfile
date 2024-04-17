@@ -1,5 +1,7 @@
 # syntax=docker/dockerfile:1
 
+# TODO: research what is docker-compose and how it works, to make the logger work in node.js (file permissions issue)  
+
 ARG NODE_VERSION=21
 
 FROM node:${NODE_VERSION}-alpine
@@ -21,6 +23,9 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 # Run the application as a non-root user.
 USER node
+
+# Create the logs directory and set its permissions.
+# RUN mkdir -p ./logs && chown node:node ./logs
 
 # Expose the port that the application listens on.
 EXPOSE 3030
