@@ -16,7 +16,6 @@ import { RouterLink } from '@angular/router'
 export class AppMainMenuComponent {
 
   // TODO: make X button an SVG
-  // TODO: make a main-menu setter, in addition to the toggler (for when a certain click will always change the state to one boolean value, and never the other)
   // TODO: make routes guards, so before each route load, set main-menu state to false
 
   @Input() isMenuOpen!: boolean
@@ -27,7 +26,7 @@ export class AppMainMenuComponent {
     return this.isMenuOpen ? ['right-0'] : ['right-neg-full']
   }
 
-  onToggleMenu() {
-    this.mainMenuService.toggleMenu()
+  onCloseMenu() {
+    this.mainMenuService.setMenu(false)
   }
 }

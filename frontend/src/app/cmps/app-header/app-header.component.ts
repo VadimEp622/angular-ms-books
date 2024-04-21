@@ -19,4 +19,8 @@ export class AppHeaderComponent {
   onToggleMenu() {
     this.mainMenuService.toggleMenu()
   }
+
+  onOpenMenu() {
+    this.mainMenuService.setMenu(true)
+  }
 }

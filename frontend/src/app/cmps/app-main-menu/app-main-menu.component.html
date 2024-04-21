@@ -4,13 +4,13 @@
 >
     <div
         class="overlay width-full height-full bg-clr-black"
-        (click)="onToggleMenu()"
+        (click)="onCloseMenu()"
     ></div>
     <section
         class="main-menu bg-clr-main-2 pd-20 pos-abs top-0 height-full width-50vw min-width-200 max-width-300"
         [ngClass]="getMenuClass()"
     >
-        <p (click)="onToggleMenu()">x</p>
+        <p (click)="onCloseMenu()">x</p>
 
         <nav class="desktop-nav pd-bl-20">
             <ul class="flex column gap10">

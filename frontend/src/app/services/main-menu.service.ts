@@ -16,4 +16,8 @@ export class MainMenuService {
   public toggleMenu(): void {
     this._isMenuOpen$.next(!this._isMenuOpen$.getValue())
   }
+
+  public setMenu(value: boolean = false): void {
+    this._isMenuOpen$.next(value)
+  }
 }

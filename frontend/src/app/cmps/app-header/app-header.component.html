@@ -3,7 +3,7 @@
     class="bg-clr-main-3"
 >
     <section class="app-header-container flex align-center space-between gap20 pd-bl-5">
-        <section>
+        <section class="logo">
             <h1 class="fs25 pd-bl-10">Ms. Books</h1>
         </section>
 
@@ -35,8 +35,7 @@
         <dynamic-svg
             class="mobile-menu-icon pd-5"
             [svgPath]="'assets/imgs/icon/config/icon-hamburger.svg'"
-            (click)="onToggleMenu()"
+            (click)="onOpenMenu()"
         ></dynamic-svg>
-
     </section>
 </header>
