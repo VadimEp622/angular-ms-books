@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { NavigationEnd, NavigationSkipped, Router } from '@angular/router'
+import { BehaviorSubject, filter } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainMenuService {
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd || event instanceof NavigationSkipped)
+    ).subscribe(() => {
+      this.setMenu(false)
+    })
+  }
 
   private _isMenuOpen$ = new BehaviorSubject<boolean>(false)
   public isMenuOpen$ = this._isMenuOpen$.asObservable()
-
 
 
   public toggleMenu(): void {

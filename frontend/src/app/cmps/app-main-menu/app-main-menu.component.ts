@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core'
-import { NgClass } from '@angular/common'
-import { MainMenuService } from '../../services/main-menu.service'
+import { NgClass, NgIf } from '@angular/common'
 import { RouterLink } from '@angular/router'
+import { MainMenuService } from '../../services/main-menu.service'
 import { DynamicSvgComponent } from '../dynamic-svg.component'
+
 
 @Component({
   selector: 'app-main-menu',
   standalone: true,
-  imports: [NgClass, RouterLink, DynamicSvgComponent],
+  imports: [NgClass, RouterLink, NgIf, DynamicSvgComponent],
   host: {
     class: 'pos-abs top-0'
   },
@@ -16,14 +17,18 @@ import { DynamicSvgComponent } from '../dynamic-svg.component'
 })
 export class AppMainMenuComponent {
 
-  // TODO: make routes guards, so before each route load, set main-menu state to false
 
-  @Input() isMenuOpen!: boolean
+  @Input() isMenuOpen!: boolean | null
+
 
   constructor(public mainMenuService: MainMenuService) { }
 
-  getMenuClass() {
-    return this.isMenuOpen ? ['right-0'] : ['right-neg-full']
+  getMenuContainerClass(isMenuOpen: boolean) {
+    return isMenuOpen ? ['active'] : []
+  }
+
+  getMenuClass(isMenuOpen: boolean) {
+    return isMenuOpen ? ['right-0'] : ['right-neg-full']
   }
 
   onCloseMenu() {

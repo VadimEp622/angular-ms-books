@@ -13,9 +13,4 @@
     </main>
 </section>
 
-<ng-container *ngIf="{value: isMenuOpen$ | async}; let isMenuOpen;">
-    <app-main-menu
-        *ngIf="isMenuOpen.value!==null"
-        [isMenuOpen]="isMenuOpen.value"
-    ></app-main-menu>
-</ng-container>
+<app-main-menu [isMenuOpen]="isMenuOpen$ | async"></app-main-menu>
