@@ -8,4 +8,4 @@ This project is a designed to showcase skill and understanding of Angular.
 
 ## More content In Progress
 
-More content In Progress
+Project is currently in very early stages of content, yet overall app structure is exiting design phase.
