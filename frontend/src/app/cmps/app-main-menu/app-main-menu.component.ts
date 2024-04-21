@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core'
 import { NgClass } from '@angular/common'
 import { MainMenuService } from '../../services/main-menu.service'
 import { RouterLink } from '@angular/router'
+import { DynamicSvgComponent } from '../dynamic-svg.component'
 
 @Component({
   selector: 'app-main-menu',
   standalone: true,
-  imports: [NgClass, RouterLink],
+  imports: [NgClass, RouterLink, DynamicSvgComponent],
   host: {
     class: 'pos-abs top-0'
   },
@@ -15,7 +16,6 @@ import { RouterLink } from '@angular/router'
 })
 export class AppMainMenuComponent {
 
-  // TODO: make X button an SVG
   // TODO: make routes guards, so before each route load, set main-menu state to false
 
   @Input() isMenuOpen!: boolean
