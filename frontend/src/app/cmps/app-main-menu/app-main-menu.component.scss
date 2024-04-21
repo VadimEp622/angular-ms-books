@@ -1,0 +1,6 @@
+@import "../../../assets/styles/setup/_variables.scss";
+
+.app-main-menu {
+    transition: right 0.2s ease-in-out;
+    background-color: lighten(map-get($map-clr, main, main-3), 10%);
+}

@@ -1,7 +1,8 @@
-import { NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { DynamicSvgComponent } from '../dynamic-svg.component';
+import { NgClass } from '@angular/common'
+import { Component, Input } from '@angular/core'
+import { RouterLink } from '@angular/router'
+import { DynamicSvgComponent } from '../dynamic-svg.component'
+import { MainMenuService } from './../../services/main-menu.service'
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,11 @@ import { DynamicSvgComponent } from '../dynamic-svg.component';
   styleUrl: './app-header.component.scss'
 })
 export class AppHeaderComponent {
-  @Input() layout: string = 'main-layout';
+  @Input() layout: string = 'main-layout'
 
+  constructor(public mainMenuService: MainMenuService) { }
 
+  onToggleMenu() {
+    this.mainMenuService.toggleMenu()
+  }
 }

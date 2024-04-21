@@ -5,3 +5,7 @@ nav a {
         background-color: lighten(map-get($map-clr, "main", "main-3"), 10%);
     }
 }
+
+.mobile-menu-icon:hover {
+    cursor: pointer;
+}

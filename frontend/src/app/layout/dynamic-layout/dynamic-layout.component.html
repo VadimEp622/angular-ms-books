@@ -1,4 +1,5 @@
 <div class="drawer-bg"></div>
+
 <section
     [ngClass]="layoutService.getLayout()"
     class="main-app"
@@ -11,3 +12,10 @@
         <router-outlet></router-outlet>
     </main>
 </section>
+
+<ng-container *ngIf="{value: isMenuOpen$ | async}; let isMenuOpen;">
+    <app-main-menu
+        *ngIf="isMenuOpen.value!==null"
+        [isMenuOpen]="isMenuOpen.value"
+    ></app-main-menu>
+</ng-container>

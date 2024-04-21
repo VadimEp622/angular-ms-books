@@ -33,8 +33,9 @@
         </nav>
 
         <dynamic-svg
-            class="mobile-menu-icon"
+            class="mobile-menu-icon pd-5"
             [svgPath]="'assets/imgs/icon/config/icon-hamburger.svg'"
+            (click)="onToggleMenu()"
         ></dynamic-svg>
 
     </section>
