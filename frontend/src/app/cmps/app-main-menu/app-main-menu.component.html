@@ -1,8 +1,40 @@
-<!-- <p>app-main-menu works! {{isMenuOpen}}</p> -->
 <section
-    class="app-main-menu pos-fix top-0 bg-clr-main-2 height-full pd-20"
-    [ngClass]="getMenuClass()"
+    class="main-menu-container pos-fix width-100vw height-100vh overflow-hidden"
+    [ngClass]="isMenuOpen?['active']:[]"
 >
-    <p (click)="onToggleMenu()">x</p>
-    <p>app-main-menu works!</p>
+    <div
+        class="overlay width-full height-full bg-clr-black"
+        (click)="onToggleMenu()"
+    ></div>
+    <section
+        class="main-menu bg-clr-main-2 pd-20 pos-abs top-0 height-full width-50vw min-width-200 max-width-300"
+        [ngClass]="getMenuClass()"
+    >
+        <p (click)="onToggleMenu()">x</p>
+
+        <nav class="desktop-nav pd-bl-20">
+            <ul class="flex column gap10">
+
+                <li class="flex">
+                    <a
+                        routerLink="/"
+                        class="pd-bl-10 pd-in-10 width-full"
+                    >Home</a>
+                </li>
+                <li class="flex">
+                    <a
+                        routerLink="/book"
+                        class="pd-bl-10 pd-in-10 width-full"
+                    >Book</a>
+                </li>
+                <li class="flex">
+                    <a
+                        routerLink="/about"
+                        class="pd-bl-10 pd-in-10 width-full"
+                    >About</a>
+                </li>
+
+            </ul>
+        </nav>
+    </section>
 </section>

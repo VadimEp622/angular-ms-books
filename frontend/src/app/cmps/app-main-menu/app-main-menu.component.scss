@@ -1,6 +1,34 @@
 @import "../../../assets/styles/setup/_variables.scss";
 
-.app-main-menu {
+.main-menu-container {
+    transition: visibility 0.2s ease-in-out;
+
+    &:not(.active) {
+        visibility: hidden;
+
+        & .overlay {
+            opacity: 0;
+        }
+    }
+
+    &.active {
+        & .overlay {
+            opacity: 0.5;
+        }
+    }
+}
+
+.overlay {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.main-menu {
     transition: right 0.2s ease-in-out;
     background-color: lighten(map-get($map-clr, main, main-3), 10%);
+
+    & nav a {
+        &:hover {
+            background-color: map-get($map-clr, "main", "main-3");
+        }
+    }
 }
