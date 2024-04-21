@@ -5,6 +5,8 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 
+// TODO: Research logging services, and how necessary are they for a small private project
+
 
 dotenv.config()
 const app = express()
