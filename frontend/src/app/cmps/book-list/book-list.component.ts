@@ -25,5 +25,6 @@ export class BookListComponent {
   //   - grid (responsive) of preview C's (each vertical text item will have text-overflow: ellipsis;)
   //   - horizontal carousel of preview B's
   //   - horizontal carousel of preview C's
+  //   - experimental --> vertical list on left + 2 horizontal list on right
 
 }

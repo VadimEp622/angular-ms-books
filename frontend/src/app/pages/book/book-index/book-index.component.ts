@@ -23,7 +23,7 @@ export class BookIndexComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   booksByGenres$!: Observable<BooksByGenre[]>
-  currentGenres: Genre[] = ['romance', 'fiction', 'adventure']
+  currentGenres: Genre[] = ['love']
 
   // TODO: There should be a few types of book-lists:
   //  - horizontal carousel of ONLY book cover pictures

@@ -1,5 +1,6 @@
 <section class="book-index full main-layout mg-bl-20">
     <ng-container *ngIf="booksByGenres$ | async as booksByGenres">
+
         <ng-container *ngIf="booksByGenres && booksByGenres.length > 0; else loading">
             <book-list
                 *ngFor="let booksByGenre of booksByGenres"
@@ -7,8 +8,10 @@
                 class="mg-bl-20"
             ></book-list>
         </ng-container>
+
         <ng-template #loading>
             <p class="text-align-center">Loading...</p>
         </ng-template>
+
     </ng-container>
 </section>
