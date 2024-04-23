@@ -1,0 +1,1 @@
+export type BookListType = 'vertical list' | 'grid' | 'horizontal carousel'
