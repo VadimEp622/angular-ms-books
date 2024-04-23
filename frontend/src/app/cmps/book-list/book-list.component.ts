@@ -1,8 +1,8 @@
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { BookPreviewComponent } from './book-preview/book-preview.component';
-import { BooksByGenre } from '../../models/books-by-genre.model';
-import { BookCarouselComponent } from '../book-carousel/book-carousel.component';
+import { JsonPipe, NgFor, NgIf } from '@angular/common'
+import { Component, Input } from '@angular/core'
+import { BookPreviewComponent } from './book-preview/book-preview.component'
+import { BooksByGenre } from '../../models/books-by-genre.model'
+import { BookCarouselComponent } from '../book-carousel/book-carousel.component'
 
 @Component({
   selector: 'book-list',
@@ -14,39 +14,16 @@ import { BookCarouselComponent } from '../book-carousel/book-carousel.component'
 export class BookListComponent {
   @Input() booksByGenre!: BooksByGenre
 
-  // demoBooksByGenre: any = {
-  //   genre: 'romance',
-  //   books: [
-  //     {
-  //       _id: '1',
-  //       title: 'Book 1demoBooksByGenre',
-  //       authors: [{ name: '1demoBooksByGenre' }, { name: 'author 1demoBooksByGenre' }],
-  //       openLibBookId: '1',
-  //       openLibCoverId: 1
-  //     },
-  //     {
-  //       _id: '2',
-  //       title: 'Book 2demoBooksByGenre',
-  //       authors: [{ name: 'author 1demoBooksByGenre' }, { name: 'author 1demoBooksByGenre' }],
-  //       openLibBookId: '2',
-  //       openLibCoverId: 2
-  //     },
-  //     {
-  //       _id: '3',
-  //       title: 'Book 3demoBooksByGenre',
-  //       authors: [{ name: 'author 1demoBooksByGenre' }, { name: 'author 1demoBooksByGenre' }],
-  //       openLibBookId: '3',
-  //       openLibCoverId: 3
-  //     },
-  //     {
-  //       _id: '4',
-  //       title: 'Book 4demoBooksByGenre',
-  //       authors: [{ name: 'author 1demoBooksByGenre' }, { name: 'author 1demoBooksByGenre' }],
-  //       openLibBookId: '4',
-  //       openLibCoverId: 4
-  //     }
-  //   ]
-  // }
+  // TODO: there will be several preview types -
+  //   - preview A -> cover to the left, info to the right
+  //   - preview B -> just cover
+  //   - preview C -> from top to buttom, cover/title/authors/price/score
 
+
+  // TODO: there will only be SEVERAL POSSIBLE list types -
+  //   - vertical list of preview A's
+  //   - grid (responsive) of preview C's (each vertical text item will have text-overflow: ellipsis;)
+  //   - horizontal carousel of preview B's
+  //   - horizontal carousel of preview C's
 
 }

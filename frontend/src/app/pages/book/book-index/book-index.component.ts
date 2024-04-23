@@ -23,7 +23,12 @@ export class BookIndexComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   booksByGenres$!: Observable<BooksByGenre[]>
-  currentGenres: Genre[] = ['romance']
+  currentGenres: Genre[] = ['romance', 'fiction', 'adventure']
+
+  // TODO: There should be a few types of book-lists:
+  //  - horizontal carousel of ONLY book cover pictures
+  //  - horizontal carousel of VERTICAL covers/title/authors/price/score
+  //  - two rows of book covers/title/authors/price/score (need to consider responsiveness, and preventing jumping of content when changing screen size (?))
 
 
   // TODO: consider again, how the book-list (per genre) cmps should be structured in book-index, it's potential styling,

@@ -17,6 +17,10 @@ import { DynamicSvgComponent } from '../dynamic-svg.component'
 })
 export class AppMainMenuComponent {
 
+  // TODO: when switching routes, menu closing is done instantly, with disregard to transition styling (should roll to the right and dissappear)
+  //   - a possible fix would be to put the app-main-menu in app-root, so it will exist in all routes (need to handle async pipe of observable<boolean> isMenuOpen differently)
+  //   - perhaps also putting it in the child of <router-outlet></router-outlet> of root-cmp, so it will exist in all routes?
+
 
   @Input() isMenuOpen!: boolean | null
 
