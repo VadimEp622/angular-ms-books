@@ -5,13 +5,15 @@ import { BookService } from './../../../services/book.service'
 import { BookListComponent } from '../../../cmps/book-list/book-list.component'
 import { Genre } from '../../../models/genre.model'
 import { BooksByGenre } from '../../../models/books-by-genre.model'
+import { BookListHorizontalCarouselComponent } from '../../../cmps/book-list/book-list-horizontal-carousel/book-list-horizontal-carousel.component'
+import { BookListGridComponent } from './../../../cmps/book-list/book-list-grid/book-list-grid.component'
 
 
 
 @Component({
   selector: 'book-index',
   standalone: true,
-  imports: [BookListComponent, NgIf, NgFor, AsyncPipe],
+  imports: [BookListComponent, NgIf, NgFor, AsyncPipe, BookListHorizontalCarouselComponent, BookListGridComponent],
   host: {
     class: 'full main-layout'
   },

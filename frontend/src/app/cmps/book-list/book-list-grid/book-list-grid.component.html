@@ -1,0 +1,11 @@
+<section class="book-list-container pd-20">
+    <section>
+        <h1 class="category-title fs18 capitalize pd-10 mg-bl-ed-20">{{ booksByGenre.genre }}</h1>
+    </section>
+    <section class="book-list">
+        <book-preview-top-to-bottom
+            *ngFor="let book of booksByGenre.books"
+            [book]="book"
+        ></book-preview-top-to-bottom>
+    </section>
+</section>

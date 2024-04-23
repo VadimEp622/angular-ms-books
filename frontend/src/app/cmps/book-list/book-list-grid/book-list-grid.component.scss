@@ -1,0 +1,11 @@
+@import "../../../../assets/styles/setup/_variables.scss";
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    // grid-template-rows: minmax(300px, auto);
+}
+
+.category-title {
+    border-bottom: 2px solid map-get($map-clr, "gray", "gray-3");
+}

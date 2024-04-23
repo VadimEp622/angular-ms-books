@@ -1,1 +1,17 @@
-<p>book-preview-top-to-bottom works!</p>
+<section class="book-preview-container flex pd-bl-10 pd-in-10 mg-in-10 mg-bl-10">
+    <section class="book-preview flex column">
+
+        <section class="book-img-container flex justify-center align-center">
+            <section class="book-img">
+                <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverId }}-M.jpg" alt="book">
+            </section>
+        </section>
+
+        <section class="book-info mg-bl-st-20">
+            <h3 class="title text-align-center">{{ book.title }}</h3>
+            <p class="authors text-align-center mg-bl-5">{{ book.authors[0].name }}</p>
+            <!-- <p>{{ book.openLibBookId }}</p> -->
+        </section>
+
+    </section>
+</section>

@@ -2,11 +2,16 @@
     <ng-container *ngIf="booksByGenres$ | async as booksByGenres">
 
         <ng-container *ngIf="booksByGenres && booksByGenres.length > 0; else loading">
-            <book-list
+            <book-list-horizontal-carousel
                 *ngFor="let booksByGenre of booksByGenres"
                 [booksByGenre]="booksByGenre"
                 class="mg-bl-20"
-            ></book-list>
+            ></book-list-horizontal-carousel>
+            <book-list-grid
+                *ngFor="let booksByGenre of booksByGenres"
+                [booksByGenre]="booksByGenre"
+                class="mg-bl-20"
+            ></book-list-grid>
         </ng-container>
 
         <ng-template #loading>
