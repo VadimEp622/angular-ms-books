@@ -1,13 +1,12 @@
 import { JsonPipe, NgFor, NgIf } from '@angular/common'
 import { Component, Input } from '@angular/core'
-import { BookPreviewComponent } from './book-preview/book-preview.component'
 import { BooksByGenre } from '../../models/books-by-genre.model'
 import { BookCarouselComponent } from '../book-carousel/book-carousel.component'
 
 @Component({
   selector: 'book-list',
   standalone: true,
-  imports: [BookPreviewComponent, JsonPipe, NgFor, NgIf, BookCarouselComponent],
+  imports: [JsonPipe, NgFor, NgIf, BookCarouselComponent],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'
 })
@@ -23,7 +22,7 @@ export class BookListComponent {
   // TODO: there will only be SEVERAL POSSIBLE list types -
   //   - vertical list of preview A's
   //   - grid (responsive) of preview C's (each vertical text item will have text-overflow: ellipsis;)
-  //   - horizontal carousel of preview B's
+  //   - horizontal carousel of preview B's (figure out how to render only good ligable images)
   //   - horizontal carousel of preview C's
   //   - experimental --> vertical list on left + 2 horizontal list on right
 

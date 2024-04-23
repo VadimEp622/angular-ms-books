@@ -1,0 +1,1 @@
+export type BookPreviewType = 'side-by-side' | 'cover-only' | 'top-to-bottom'

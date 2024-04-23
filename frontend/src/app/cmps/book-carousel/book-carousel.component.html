@@ -4,16 +4,17 @@
     [numScroll]="3"
     [circular]="false"
     [responsiveOptions]="responsiveOptions"
-    indicatorsContentClass="pd-20"
+    indicatorsContentClass="pd-20 mg-bl-st-20"
 >
     <ng-template pTemplate="header">
-        <h1 class="category-title capitalize pd-10">{{booksByGenre.genre}}</h1>
+        <h1 class="category-title capitalize pd-10 mg-bl-ed-20">{{booksByGenre.genre}}</h1>
     </ng-template>
 
     <ng-template
         let-book
         pTemplate="item"
     >
-        <book-preview [book]="book"></book-preview>
+        <!-- <book-preview-side-by-side [book]="book"></book-preview-side-by-side> -->
+        <book-preview-cover-only [book]="book"></book-preview-cover-only>
     </ng-template>
 </p-carousel>

@@ -1,0 +1,15 @@
+@import "../../../../assets/styles/setup/_variables.scss";
+
+.book-preview-container {
+    height: 100%;
+
+    & .book-preview {
+        box-shadow: 0 3px 10px -2px map-get($map-clr, "pure", "black");
+        border-radius: 8px;
+    }
+}
+
+.book-img {
+    width: 97px;
+    height: 180px;
+}
