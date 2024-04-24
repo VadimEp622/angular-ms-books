@@ -40,12 +40,17 @@ if (process.env.NODE_ENV === 'production') {
 // import { authRoutes } from './api/auth/auth.routes.mjs'
 // import { secretRoutes } from './api/secret/secret.routes.mjs'
 // import { userRoutes } from './api/user/user.routes.mjs'
+import { bookRoutes } from './api/book/book.routes.mjs'
 
 import { logger } from './services/logger.service.mjs'
 // import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.mjs'
 
 // app.all('*', setupAsyncLocalStorage)
 
+// app.use('/api/auth', authRoutes)
+// app.use('/api/order', orderRoutes)
+// app.use('/api/secret', secretRoutes)
+app.use('/api/book', bookRoutes)
 
 
 

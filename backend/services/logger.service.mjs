@@ -1,5 +1,5 @@
 // import fs from 'fs'
-import {asyncLocalStorage} from './als.service.mjs'
+import { asyncLocalStorage } from './als.service.mjs'
 
 
 // const logsDir = './logs'
@@ -30,8 +30,8 @@ function doLog(level, ...args) {
     line = `${getTime()} - ${level} - ${line} ${str}\n`
     console.log(line)
     // fs.appendFile('./logs/backend.log', line, (err) =>{
-        // if (err) console.log('FATAL: cannot write to log file')
-        // if (err) console.log('FATAL: cannot write to log file ->', err)
+    // if (err) console.log('FATAL: cannot write to log file')
+    // if (err) console.log('FATAL: cannot write to log file ->', err)
     // })
 }
 

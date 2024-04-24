@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
-import { UtilService } from './util.service'
 import { BehaviorSubject, catchError, delay, forkJoin, map, of, retry, tap } from 'rxjs'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { UtilService } from './util.service'
 import { BooksByGenre } from '../models/books-by-genre.model'
 import { Book } from '../models/book.model'
 import { BookMini } from '../models/book-mini.model'
