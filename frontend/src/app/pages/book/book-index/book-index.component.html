@@ -1,22 +1,19 @@
 <section class="book-index full main-layout mg-bl-20">
-    <ng-container *ngIf="booksByGenres$ | async as booksByGenres">
+    <ng-container *ngFor="let booksByGenre of booksByGenres; let i = index">
 
-        <ng-container *ngIf="booksByGenres && booksByGenres.length > 0; else loading">
+        <ng-container *ngIf="(i>=0 && i<=1) || i>=3">
             <book-list-horizontal-carousel
-                *ngFor="let booksByGenre of booksByGenres"
                 [booksByGenre]="booksByGenre"
                 class="mg-bl-20"
             ></book-list-horizontal-carousel>
+        </ng-container>
+
+        <ng-container *ngIf="(i>=2 && i<=2)">
             <book-list-grid
-                *ngFor="let booksByGenre of booksByGenres"
                 [booksByGenre]="booksByGenre"
                 class="mg-bl-20"
             ></book-list-grid>
         </ng-container>
-
-        <ng-template #loading>
-            <p class="text-align-center">Loading...</p>
-        </ng-template>
 
     </ng-container>
 </section>

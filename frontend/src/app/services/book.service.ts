@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, catchError, delay, forkJoin, map, of, retry, tap } from 'rxjs'
+import { BehaviorSubject, catchError, forkJoin, map, of, retry, tap } from 'rxjs'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { UtilService } from './util.service'
 import { BooksByGenre } from '../models/books-by-genre.model'
@@ -11,8 +11,14 @@ const ENTITY = 'book'
 
 // ================================================================================================
 // A) Local-storage will act as DB
-// B) Local-storage will be divided into: booksBySubject, Users
-// C) booksBySubject will be an array of objects: [{ genre: 'love', books: [...] }, ...]
+// B) Local-storage will be divided into: booksByGenre, Users
+// C) booksByGenres will be an array of objects: [{ genre: 'love', books: [...] }, ...]
+// D) booksByGenres array length is decided by backend and thus is unknown, therefore there cannot be observable declaration for each bookByGenre object.
+//      Thus, observable booksByGenres will have ONLY: loading OR error OR array.
+// E) booksByGenre object for each genre will be fetched from open-library API in the backend.
+//      Thus, each booksByGenre object will either have:
+//          * genre+empty books array+error key
+//          * OR genre+filled books array
 // ================================================================================================
 
 // INFO: RIGHT NOW, using "queryByGenres()" we fetch all books by genres from the API,
@@ -43,32 +49,14 @@ export class BookService {
     private utilService: UtilService
   ) { }
 
-  private _booksByGenres$ = new BehaviorSubject<BooksByGenre[]>([])
-  public booksByGenres$ = this._booksByGenres$.asObservable()
+  // private _booksByGenres$ = new BehaviorSubject<BooksByGenre[]>([])
+  // public booksByGenres$ = this._booksByGenres$.asObservable()
 
 
   public queryByGenres(genres: Genre[] = []) {
     return this._getBooksByGenres(genres)
-      .pipe(
-        tap(data => {
-          this._booksByGenres$.next(data)
-        })
-      )
   }
 
-
-
-
-
-  // TODO: Decide if we get real book data or not.
-  // * if we do get real book data, how should we combine it with user created book data?
-  //    assumption is that we have an observable for async fetching of book objects.
-  //    so we subscribe to it in book-list.component, and render coming and going book objects array.
-  //    then we have user create books. we store those in local-storage.
-  //    when fetching data in book-list.component, we have to somehow COMBINE real book data, with local-storage book data.
-  //    before that, we need to decide the main book listing layout - 
-  //      ** do we have mutilple lists of different categories? if we fetch real book data, this seems logical.
-  //      ** do we make a new list for new user created books? -> list title: "Check out out our new exclusives".
 
 
   // ------------------ Private Functions ------------------
