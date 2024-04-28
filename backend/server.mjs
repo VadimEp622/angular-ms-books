@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 
 // TODO: Research logging services, and how necessary are they for a small private project
+// TODO: Implement caching for routes
 
 
 dotenv.config()
