@@ -1,26 +1,31 @@
+import { bookDataService } from "../../services/bookData.service.mjs"
 import { logger } from "../../services/logger.service.mjs"
-import { queryBooksByGenres } from "./book.service.mjs"
+import { queryBooksByGenre, queryBooksByGenres } from "./book.service.mjs"
 
 
-// backend decides which genres of books to return
+// TODO: research correct status codes for different errors
+// TODO: make middleware verifier that genre is valid
+
 export async function getBooksByGenres(req, res) {
     try {
-        console.log('book.controller - getBooksByGenres')
-        const genres = _getGenres()
-        const booksByGenres = await queryBooksByGenres(genres)
+        const booksByGenres = await queryBooksByGenres(bookDataService.getGenres())
         res.send(booksByGenres)
     } catch {
+        logger.error('Failed to get books by genres')
+        res.status(400).send({ err: 'Failed to get books by genres' })
+    }
+}
+
+export async function getBooksByGenre(req, res) {
+    try {
+        const genre = req.params.id
+        const booksByGenre = await queryBooksByGenre(genre)
+        res.send(booksByGenre)
+    } catch (err) {
         logger.error('Failed to get books by genre')
         res.status(400).send({ err: 'Failed to get books by genre' })
     }
 }
-
-// returns a single category of books
-export async function getBooksByGenre(req, res) {
-    console.log('hi from getBooksByGenre')
-    console.log('req.params', req.params)
-}
-
 
 
 
@@ -28,6 +33,3 @@ export async function getBooksByGenre(req, res) {
 
 
 // ======================== Private Functions ========================
-function _getGenres() {
-    return ['adventure', 'love']
-}
