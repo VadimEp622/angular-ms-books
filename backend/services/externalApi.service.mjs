@@ -53,11 +53,6 @@ function _createMiniBookObject(title, authors, openLibBookId, openLibCoverId) {
     }
 }
 
-function _handleError(error, genre) {
-    console.error(`Failed fetching books for genre ${genre}:`, error)
-
-}
-
 function _createErrorBooksByGenre(error, genre) {
     return {
         genre,
