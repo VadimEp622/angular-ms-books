@@ -13,4 +13,6 @@ export class AppComponent {
 
   // TODO: research how to make api_url for different environments (prod/dev)
   //   and make prod overwrite the dev
+
+  // TODO: make API service that connects to backend 
 }

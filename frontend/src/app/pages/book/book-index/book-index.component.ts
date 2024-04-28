@@ -28,7 +28,8 @@ export class BookIndexComponent implements OnInit, OnDestroy {
   sub!: Subscription
   booksByGenres!: BooksByGenre[]
 
-  // TODO: add "loading..." when data is loading, same for error
+  // TODO: add error when data failed fetching (before this,
+  //  connect to backend API, and in backend make each booksPerGenre external API call that fails, not cause entire booksPerGenres API to fail)
 
 
   // INFO: There should be a few types of book-lists:
