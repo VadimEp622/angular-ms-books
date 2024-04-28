@@ -8,8 +8,18 @@
         [ngClass]="['full' ,layoutService.getLayout()]"
         [layout]="layoutService.getLayout()"
     />
+
     <main [ngClass]="['full' ,layoutService.getLayout()]">
-        <router-outlet></router-outlet>
+        <ng-container *ngIf="isRouteLoading$ | async; else content">
+            <p-progressSpinner
+                class="flex justify-center"
+                ariaLabel="loading"
+            ></p-progressSpinner>
+        </ng-container>
+
+        <ng-template #content>
+            <router-outlet></router-outlet>
+        </ng-template>
     </main>
 </section>
 
