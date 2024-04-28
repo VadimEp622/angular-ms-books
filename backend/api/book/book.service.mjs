@@ -2,8 +2,7 @@ import { externalApiService } from '../../services/externalApi.service.mjs'
 import { logger } from '../../services/logger.service.mjs'
 
 
-// TODO 2: after making externalAPI service, reasearch Promise.allSettled(), and change Promise.all() to Promise.allSettled()
-// TODO 3: improve error handling
+// TODO: improve error handling
 
 // INFO: One thing to note is that Promise.all() will reject entirely even if one of the API calls fails. 
 //   To avoid this, you can use the Promise.allSettled() method, which resolves even when all promises are rejected.
@@ -13,10 +12,10 @@ import { logger } from '../../services/logger.service.mjs'
 export async function queryBooksByGenres(genres) {
     try {
         console.log('book.service - queryBooksByGenres -> genres', genres)
-        const booksByGenres = await Promise.all(
-            genres.map(genre => queryBooksByGenre(genre))
+        const results = await Promise.allSettled(
+            genres.map(genre => externalApiService.fetchBooksByGenre(genre))
         )
-        return booksByGenres
+        return results.map(result => result.status === 'fulfilled' ? result.value : result.reason)
     } catch (err) {
         logger.error('Failed fetching books by genres', err)
         throw err

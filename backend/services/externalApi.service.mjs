@@ -4,18 +4,16 @@ export const externalApiService = {
     fetchBooksByGenre
 }
 
-
 async function fetchBooksByGenre(genre) {
     try {
         const data = await fetch(_getUrlBooksByGenre(genre)).then(res => res.json())
         return _transformBooksByGenre(genre, data)
     } catch (err) {
         logger.error('Failed fetching books by genre', err)
-        throw err
+        throw _createErrorBooksByGenre('Failed fetching books by genre', genre)
     }
 
 }
-
 
 
 
@@ -52,5 +50,18 @@ function _createMiniBookObject(title, authors, openLibBookId, openLibCoverId) {
         authors,
         openLibBookId,
         openLibCoverId
+    }
+}
+
+function _handleError(error, genre) {
+    console.error(`Failed fetching books for genre ${genre}:`, error)
+
+}
+
+function _createErrorBooksByGenre(error, genre) {
+    return {
+        genre,
+        books: [],
+        error
     }
 }
