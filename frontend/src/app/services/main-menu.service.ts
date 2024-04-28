@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { NavigationEnd, NavigationSkipped, Router } from '@angular/router'
+import { NavigationEnd, NavigationSkipped, NavigationStart, Router } from '@angular/router'
 import { BehaviorSubject, filter } from 'rxjs'
 
 @Injectable({
@@ -9,7 +9,7 @@ export class MainMenuService {
 
   constructor(private router: Router) {
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd || event instanceof NavigationSkipped)
+      filter(event => event instanceof NavigationStart || event instanceof NavigationEnd || event instanceof NavigationSkipped)
     ).subscribe(() => {
       this.setMenu(false)
     })
