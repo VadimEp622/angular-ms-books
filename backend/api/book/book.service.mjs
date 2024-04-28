@@ -1,8 +1,8 @@
+import { externalApiService } from '../../services/externalApi.service.mjs'
 import { logger } from '../../services/logger.service.mjs'
 
 
-// TODO 1: make externalAPI service for this
-// TODO 2: after making externalAPI service, change Promise.all() to Promise.allSettled()
+// TODO 2: after making externalAPI service, reasearch Promise.allSettled(), and change Promise.all() to Promise.allSettled()
 // TODO 3: improve error handling
 
 // INFO: One thing to note is that Promise.all() will reject entirely even if one of the API calls fails. 
@@ -23,12 +23,11 @@ export async function queryBooksByGenres(genres) {
     }
 }
 
-
 export async function queryBooksByGenre(genre) {
     try {
         console.log('book.service - queryBooksByGenre -> genre', genre)
-        const data = await fetch(_getUrlBooksByGenre(genre)).then(res => res.json())
-        return _transformBooksByGenre(genre, data)
+        const booksByGenre = await externalApiService.fetchBooksByGenre(genre)
+        return booksByGenre
     } catch (err) {
         logger.error('Failed fetching books by genre', err)
         throw err
@@ -38,42 +37,5 @@ export async function queryBooksByGenre(genre) {
 
 
 
-
-
-
-
-
 // ------------------------------------ Private Functions ------------------------------------
-function _transformBooksByGenre(genre, data) {
-    const transformedBooks = data?.works.map((book) => _createMiniBook(book))
-    return _createBooksByGenre(genre, transformedBooks)
-}
 
-function _createBooksByGenre(genre, books) {
-    return {
-        genre,
-        books
-    }
-}
-
-function _createMiniBook(apiBook) {
-    const title = apiBook?.title
-    const authors = apiBook?.authors
-    const openLibBookId = apiBook?.key.replace('/works/', '')
-    const openLibCoverId = apiBook?.cover_id
-    return _createMiniBookObject(title, authors, openLibBookId, openLibCoverId)
-}
-
-function _createMiniBookObject(title, authors, openLibBookId, openLibCoverId) {
-    return {
-        _id: openLibBookId,
-        title,
-        authors,
-        openLibBookId,
-        openLibCoverId
-    }
-}
-
-function _getUrlBooksByGenre(genre) {
-    return `https://openlibrary.org/subjects/${genre}.json`
-}
