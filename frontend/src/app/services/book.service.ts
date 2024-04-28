@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, catchError, forkJoin, map, of, retry, tap } from 'rxjs'
-import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { UtilService } from './util.service'
-import { BooksByGenre } from '../models/books-by-genre.model'
-import { Book } from '../models/book.model'
-import { BookMini } from '../models/book-mini.model'
+import { HttpClient } from '@angular/common/http'
 import { Genre } from '../models/genre.model'
+import { environment } from '../../environments/environment'
+
 
 const ENTITY = 'book'
+
 
 // ================================================================================================
 // A) Local-storage will act as DB
@@ -44,99 +42,96 @@ const ENTITY = 'book'
 })
 export class BookService {
 
-  constructor(
-    private http: HttpClient,
-    private utilService: UtilService
-  ) { }
+  private baseUrl = environment.api_url + ENTITY
 
-  // private _booksByGenres$ = new BehaviorSubject<BooksByGenre[]>([])
-  // public booksByGenres$ = this._booksByGenres$.asObservable()
+  constructor(
+    private http: HttpClient
+  ) { }
 
 
   public queryByGenres(genres: Genre[] = []) {
-    return this._getBooksByGenres(genres)
+    return this.http.get<any>(`${this.baseUrl}/genre`)
+    // return this._getBooksByGenres(genres)
   }
 
 
 
   // ------------------ Private Functions ------------------
-  private _getBooksByGenres(genres: Genre[]) {
-    const lsBooksByGenres = this.utilService.loadFromStorage(ENTITY)
-    if (
-      !lsBooksByGenres
-      || !Array.isArray(lsBooksByGenres)
-      || lsBooksByGenres.length < 1
-      || !genres.every(genre => lsBooksByGenres.some((booksByGenre: any) => booksByGenre.genre === genre))
-    ) {
-      return this._fetchBooksByGenres(genres)
-        .pipe(
-          map((dataArr: any[]) => {
-            console.log('fetchnig data from API')
-            const transformedBooksObjects = dataArr.map((data: any) => {
-              if (data.error) return data
-              const transformedBooks = data?.works.map((book: Book) => this._createMiniBook(book))
-              return this._createBooksByGenre(data?.name, transformedBooks)
-            })
-            this.utilService.saveToStorage(ENTITY, transformedBooksObjects)
-            return transformedBooksObjects
-          })
-        )
-    }
-    console.log('getting data from Local-storage')
-    return of(lsBooksByGenres as BooksByGenre[])
-  }
+  // private _getBooksByGenres(genres: Genre[]) {
+  //   const lsBooksByGenres = this.utilService.loadFromStorage(ENTITY)
+  //   if (
+  //     !lsBooksByGenres
+  //     || !Array.isArray(lsBooksByGenres)
+  //     || lsBooksByGenres.length < 1
+  //     || !genres.every(genre => lsBooksByGenres.some((booksByGenre: any) => booksByGenre.genre === genre))
+  //   ) {
+  //     return this._fetchBooksByGenres(genres)
+  //       .pipe(
+  //         map((dataArr: any[]) => {
+  //           console.log('fetchnig data from API')
+  //           const transformedBooksObjects = dataArr.map((data: any) => {
+  //             if (data.error) return data
+  //             const transformedBooks = data?.works.map((book: Book) => this._createMiniBook(book))
+  //             return this._createBooksByGenre(data?.name, transformedBooks)
+  //           })
+  //           this.utilService.saveToStorage(ENTITY, transformedBooksObjects)
+  //           return transformedBooksObjects
+  //         })
+  //       )
+  //   }
+  //   console.log('getting data from Local-storage')
+  //   return of(lsBooksByGenres as BooksByGenre[])
+  // }
 
-  private _fetchBooksByGenres(genres: Genre[]) {
-    return forkJoin(genres.map(genre => this._fetchBooksByGenre(genre)))
-  }
+  // private _fetchBooksByGenres(genres: Genre[]) {
+  //   return forkJoin(genres.map(genre => this._fetchBooksByGenre(genre)))
+  // }
 
-  private _fetchBooksByGenre(genre: Genre) {
-    return this.http.get(this._getUrlBooksByGenre(genre))
-      .pipe(
-        // TODO: check if fetched data is valid/correct format. if not, handle it.
-        // delay(1000),
-        retry(1),
-        catchError((error) => this._handleError(error, genre))
-      )
-  }
+  // private _fetchBooksByGenre(genre: Genre) {
+  //   return this.http.get(this._getUrlBooksByGenre(genre))
+  //     .pipe(
+  //       retry(1),
+  //       catchError((error) => this._handleError(error, genre))
+  //     )
+  // }
 
-  private _getUrlBooksByGenre(genre: Genre) {
-    return `https://openlibrary.org/subjects/${genre}.json`
-  }
+  // private _getUrlBooksByGenre(genre: Genre) {
+  //   return `https://openlibrary.org/subjects/${genre}.json`
+  // }
 
-  private _createBooksByGenre(genre: Genre, books: BookMini[]): BooksByGenre {
-    return {
-      genre,
-      books
-    }
-  }
+  // private _createBooksByGenre(genre: Genre, books: BookMini[]): BooksByGenre {
+  //   return {
+  //     genre,
+  //     books
+  //   }
+  // }
 
-  private _createMiniBook(apiBook: any): BookMini {
-    const title = apiBook?.title
-    const authors = apiBook?.authors
-    const openLibBookId = apiBook?.key.replace('/works/', '')
-    const openLibCoverId = apiBook?.cover_id
-    return this._createMiniBookObject(title, authors, openLibBookId, openLibCoverId)
-  }
+  // private _createMiniBook(apiBook: any): BookMini {
+  //   const title = apiBook?.title
+  //   const authors = apiBook?.authors
+  //   const openLibBookId = apiBook?.key.replace('/works/', '')
+  //   const openLibCoverId = apiBook?.cover_id
+  //   return this._createMiniBookObject(title, authors, openLibBookId, openLibCoverId)
+  // }
 
-  private _createMiniBookObject(title: string, authors: object[], openLibBookId: string, openLibCoverId: number): BookMini {
-    return {
-      _id: openLibBookId,
-      title,
-      authors,
-      openLibBookId,
-      openLibCoverId
-    }
-  }
+  // private _createMiniBookObject(title: string, authors: object[], openLibBookId: string, openLibCoverId: number): BookMini {
+  //   return {
+  //     _id: openLibBookId,
+  //     title,
+  //     authors,
+  //     openLibBookId,
+  //     openLibCoverId
+  //   }
+  // }
 
-  private _handleError(error: HttpErrorResponse, genre: Genre) {
-    console.error(`Failed fetching books for genre ${genre}:`, error)
-    return of({
-      genre: genre,
-      books: [],
-      error: `Failed fetching books for genre ${genre}`
-    })
-  }
+  // private _handleError(error: HttpErrorResponse, genre: Genre) {
+  //   console.error(`Failed fetching books for genre ${genre}:`, error)
+  //   return of({
+  //     genre: genre,
+  //     books: [],
+  //     error: `Failed fetching books for genre ${genre}`
+  //   })
+  // }
 }
 
 

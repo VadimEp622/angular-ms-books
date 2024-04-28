@@ -11,8 +11,10 @@ import { RouterOutlet } from '@angular/router'
 export class AppComponent {
   title = 'angular-ms-books'
 
-  // TODO: research how to make api_url for different environments (prod/dev)
-  //   and make prod overwrite the dev
-
-  // TODO: make API service that connects to backend 
+  // TODO: no matter what, stop using local-storage. Decide on one of the following ->
+  //    my options:
+  //       1. Don't use Github-pages.
+  //       2. If using Github-pages, use only hardcoded demo data.
+  //       3. If using Github-pages, set prod/dev CRUD API to be the same ["cloud_service_url/api/"],
+  //           and find a way to hide said url from being pushed to github pages (research angular env variables AND github pages secrets).
 }
