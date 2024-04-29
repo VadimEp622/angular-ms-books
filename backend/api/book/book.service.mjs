@@ -38,6 +38,12 @@ export async function getBookById(bookId) {
         //     2. move fetch request to externalApiService
         //     3. extract ONLY data you need
 
+
+        // Data will have:
+        // title, authors, openLibBookId, openLibCoverId, description
+        // basically everything I might need is in the fetched works object 
+        // ** Extra-> though I may need to later combine data with different editions and their varying covers/publish dates/etc..
+
     } catch (err) {
         logger.error('Failed to get book by id', err)
         throw err
