@@ -31,6 +31,19 @@ export async function queryBooksByGenre(genre) {
     }
 }
 
+export async function getBookById(bookId) {
+    try {
+        // TODO: 
+        //     1. use bookId to get data from open-library
+        //     2. move fetch request to externalApiService
+        //     3. extract ONLY data you need
+
+    } catch (err) {
+        logger.error('Failed to get book by id', err)
+        throw err
+    }
+}
+
 
 
 

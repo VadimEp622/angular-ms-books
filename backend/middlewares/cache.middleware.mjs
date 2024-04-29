@@ -3,7 +3,7 @@ import { logger } from "../services/logger.service.mjs"
 
 
 
-export function getFromCacheBooksByGenres(req, res, next) {
+export function cacheBooksByGenres(req, res, next) {
     try {
         if (bookCache.has('booksByGenres')) {
             logger.info(`Cache hit - booksByGenres`)

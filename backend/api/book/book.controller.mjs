@@ -19,7 +19,7 @@ export async function getBooksByGenres(req, res) {
     }
 }
 
-export async function getBooksByGenre(req, res) {
+export async function getBooks(req, res) {
     try {
         const genre = req.params.id
         const booksByGenre = await queryBooksByGenre(genre)
@@ -27,6 +27,17 @@ export async function getBooksByGenre(req, res) {
     } catch (err) {
         logger.error('Failed to get books by genre')
         res.status(400).send({ err: 'Failed to get books by genre' })
+    }
+}
+
+export async function getBook(req, res) {
+    try {
+        const bookId = req.params.id
+        // const book = await getBookById(bookId)
+        // res.send(book)
+    } catch (err) {
+        logger.error('Failed to get book by id')
+        res.status(400).send({ err: 'Failed to get book by id' })
     }
 }
 
