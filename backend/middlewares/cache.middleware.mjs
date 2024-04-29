@@ -1,14 +1,18 @@
-import { booksByGenreCache } from "../services/cache.service.mjs"
+import { bookCache } from "../services/cache.service.mjs"
+import { logger } from "../services/logger.service.mjs"
 
 
-export async function getFromCache(req, res, next) {
-    const key = req.originalUrl
-    const cachedResponse = await booksByGenreCache.get(key)
-    if (cachedResponse) {
-        logger.info('Cache hit')
-        res.send(cachedResponse)
-    } else {
-        logger.info('Cache miss')
-        next()
+
+export function getFromCacheBooksByGenres(req, res, next) {
+    try {
+        if (bookCache.has('booksByGenres')) {
+            logger.info(`Cache hit - booksByGenres`)
+            return res.send(bookCache.get('booksByGenres'))
+        }
+        logger.info('Cache miss - booksByGenres')
+        return next()
+    } catch (err) {
+        console.log('err', err)
+        throw err
     }
 }

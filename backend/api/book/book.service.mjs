@@ -11,7 +11,6 @@ import { logger } from '../../services/logger.service.mjs'
 
 export async function queryBooksByGenres(genres) {
     try {
-        console.log('book.service - queryBooksByGenres -> genres', genres)
         const results = await Promise.allSettled(
             genres.map(genre => externalApiService.fetchBooksByGenre(genre))
         )
@@ -24,7 +23,6 @@ export async function queryBooksByGenres(genres) {
 
 export async function queryBooksByGenre(genre) {
     try {
-        console.log('book.service - queryBooksByGenre -> genre', genre)
         const booksByGenre = await externalApiService.fetchBooksByGenre(genre)
         return booksByGenre
     } catch (err) {
