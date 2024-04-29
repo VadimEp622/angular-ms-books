@@ -23,6 +23,10 @@ function _getUrlBooksByGenre(genre) {
     return `https://openlibrary.org/subjects/${genre}.json`
 }
 
+function _getUrlBookById(bookId = 'OL45804W') {
+    return `https://openlibrary.org/works/${bookId}.json`
+}
+
 function _transformBooksByGenre(genre, data) {
     const transformedBooks = data?.works.map((book) => _createMiniBook(book))
     return _createBooksByGenre(genre, transformedBooks)
