@@ -5,8 +5,15 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 
-// TODO: Research logging services, and how necessary are they for a small private project
-// TODO: Implement caching for routes
+// TODO: Research logging practices, what to log, what not to log.
+
+// TODO: In Order ->
+//   1) Add Database (sql -> MySql or sqlite) for users
+//   2) make user API
+//   3) activate ALS middleware
+//   4) make auth API
+
+// TODO: in book api, create route getBookById
 
 
 dotenv.config()
