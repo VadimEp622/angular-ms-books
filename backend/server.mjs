@@ -15,6 +15,8 @@ import dotenv from 'dotenv'
 
 // TODO: in book api, create route getBookById
 
+// TODO: research graceful shutdown - what, why, how.
+
 
 dotenv.config()
 const app = express()
