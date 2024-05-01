@@ -1,18 +1,53 @@
 // import { dbService } from '../../services/db.service.mjs'
-// import { logger } from '../../services/logger.service.mjs'
+import { logger } from '../../services/logger.service.mjs'
 // import mongodb from 'mongodb'
 // const { ObjectId } = mongodb
 
-// export const userService = {
-//     getById,
-//     getByUsername,
-//     add,
-//     addTrip,
-//     updateWishlist,
-//     query,
-//     remove,
-//     update,
-// }
+import { dbService } from "../../services/db.service.mjs"
+
+export const userService = {
+    query,
+    createTable
+    //     getById,
+    //     getByUsername,
+    //     add,
+    //     addTrip,
+    //     updateWishlist,
+    //     query,
+    //     remove,
+    //     update,
+}
+
+// temporary table structure - to be improved
+async function createTable() {
+    const connection = await dbService.connect()
+    const [results, fields] = await connection.query(
+        'CREATE TABLE `user` (`id` INT(11) AUTO_INCREMENT, `name` VARCHAR(50), PRIMARY KEY (`id`));'
+    )
+    console.log('results', results)
+    console.log('fields', fields)
+    const [inserted] = await connection.query(
+        'INSERT INTO `user`(`name`) VALUES(?), (?), (?), (?);',
+        ['Josh', 'John', 'Marie', 'Gween']
+    )
+    console.log('inserted', inserted)
+}
+
+
+async function query() {
+    try {
+        const connection = await dbService.connect()
+        const [results, fields] = await connection.query(
+            'SELECT * FROM user'
+        )
+        console.log('results', results)
+        console.log('fields', fields)
+        return results
+    } catch (err) {
+        logger.error(`Failed fetching users`, err)
+        throw err
+    }
+}
 
 // async function getById(userId) {
 //     try {

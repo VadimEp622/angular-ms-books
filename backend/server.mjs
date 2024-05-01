@@ -8,7 +8,7 @@ import dotenv from 'dotenv'
 // TODO: Research logging practices, what to log, what not to log.
 
 // TODO: In Order ->
-//   1) Add Database (sql -> MySql or sqlite) for users
+//   1) Add mysql Database for users
 //   2) make user API
 //   3) activate ALS middleware
 //   4) make auth API
@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === 'production') {
 // routes
 // import { authRoutes } from './api/auth/auth.routes.mjs'
 // import { secretRoutes } from './api/secret/secret.routes.mjs'
-// import { userRoutes } from './api/user/user.routes.mjs'
+import { userRoutes } from './api/user/user.routes.mjs'
 import { bookRoutes } from './api/book/book.routes.mjs'
 
 import { logger } from './services/logger.service.mjs'
@@ -61,6 +61,7 @@ import { logger } from './services/logger.service.mjs'
 // app.use('/api/order', orderRoutes)
 // app.use('/api/secret', secretRoutes)
 app.use('/api/book', bookRoutes)
+app.use('/api/user', userRoutes)
 
 
 
