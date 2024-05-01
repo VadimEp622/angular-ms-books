@@ -22,6 +22,18 @@ export async function getUsers(req, res) {
     }
 }
 
+export async function getUser(req, res) {
+    try {
+        const userId = req.params.id
+        const user = await userService.getById(userId)
+        logger.info('Get user by userId:', userId)
+        res.send(user)
+    } catch (err) {
+        logger.error('Failed to get user', err)
+        res.status(400).send({ err: 'Failed to get user' })
+    }
+}
+
 
 // // ====================== Confirmed Being Used ======================
 // export async function getUser(req, res) {

@@ -5,8 +5,13 @@ import { logger } from '../../services/logger.service.mjs'
 
 import { dbService } from "../../services/db.service.mjs"
 
+
+// TODO: research MySQLEvents (or something similiar), and see if that is what I need for the trigger
+
+
 export const userService = {
     query,
+    getById,
     createTable
     //     getById,
     //     getByUsername,
@@ -21,30 +26,84 @@ export const userService = {
 // temporary table structure - to be improved
 async function createTable() {
     const connection = await dbService.connect()
-    const [results, fields] = await connection.query(
-        'CREATE TABLE `user` (`id` INT(11) AUTO_INCREMENT, `name` VARCHAR(50), PRIMARY KEY (`id`));'
-    )
-    console.log('results', results)
-    console.log('fields', fields)
+
+    const query = `
+        CREATE TABLE user (
+            id BINARY(16) NOT NULL,
+            username VARCHAR(255) NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            fullname VARCHAR(255) NOT NULL,
+            PRIMARY KEY (id)
+        );
+    `
+
+    const queryRes = await connection.query(query)
+    console.log('queryRes', queryRes)
+
+    const trigger = `
+    CREATE TRIGGER before_insert_users
+    BEFORE INSERT ON user
+    FOR EACH ROW
+    BEGIN
+        SET NEW.id = UNHEX(REPLACE(UUID(), '-', ''));
+    END;
+    `
+
+    const triggerRes = await connection.query(trigger)
+    console.log('triggerRes', triggerRes)
+
+
     const [inserted] = await connection.query(
-        'INSERT INTO `user`(`name`) VALUES(?), (?), (?), (?);',
-        ['Josh', 'John', 'Marie', 'Gween']
+        `INSERT INTO user (username, password, fullname)
+        VALUES ('johndoe', 'password123', 'John Doe');`
     )
     console.log('inserted', inserted)
 }
 
 
+// You may retrieve the UUID like this:
+
+// SELECT HEX(id) AS uuid FROM user WHERE username = 'johndoe'; 
+
+
 async function query() {
     try {
         const connection = await dbService.connect()
-        const [results, fields] = await connection.query(
-            'SELECT * FROM user'
-        )
+        const [results, fields] = await connection.query(`    
+            SELECT 
+                HEX(id) AS id,
+                username,
+                password,
+                fullname
+            FROM user
+        `)
         console.log('results', results)
         console.log('fields', fields)
         return results
     } catch (err) {
         logger.error(`Failed fetching users`, err)
+        throw err
+    }
+}
+
+
+async function getById(userId = '3853383007CF11EF94347C10C9D06414') {
+    try {
+        const connection = await dbService.connect()
+        const [results, fields] = await connection.query(
+            `SELECT 
+                HEX(id) AS id,
+                username,
+                password,
+                fullname
+            FROM user WHERE id = UNHEX('${userId}')`
+        )
+
+        console.log('results', results)
+        console.log('fields', fields)
+        return results
+    } catch (err) {
+        logger.error(`while finding user by id: ${userId}`, err)
         throw err
     }
 }

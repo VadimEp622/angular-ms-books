@@ -1,12 +1,13 @@
 import express from 'express'
-import { createUserTable, getUsers } from './user.controller.mjs'
+import { createUserTable, getUser, getUsers } from './user.controller.mjs'
 // import { requireAuth, requireAdmin } from '../../middlewares/requireAuth.middleware.mjs'
 // import { getUser, getUsers, deleteUser, updateUser, updateUserWishlist, addUserTrip } from './user.controller.mjs'
 
 const router = express.Router()
 
 router.get('/', getUsers)
-router.get('/create-table', createUserTable)
+router.get('/:id', getUser)
+router.get('/config/create-table', createUserTable)
 
 // // ====================== Confirmed Being Used ======================
 // router.get('/:id', getUser)
