@@ -1,21 +1,12 @@
-// import { dbService } from '../../services/db.service.mjs'
 import { logger } from '../../services/logger.service.mjs'
-// import mongodb from 'mongodb'
-// const { ObjectId } = mongodb
-
 import { dbService } from "../../services/db.service.mjs"
-
-
-// TODO: research MySQLEvents (or something similiar), and see if that is what I need for the trigger
 
 
 export const userService = {
     query,
     getById,
-    createTable
-    //     getById,
+    add
     //     getByUsername,
-    //     add,
     //     addTrip,
     //     updateWishlist,
     //     query,
@@ -23,47 +14,8 @@ export const userService = {
     //     update,
 }
 
-// temporary table structure - to be improved
-async function createTable() {
-    const connection = await dbService.connect()
 
-    const query = `
-        CREATE TABLE user (
-            id BINARY(16) NOT NULL,
-            username VARCHAR(255) NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            fullname VARCHAR(255) NOT NULL,
-            PRIMARY KEY (id)
-        );
-    `
-
-    const queryRes = await connection.query(query)
-    console.log('queryRes', queryRes)
-
-    const trigger = `
-    CREATE TRIGGER before_insert_users
-    BEFORE INSERT ON user
-    FOR EACH ROW
-    BEGIN
-        SET NEW.id = UNHEX(REPLACE(UUID(), '-', ''));
-    END;
-    `
-
-    const triggerRes = await connection.query(trigger)
-    console.log('triggerRes', triggerRes)
-
-
-    const [inserted] = await connection.query(
-        `INSERT INTO user (username, password, fullname)
-        VALUES ('johndoe', 'password123', 'John Doe');`
-    )
-    console.log('inserted', inserted)
-}
-
-
-// You may retrieve the UUID like this:
-
-// SELECT HEX(id) AS uuid FROM user WHERE username = 'johndoe'; 
+// TODO: make an exportable query list that any function here can use
 
 
 async function query() {
@@ -108,17 +60,21 @@ async function getById(userId = '3853383007CF11EF94347C10C9D06414') {
     }
 }
 
-// async function getById(userId) {
-//     try {
-//         const collection = await dbService.getCollection('user')
-//         const user = await collection.findOne({ _id: ObjectId(userId) })
-//         delete user.password
-//         return user
-//     } catch (err) {
-//         logger.error(`while finding user by id: ${userId}`, err)
-//         throw err
-//     }
-// }
+async function add(user) {
+    try {
+        // TODO: make a way to return the newly created user
+        const { username, password, fullname } = user
+        const query = `INSERT INTO user (username, password, fullname) VALUES ('${username}', '${password}', '${fullname}');`
+        const connection = await dbService.connect()
+        const [results, fields] = await connection.query(query)
+        console.log('results', results)
+        console.log('fields', fields)
+    } catch (err) {
+        logger.error('cannot add user', err)
+        throw err
+    }
+}
+
 
 // async function getByUsername(username) {
 //     try {
@@ -128,26 +84,6 @@ async function getById(userId = '3853383007CF11EF94347C10C9D06414') {
 //         return user
 //     } catch (err) {
 //         logger.error(`while finding user by username: ${username}`, err)
-//         throw err
-//     }
-// }
-
-// async function add(user) {
-//     try {
-//         const userToAdd = {
-//             username: user.username,
-//             password: user.password,
-//             fullname: user.fullname,
-//             imgUrl: user.imgUrl,
-//             wishlist: [],
-//             trip: [],
-//         }
-//         const collection = await dbService.getCollection('user')
-//         await collection.insertOne(userToAdd)
-//         logger.info('Creating user', `userId: ${userToAdd._id}`)
-//         return userToAdd
-//     } catch (err) {
-//         logger.error('cannot add user', err)
 //         throw err
 //     }
 // }

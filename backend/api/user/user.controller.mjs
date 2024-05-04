@@ -2,19 +2,10 @@ import { userService } from './user.service.mjs'
 import { logger } from '../../services/logger.service.mjs'
 
 
-export async function createUserTable(req, res) {
-    try {
-        await userService.createTable()
-        res.send('Created user table')
-    } catch (err) {
-        logger.error('Failed to create user table', err)
-        res.status(400).send({ err: 'Failed to create user table' })
-    }
-}
-
 export async function getUsers(req, res) {
     try {
         const users = await userService.query()
+        logger.info('Get users')
         res.send(users)
     } catch (err) {
         logger.error('Failed to get users', err)
@@ -34,7 +25,21 @@ export async function getUser(req, res) {
     }
 }
 
+// temporary, before moving to auth route as registeration
+export async function createUser(req, res) {
+    try {
+        const user = req.body
+        await userService.add(user)
+        logger.info('Created user')
+        res.send({ msg: 'Created User Successfully' })
+    } catch (err) {
+        logger.error('Failed to create user', err)
+        res.status(400).send({ err: 'Failed to create user' })
+    }
 
+}
+
+// ********************** ignore everything below this line (this is reference help code) **********************
 // // ====================== Confirmed Being Used ======================
 // export async function getUser(req, res) {
 //     try {

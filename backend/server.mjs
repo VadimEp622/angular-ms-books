@@ -7,9 +7,11 @@ import dotenv from 'dotenv'
 
 // TODO: Research logging practices, what to log, what not to log.
 
+// TODO: in docker-compose, see if it's possible to set same port value (3030:3030) for simpler development
+
 // TODO: In Order ->
-//   1) Add mysql Database for users
-//   2) make user API
+//   1) ✔ Add mysql Database for users
+//   2) ✔ make user API
 //   3) activate ALS middleware
 //   4) make auth API
 
