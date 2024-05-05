@@ -1,19 +1,5 @@
 # TODO: research healthcheck, what it is, and how to use. (from what I gather, it's useful as a condition inside depents_on)
 services:
-  mysqldb:
-    image: mysql:8.3
-    container_name: mysqlcontainer
-    restart: unless-stopped
-    env_file: ./.env
-    environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-      - MYSQL_DATABASE=$MYSQLDB_DATABASE
-    ports:
-      - $MYSQLDB_LOCAL_PORT:$PORT
-    volumes:
-      - ./dbinit/init.sql:/docker-entrypoint-initdb.d/0_init.sql
-      - db:/var/lib/mysql
-
   ms-books-app:
     image: $DOCKER_HUB_USER/testing-ms-books:latest
     build: .
@@ -22,15 +8,27 @@ services:
     restart: unless-stopped
     env_file: ./.env
     ports:
-      - $NODE_LOCAL_PORT:$PORT
+      - $NODE_HOST_PORT:$PORT
     environment:
       - DB_HOST=mysqldb
       - DB_USER=$MYSQLDB_USER
       - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - DB_NAME=$MYSQLDB_DATABASE
-      - DB_PORT=$MYSQLDB_DOCKER_PORT
+      - DB_PORT=$MYSQLDB_LOCAL_PORT
     stdin_open: true
     tty: true
+
+  mysqldb:
+    image: mysql:8.3
+    container_name: mysqlcontainer
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    volumes:
+      - ./dbinit/init.sql:/docker-entrypoint-initdb.d/0_init.sql
+      - db:/var/lib/mysql
 
 volumes:
   db:
