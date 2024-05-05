@@ -28,7 +28,5 @@ COPY . .
 # Expose the port that the application listens on.
 EXPOSE 3030
 
-# TODO: research cmd commands to run, there are some you should use, and some you should not,
-#           however if you do it the recommended way - some stuff may break (maybe requires node graceful shutdown?)
 # Run the application.  
 CMD ["npm", "start"]

@@ -1,4 +1,3 @@
-# TODO: research healthcheck, what it is, and how to use. (from what I gather, it's useful as a condition inside depents_on)
 services:
   ms-books-app:
     image: $DOCKER_HUB_USER/testing-ms-books:latest

@@ -5,9 +5,15 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 
-// TODO: Research logging practices, what to log, what not to log.
+// #################################### DOCKER ####################################
+// TODO:
+//   * research healthcheck, what it is, and how to use. (from what I gather, it's useful as a condition inside depents_on)
+//   * research docker newtwork (for shared db maybe?)
+//   * research cmd in dockerfile, best practices, what not to do, and what may break (maybe solution requires node graceful shutdown?)
+// ################################################################################
 
-// TODO: in docker-compose, research ports for different services, best practices, and what NOT to do.
+
+// TODO: Research logging practices, what to log, what not to log.
 
 // TODO: In Order ->
 //   1) ✔ Add mysql Database for users
@@ -49,13 +55,13 @@ if (process.env.NODE_ENV === 'production') {
 
 
 // routes
+// import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.mjs'
 // import { authRoutes } from './api/auth/auth.routes.mjs'
 // import { secretRoutes } from './api/secret/secret.routes.mjs'
 import { userRoutes } from './api/user/user.routes.mjs'
 import { bookRoutes } from './api/book/book.routes.mjs'
-
 import { logger } from './services/logger.service.mjs'
-// import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.mjs'
+
 
 // app.all('*', setupAsyncLocalStorage)
 
@@ -67,14 +73,12 @@ app.use('/api/user', userRoutes)
 
 
 
-
 // Make every server-side-route to match the index.html
 // so when requesting http://localhost:3030/index.html/stay/123 it will still respond with
 // our SPA (single page app) (the index.html file) and allow vue/react-router/angular to take it from there
 app.get('/**', (req, res) => {
     res.sendFile(path.resolve('public/index.html'))
 })
-
 
 
 
