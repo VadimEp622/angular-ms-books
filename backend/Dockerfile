@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 
-ARG NODE_VERSION=21
+ARG NODE_VERSION=22
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}-slim
 
 # Use production node environment by default.
 ENV NODE_ENV production
@@ -22,11 +22,13 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 # Run the application as a non-root user.
 USER node
 
-# Expose the port that the application listens on.
-EXPOSE 3030
-
 # Copy the rest of the source files into the image.
 COPY . .
 
-# Run the application.
+# Expose the port that the application listens on.
+EXPOSE 3030
+
+# TODO: research cmd commands to run, there are some you should use, and some you should not,
+#           however if you do it the recommended way - some stuff may break (maybe requires node graceful shutdown?)
+# Run the application.  
 CMD ["npm", "start"]
