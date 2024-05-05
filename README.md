@@ -1,9 +1,15 @@
 # Ms. Books (Angular)
 
-Link:
-- Render.com Docker: [Ms. Books](https://testing-ms-books.onrender.com/)
+Link: [**Ms. Books**](https://testing-ms-books.onrender.com/)
 
 This project is a designed to showcase skill and understanding of Angular.
+
+## Tools used
+
+- **Angular** (Standalone)
+- **Node.js**
+- **Docker** (docker-compose)
+- **MySQL**
 
 ## More content In Progress
 
