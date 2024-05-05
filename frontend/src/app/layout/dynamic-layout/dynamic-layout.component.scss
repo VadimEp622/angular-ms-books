@@ -4,6 +4,7 @@
     position: fixed;
     height: 100vh;
     width: 100vw;
-    background-color: map-get($map-clr, "main", "main-0");
+    // background-color: map-get($map-clr, "main", "main-0");
+    background-color: darken(map-get($map-clr, "pure", "white"), 2%);
     z-index: -1;
 }

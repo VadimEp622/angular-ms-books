@@ -4,6 +4,8 @@ export const externalApiService = {
     fetchBooksByGenre
 }
 
+// TODO: limit subjects/genres by dates, to prevent too old books from being returned
+
 async function fetchBooksByGenre(genre) {
     try {
         const data = await fetch(_getUrlBooksByGenre(genre)).then(res => res.json())

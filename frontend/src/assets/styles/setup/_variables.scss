@@ -161,6 +161,7 @@ $map-margin-block-start: (
 
 $map-margin-block-end: (
     "0": map-get($map-spacing, "0"),
+    "10": map-get($map-spacing, "10"),
     "20": map-get($map-spacing, "20")
 );
 

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Genre } from '../models/genre.model'
 import { environment } from '../../environments/environment'
 
 
@@ -19,10 +18,11 @@ export class BookService {
   ) { }
 
 
-  public queryByGenres(genres: Genre[] = []) {
+  public queryByGenres() {
     return this.http.get<any>(`${this.baseUrl}/genre`)
   }
 
+  // TODO: add queryByGenre (for book-index resolver - basically book list for single genre)
 
 
   // ------------------ Private Functions ------------------

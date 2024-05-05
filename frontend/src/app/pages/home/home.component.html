@@ -1,1 +1,13 @@
-<p>home works!</p>
+<home-hero></home-hero>
+
+<ng-container *ngFor="let booksByGenre of booksByGenres; let i = index">
+
+    <ng-container *ngIf="(i>=0 && i<=1) || i>=3">
+        <book-list-horizontal-carousel [booksByGenre]="booksByGenre"></book-list-horizontal-carousel>
+    </ng-container>
+
+    <ng-container *ngIf="(i>=2 && i<=2)">
+        <book-list-grid [booksByGenre]="booksByGenre" class="full main-layout"></book-list-grid>
+    </ng-container>
+
+</ng-container>

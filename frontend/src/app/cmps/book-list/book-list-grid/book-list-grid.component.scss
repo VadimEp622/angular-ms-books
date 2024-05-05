@@ -1,5 +1,9 @@
 @import "../../../../assets/styles/setup/_variables.scss";
 
+:host {
+    background-color: map-get($map-clr, "main", "main-0");
+}
+
 .book-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

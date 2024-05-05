@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { AsyncPipe, NgClass, NgIf } from '@angular/common'
 import { Observable } from 'rxjs'
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { AppHeaderComponent } from '../../cmps/app-header/app-header.component'
 import { AppMainMenuComponent } from '../../cmps/app-main-menu/app-main-menu.component'
 import { LayoutService } from '../../services/layout.service'

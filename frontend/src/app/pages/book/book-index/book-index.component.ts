@@ -3,9 +3,9 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common'
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { BookListComponent } from '../../../cmps/book-list/book-list.component'
-import { BooksByGenre } from '../../../models/books-by-genre.model'
 import { BookListHorizontalCarouselComponent } from '../../../cmps/book-list/book-list-horizontal-carousel/book-list-horizontal-carousel.component'
 import { BookListGridComponent } from './../../../cmps/book-list/book-list-grid/book-list-grid.component'
+
 
 
 
@@ -26,22 +26,14 @@ export class BookIndexComponent implements OnInit, OnDestroy {
   ) { }
 
   sub!: Subscription
-  booksByGenres!: BooksByGenre[]
+  // booksByGenre!: BooksByGenre
 
-  // TODO: add error when data failed fetching (before this,
-  //  connect to backend API, and in backend make each booksPerGenre external API call that fails, not cause entire booksPerGenres API to fail)
-
-
-  // INFO: There should be a few types of book-lists:
-  //  - horizontal carousel of ONLY book cover pictures
-  //  - horizontal carousel of VERTICAL covers/title/authors/price/score
-  //  - two rows of book covers/title/authors/price/score (need to consider responsiveness, and preventing jumping of content when changing screen size (?))
 
 
   ngOnInit() {
     this.sub = this.route.data.pipe(
-      tap(({ booksByGenres }) => {
-        this.booksByGenres = booksByGenres
+      tap(({ booksByGenre }) => {
+        // this.booksByGenre = booksByGenre
       })
     ).subscribe()
   }

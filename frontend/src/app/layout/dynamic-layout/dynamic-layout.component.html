@@ -12,7 +12,7 @@
     <main [ngClass]="['full' ,layoutService.getLayout()]">
         <ng-container *ngIf="isRouteLoading$ | async; else content">
             <p-progressSpinner
-                class="flex justify-center"
+                class="flex justify-center mg-bl-st-20"
                 ariaLabel="loading"
             ></p-progressSpinner>
         </ng-container>
