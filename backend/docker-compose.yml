@@ -1,3 +1,4 @@
+# TODO: research healthcheck, what it is, and how to use. (from what I gather, it's useful as a condition inside depents_on)
 services:
   mysqldb:
     image: mysql:8.3

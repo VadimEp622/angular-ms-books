@@ -7,7 +7,7 @@ import dotenv from 'dotenv'
 
 // TODO: Research logging practices, what to log, what not to log.
 
-// TODO: in docker-compose, see if it's possible to set same port value (3030:3030) for simpler development
+// TODO: in docker-compose, research ports for different services, best practices, and what NOT to do.
 
 // TODO: In Order ->
 //   1) ✔ Add mysql Database for users
