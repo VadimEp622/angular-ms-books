@@ -1,3 +1,4 @@
+.home-page-layout,
 .main-layout,
 .details-layout {
     display: grid;
@@ -10,8 +11,9 @@
         }
 
         &:not(.full) {
-            min-width: 0; // super important for child elements of this class, which are flexed, and have dynamic content
-            //               and need to be sized based on said dynamic content
+            // min-width: 0 --> super important for child elements of this class, which are flexed, and have dynamic content
+            // and need to be sized based on said dynamic content
+            min-width: 0;
         }
     }
 }

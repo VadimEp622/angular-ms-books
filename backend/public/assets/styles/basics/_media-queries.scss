@@ -1,17 +1,37 @@
+@import "../setup/variables";
+
 /* =================== Regular =================== */
 // 375px - 1049px
 @include for-screen(mobile) {
     // ...
+    .home-page-layout {
+        grid-template-columns:
+            minmax(20px, 1fr)
+            minmax(auto, map-get($map-content-width, "home-page-layout", "mobile"))
+            minmax(20px, 1fr);
+    }
 }
 
 // 1050px - 1439px
 @include for-screen(tablet) {
     // ...
+    .home-page-layout {
+        grid-template-columns:
+            minmax(20px, 1fr)
+            minmax(auto, map-get($map-content-width, "home-page-layout", "tablet"))
+            minmax(20px, 1fr);
+    }
 }
 
 // 1440px - infinity
 @include for-screen(desktop) {
     // ...
+    .home-page-layout {
+        grid-template-columns:
+            minmax(20px, 1fr)
+            minmax(auto, map-get($map-content-width, "home-page-layout", "desktop"))
+            minmax(20px, 1fr);
+    }
     // .main-layout {
     //     grid-template-columns: 20px 1fr 20px;
     // }
@@ -25,6 +45,22 @@
 // 0 - 374px
 @include for-screen(null-to-mobile) {
     // ...
+    .home-page-layout {
+        grid-template-columns: 20px 1fr 20px;
+    }
+
+    header {
+        min-width: 220px;
+    }
+
+    .home-page {
+        min-width: 275px;
+
+        & .book-list-horizontal-carousel-container,
+        & .book-list-grid-container {
+            padding-inline: 0;
+        }
+    }
 }
 
 // 0 - 1049px

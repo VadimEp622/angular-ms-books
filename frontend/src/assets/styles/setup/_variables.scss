@@ -38,6 +38,14 @@ $map-clr: (
 );
 
 /* =================== Breakpoints =================== */
+$map-content-width: (
+    "home-page-layout": (
+        "mobile": 700px,
+        "tablet": 900px,
+        "desktop": 1200px
+    )
+);
+
 $mobile-breakpoint: 375px;
 $tablet-breakpoint: 1050px;
 $desktop-breakpoint: 1440px;

@@ -12,7 +12,7 @@ import { BookListGridComponent } from '../../cmps/book-list/book-list-grid/book-
   standalone: true,
   imports: [NgIf, NgFor, HomeHeroComponent, BookListHorizontalCarouselComponent, BookListGridComponent],
   host: {
-    class: 'full main-layout'
+    class: 'full home-page-layout'
   },
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

@@ -5,7 +5,7 @@ import { Component } from '@angular/core'
   standalone: true,
   imports: [],
   host: {
-    class: 'full main-layout'
+    class: 'full home-page-layout'
   },
   templateUrl: './home-hero.component.html',
   styleUrl: './home-hero.component.scss'

@@ -21,6 +21,7 @@ async function fetchBooksByGenre(genre) {
 
 
 // ------------------------------------ Private Functions ------------------------------------
+// returns 12 books for each genre
 function _getUrlBooksByGenre(genre) {
     return `https://openlibrary.org/subjects/${genre}.json`
 }
