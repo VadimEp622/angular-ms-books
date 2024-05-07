@@ -21,7 +21,7 @@ async function fetchBooksByGenre(genre) {
 
 // ------------------------------------ Private Functions ------------------------------------
 function _getUrlBooksByGenre(genre) {
-    return `https://openlibrary.org/search.json?q=subject_key:${genre}+first_publish_year:[2020+TO+2024]+language:eng&fields=key,title,author_name,author_key,cover_i&limit=20&offset=0`
+    return `https://openlibrary.org/search.json?q=subject_key:${genre}+first_publish_year:[2020+TO+2024]+language:eng&fields=*,key,title,author_name,author_key,cover_i&limit=20&offset=0`
 }
 
 function _getUrlBookById(bookId = 'OL45804W') {
