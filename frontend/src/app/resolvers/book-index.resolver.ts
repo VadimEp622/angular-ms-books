@@ -3,6 +3,5 @@ import { inject } from '@angular/core'
 import { BookService } from './../services/book.service'
 
 export const bookIndexResolver: ResolveFn<any> = (route, state) => {
-    return true
-//   return inject(BookService).queryByGenres()
+    return inject(BookService).queryByGenre(route.paramMap.get('genre')!)
 }

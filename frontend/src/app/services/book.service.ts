@@ -22,6 +22,15 @@ export class BookService {
     return this.http.get<any>(`${this.baseUrl}/genre`)
   }
 
+  public queryByGenre(genre: string) {
+    return this.http.get<any>(`${this.baseUrl}/genre/${genre}`)
+  }
+
+  public getBookById(bookId: string) {
+    return this.http.get<any>(`${this.baseUrl}/works/${bookId}`)
+  }
+
+
   // TODO: add queryByGenre (for book-index resolver - basically book list for single genre)
 
 
