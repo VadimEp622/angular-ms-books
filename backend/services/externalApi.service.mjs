@@ -4,7 +4,7 @@ export const externalApiService = {
     fetchBooksByGenre
 }
 
-// TODO: refactor to fetch books from _getUrlBooksByGenreImproved!!!
+// TODO: think about how to handle books with missing images - do we cull them in back-end? front-end? or simply add a placeholder image?
 
 async function fetchBooksByGenre(genre) {
     try {
@@ -14,19 +14,13 @@ async function fetchBooksByGenre(genre) {
         logger.error('Failed fetching books by genre', err)
         throw _createErrorBooksByGenre('Failed fetching books by genre', genre)
     }
-
 }
 
 
 
 
 // ------------------------------------ Private Functions ------------------------------------
-// returns 12 books for each genre
 function _getUrlBooksByGenre(genre) {
-    return `https://openlibrary.org/subjects/${genre}.json`
-}
-
-function _getUrlBooksByGenreImproved(genre) {
     return `https://openlibrary.org/search.json?q=subject_key:${genre}+first_publish_year:[2020+TO+2024]+language:eng&fields=key,title,author_name,author_key,cover_i&limit=20&offset=0`
 }
 
@@ -35,7 +29,7 @@ function _getUrlBookById(bookId = 'OL45804W') {
 }
 
 function _transformBooksByGenre(genre, data) {
-    const transformedBooks = data?.works.map((book) => _createMiniBook(book))
+    const transformedBooks = data?.docs.map((book) => _createMiniBook(book))
     return _createBooksByGenre(genre, transformedBooks)
 }
 
@@ -48,17 +42,19 @@ function _createBooksByGenre(genre, books) {
 
 function _createMiniBook(apiBook) {
     const title = apiBook?.title
-    const authors = apiBook?.authors
+    const author_key = apiBook?.author_key
+    const author_name = apiBook?.author_name
     const openLibBookId = apiBook?.key.replace('/works/', '')
-    const openLibCoverId = apiBook?.cover_id
-    return _createMiniBookObject(title, authors, openLibBookId, openLibCoverId)
+    const openLibCoverId = apiBook?.cover_i ? apiBook.cover_i : -1
+    return _createMiniBookObject(title, author_key, author_name, openLibBookId, openLibCoverId)
 }
 
-function _createMiniBookObject(title, authors, openLibBookId, openLibCoverId) {
+function _createMiniBookObject(title, author_key, author_name, openLibBookId, openLibCoverId) {
     return {
         _id: openLibBookId,
         title,
-        authors,
+        author_key,
+        author_name,
         openLibBookId,
         openLibCoverId
     }

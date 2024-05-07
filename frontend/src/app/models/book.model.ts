@@ -1,7 +1,9 @@
 export interface Book {
     _id: string,
     title: string,
-    authors: any[],
+    authors?: any[],
+    author_key?: string[],
+    author_name?: string[],
     openLibBookId: string,
     openLibCoverId: number,
     description?: string,
