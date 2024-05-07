@@ -1,0 +1,5 @@
+@import "../../../../assets/styles/setup/_variables.scss";
+
+.category-title {
+    border-bottom: 2px solid map-get($map-clr, "gray", "gray-3");
+}

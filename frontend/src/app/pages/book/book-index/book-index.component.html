@@ -1,7 +1,3 @@
-<section class="book-index full main-layout mg-bl-20">
-    <p>Hello from book-index</p>
-
-    <section>
-        {{booksByGenre|json}}
-    </section>
+<section class="book-index full main-layout">
+    <book-list-vertical [booksByGenre]="booksByGenre"></book-list-vertical>
 </section>

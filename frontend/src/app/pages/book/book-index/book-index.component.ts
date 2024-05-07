@@ -1,19 +1,16 @@
 import { Subscription, tap } from 'rxjs'
-import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common'
+import { AsyncPipe, NgFor, NgIf } from '@angular/common'
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { BookListComponent } from '../../../cmps/book-list/book-list.component'
-import { BookListHorizontalCarouselComponent } from '../../../cmps/book-list/book-list-horizontal-carousel/book-list-horizontal-carousel.component'
-import { BookListGridComponent } from './../../../cmps/book-list/book-list-grid/book-list-grid.component'
 import { BooksByGenre } from '../../../models/books-by-genre.model'
-
+import { BookListVerticalComponent } from '../../../cmps/book-list/book-list-vertical/book-list-vertical.component'
 
 
 
 @Component({
   selector: 'book-index',
   standalone: true,
-  imports: [JsonPipe, NgIf, NgFor, AsyncPipe, BookListComponent, BookListHorizontalCarouselComponent, BookListGridComponent],
+  imports: [NgIf, NgFor, AsyncPipe, BookListVerticalComponent],
   host: {
     class: 'full main-layout'
   },
@@ -28,6 +25,12 @@ export class BookIndexComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute
   ) { }
+
+  // TODO:
+  // - decide on background color for page, for book-list, for book-preview, and for book-preview on hover 
+  // - add hover styling for book previews
+
+  // TODO: consider added different category/genre sidebar to the left
 
 
 
