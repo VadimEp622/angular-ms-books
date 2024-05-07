@@ -4,7 +4,7 @@ export const externalApiService = {
     fetchBooksByGenre
 }
 
-// TODO: limit subjects/genres by dates, to prevent too old books from being returned
+// TODO: refactor to fetch books from _getUrlBooksByGenreImproved!!!
 
 async function fetchBooksByGenre(genre) {
     try {
@@ -24,6 +24,10 @@ async function fetchBooksByGenre(genre) {
 // returns 12 books for each genre
 function _getUrlBooksByGenre(genre) {
     return `https://openlibrary.org/subjects/${genre}.json`
+}
+
+function _getUrlBooksByGenreImproved(genre) {
+    return `https://openlibrary.org/search.json?q=subject_key:${genre}+first_publish_year:[2020+TO+2024]+language:eng&fields=key,title,author_name,author_key,cover_i&limit=20&offset=0`
 }
 
 function _getUrlBookById(bookId = 'OL45804W') {
