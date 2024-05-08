@@ -10,7 +10,7 @@ export function requireAuth(req, res, next) {
   req.loggedinUser = loggedinUser
 
   if (config.isGuestMode && !loggedinUser) {
-    req.loggedinUser = { _id: '', fullname: 'Guest' }
+    req.loggedinUser = { id: '', fullname: 'Guest' }
     return next()
   }
   if (!loggedinUser) return res.status(401).send('Not Authenticated')
@@ -22,8 +22,7 @@ export function requireAdmin(req, res, next) {
   if (!loggedinUser) return res.status(401).send('Not Authenticated')
   if (!loggedinUser.isAdmin) {
     logger.warn(loggedinUser.fullname + 'attempted to perform admin action')
-    res.status(403).end('Not Authorized')
-    return
+    return res.status(403).send('Not Authorized')
   }
   next()
 }

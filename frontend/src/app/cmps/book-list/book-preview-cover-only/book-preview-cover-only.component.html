@@ -3,7 +3,7 @@
 
         <section class="book-img-container flex justify-center align-center">
             <section class="book-img">
-                <ng-container *ngIf="book.openLibCoverId !== -1;else noCover">
+                <ng-container *ngIf="book.openLibCoverId !== -1; else noCover">
                     <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverId }}-M.jpg" alt="book">
                 </ng-container>
 
