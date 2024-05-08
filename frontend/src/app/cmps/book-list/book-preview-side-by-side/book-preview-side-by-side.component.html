@@ -1,11 +1,11 @@
-<section class="book-preview flex align-center gap10 pd-10 mg-in-10">
+<section class="book-preview flex align-center gap20 pd-10 mg-in-10">
     <section class="book-img">
         <ng-container *ngIf="book.openLibCoverId !== -1;else noCover">
             <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverId }}-M.jpg" alt="book">
         </ng-container>
 
         <ng-template #noCover>
-            <div class="fs12 text-align-center flex align-center bg-clr-gray-0 height-full width-full">missing cover</div>
+            <div class="fs12 text-align-center flex align-center justify-center bg-clr-gray-0 height-full width-full">missing cover</div>
         </ng-template>
     </section>
     <section class="book-info">
