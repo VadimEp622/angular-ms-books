@@ -1,13 +1,17 @@
 <section class="book-preview-container flex justify-center align-center gap10 pd-bl-10 pd-in-10 mg-in-10">
-    <section class="book-preview">
+    <section class="book-preview" [title]="book.title">
 
-        <section class="book-img">
-            <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverId }}-M.jpg" alt="book">
+        <section class="book-img-container flex justify-center align-center">
+            <section class="book-img">
+                <ng-container *ngIf="book.openLibCoverId !== -1;else noCover">
+                    <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverId }}-M.jpg" alt="book">
+                </ng-container>
+
+                <ng-template #noCover>
+                    <div class="text-align-center flex align-center bg-clr-gray-0 height-full width-full">missing cover</div>
+                </ng-template>
+            </section>
         </section>
-        <!-- <section class="book-info"> -->
-        <!-- <h3 class="">{{ book.title }}</h3> -->
-        <!-- <p class="mg-bl-5">{{ book.author_name[0] }}</p> -->
-        <!-- <p>{{ book.openLibBookId }}</p> -->
-        <!-- </section> -->
+        
     </section>
 </section>
