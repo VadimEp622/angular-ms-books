@@ -18,7 +18,7 @@ import dotenv from 'dotenv'
 // TODO: In Order ->
 //   1) ✔ Add mysql Database for users
 //   2) ✔ make user API
-//   3) make auth API
+//   3) ✔ make auth API
 //   4) activate ALS middleware
 
 // TODO: in book api, create route getBookById
@@ -56,7 +56,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // routes
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.mjs'
-// import { authRoutes } from './api/auth/auth.routes.mjs'
+import { authRoutes } from './api/auth/auth.routes.mjs'
 // import { secretRoutes } from './api/secret/secret.routes.mjs'
 import { userRoutes } from './api/user/user.routes.mjs'
 import { bookRoutes } from './api/book/book.routes.mjs'
@@ -65,7 +65,7 @@ import { logger } from './services/logger.service.mjs'
 
 app.all('*', setupAsyncLocalStorage)
 
-// app.use('/api/auth', authRoutes)
+app.use('/api/auth', authRoutes)
 // app.use('/api/order', orderRoutes)
 // app.use('/api/secret', secretRoutes)
 app.use('/api/book', bookRoutes)

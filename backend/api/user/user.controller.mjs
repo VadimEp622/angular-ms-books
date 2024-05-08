@@ -25,19 +25,6 @@ export async function getUser(req, res) {
     }
 }
 
-// temporary, before moving to auth route as registeration
-export async function createUser(req, res) {
-    try {
-        const user = req.body
-        await userService.add(user)
-        logger.info('Created user')
-        res.send({ msg: 'Created User Successfully' })
-    } catch (err) {
-        logger.error('Failed to create user', err)
-        res.status(400).send({ err: 'Failed to create user' })
-    }
-
-}
 
 // ********************** ignore everything below this line (this is reference help code) **********************
 // // ====================== Confirmed Being Used ======================

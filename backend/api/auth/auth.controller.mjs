@@ -6,7 +6,7 @@ export async function login(req, res) {
     try {
         const user = await authService.login(username, password)
         const loginToken = authService.getLoginToken(user)
-        logger.info('User login: ', user._id)
+        logger.info('User login: ', user.id)
         res.cookie('loginToken', loginToken, {sameSite: 'None', secure: true})
         res.json(user)
     } catch (err) {
@@ -23,7 +23,7 @@ export async function signup(req, res) {
         const account = await authService.signup(credentials)
         logger.debug(`auth.route - new account created: ` + JSON.stringify(account))
         const user = await authService.login(credentials.username, credentials.password)
-        logger.info('User signup:', user._id)
+        logger.info('User signup:', user.id)
         const loginToken = authService.getLoginToken(user)
         res.cookie('loginToken', loginToken, {sameSite: 'None', secure: true})
         res.json(user)
