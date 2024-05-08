@@ -3,8 +3,9 @@
         <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverId }}-S.jpg" alt="book">
     </section>
     <section class="book-info">
-        <h3 class="">{{ book.title }}</h3>
-        <p class="mg-bl-5">{{ book.author_name[0] }}</p>
+        <h3 [title]="book.title">{{ book.title }}</h3>
+        <p class="mg-bl-5" [title]="book.author_name.join(', ')">{{ book.author_name.join(', ') }}</p>
+
         <!-- <p>{{ book.openLibBookId }}</p> -->
     </section>
 </section>
