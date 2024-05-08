@@ -1,17 +1,17 @@
-// import Cryptr from 'cryptr'
+import Cryptr from 'cryptr'
 // import bcrypt from 'bcrypt'
 
-// import {userService} from '../user/user.service.mjs'
-// import {logger} from '../../services/logger.service.mjs'
+// import { userService } from '../user/user.service.mjs'
+import { logger } from '../../services/logger.service.mjs'
 
-// const cryptr = new Cryptr(process.env.SECRET1 || 'Secret-Puk-1234')
+const cryptr = new Cryptr(process.env.SECRET1 || 'Secret-Puk-1234')
 
-// export const authService = {
-//     signup,
-//     login,
-//     getLoginToken,
-//     validateToken
-// }
+export const authService = {
+    // signup,
+    //     login,
+    //     getLoginToken,
+    validateToken
+}
 
 // async function login(username, password) {
 //     logger.debug(`auth.service - login with username: ${username}`)
@@ -42,20 +42,20 @@
 
 // function getLoginToken(user) {
 //     const userInfo = {_id : user._id, fullname: user.fullname, isAdmin: user.isAdmin}
-//     return cryptr.encrypt(JSON.stringify(userInfo))    
+//     return cryptr.encrypt(JSON.stringify(userInfo))
 // }
 
-// function validateToken(loginToken) {
-//     try {
-//         const json = cryptr.decrypt(loginToken)
-//         const loggedinUser = JSON.parse(json)
-//         return loggedinUser
+function validateToken(loginToken) {
+    try {
+        const json = cryptr.decrypt(loginToken)
+        const loggedinUser = JSON.parse(json)
+        return loggedinUser
 
-//     } catch(err) {
-//         console.log('Invalid login token')
-//     }
-//     return null
-// }
+    } catch (err) {
+        logger.info('Invalid login token')
+    }
+    return null
+}
 
 // // ;(async ()=>{
 // //     await signup('bubu', '123', 'Bubu Bi')

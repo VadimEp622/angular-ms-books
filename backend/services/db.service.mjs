@@ -14,7 +14,7 @@ let dbConn = null
 async function connect() {
     if (dbConn) return dbConn
     try {
-        const db = mysql.createPool(config)
+        const db = mysql.createPool(config.configDB)
         dbConn = db
         return db
     } catch (err) {

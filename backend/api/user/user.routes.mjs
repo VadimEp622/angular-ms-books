@@ -1,11 +1,12 @@
 import express from 'express'
 import { createUser, getUser, getUsers } from './user.controller.mjs'
+import { requireAuth } from '../../middlewares/requireAuth.middleware.mjs'
 // import { requireAuth, requireAdmin } from '../../middlewares/requireAuth.middleware.mjs'
 // import { getUser, getUsers, deleteUser, updateUser, updateUserWishlist, addUserTrip } from './user.controller.mjs'
 
 const router = express.Router()
 
-router.get('/', getUsers)
+router.get('/', requireAuth, getUsers)
 router.get('/:id', getUser)
 router.post('/', createUser)
 

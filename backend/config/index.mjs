@@ -3,8 +3,8 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-export let config
+export let config = {}
 
-config = configDB
+config.configDB = configDB
 
-// config.isGuestMode = false
+config.isGuestMode = false
