@@ -89,7 +89,6 @@ async function getByUsername(username) {
         WHERE username = '${username}'
         `
         const [results] = await connection.query(query)
-        logger.debug(`getByUsername(${username}) results[0]`, results[0])
         return results[0]
     } catch (err) {
         logger.error(`while finding user by username: ${username}`, err)
