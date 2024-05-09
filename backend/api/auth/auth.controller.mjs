@@ -1,6 +1,9 @@
 import {authService} from './auth.service.mjs'
 import {logger} from '../../services/logger.service.mjs'
 
+
+// TODO: consider if needed -> on successful login/signup, update store.loggedinUser, and on logout, update store.loggedinUser to guest or null/undefined
+
 export async function login(req, res) {
     const { username, password } = req.body
     try {
