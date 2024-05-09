@@ -31,8 +31,6 @@ export class BookService {
   }
 
 
-  // TODO: add queryByGenre (for book-index resolver - basically book list for single genre)
-
 
   // ------------------ Private Functions ------------------
 

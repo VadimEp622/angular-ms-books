@@ -11,10 +11,14 @@ import { RouterOutlet } from '@angular/router'
 export class AppComponent {
   title = 'angular-ms-books'
 
-  // TODO: no matter what, stop using local-storage. Decide on one of the following ->
-  //    my options:
-  //       1. Don't use Github-pages.
-  //       2. If using Github-pages, use only hardcoded demo data.
-  //       3. If using Github-pages, set prod/dev CRUD API to be the same ["cloud_service_url/api/"],
-  //           and find a way to hide said url from being pushed to github pages (research angular env variables AND github pages secrets).
+  // TODO: in app header, DESKTOP, change it up to have an upper header and lower header.
+  //    - upper header: will have logo + search bar + user profile button, that on click will open menu
+  //    - lower header: will have menu button, that will open a nav sidebar + book genres (maybe have "our favorites","top rated" etc)
+
+  // TODO: in app header, MOBILE, will have a header search bar, and a footer nav for: home (meaning home + book route), user (user profile page), cart (cart page), + menu button
+  //    - footer nav: 
+  //         * home -> home route + book route 
+  //         * user -> user profile route (header search bar will disappear, and instead be user profile button + alerts/notification button)
+  //         * cart -> cart route
+  //         * menu -> menu sidebar
 }
