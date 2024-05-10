@@ -19,7 +19,7 @@ import dotenv from 'dotenv'
 //   1) ✔ Add mysql Database for users
 //   2) ✔ make user API
 //   3) ✔ make auth API
-//   4) activate ALS middleware
+//   4) ✔ activate ALS middleware
 
 // TODO: in book api, create route getBookById
 
