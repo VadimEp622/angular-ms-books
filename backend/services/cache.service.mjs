@@ -1,3 +1,3 @@
 import NodeCache from 'node-cache'
 
-export const bookCache = new NodeCache({ stdTTL: 3600 })
+export const cacheUrl = new NodeCache({ stdTTL: 3600 })

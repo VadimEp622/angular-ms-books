@@ -1,5 +1,5 @@
 import { bookDataService } from "../../services/bookData.service.mjs"
-import { bookCache } from "../../services/cache.service.mjs"
+import { cacheUrl } from "../../services/cache.service.mjs"
 import { logger } from "../../services/logger.service.mjs"
 import { queryBooksByGenre, queryBooksByGenres } from "./book.service.mjs"
 
@@ -10,8 +10,8 @@ import { queryBooksByGenre, queryBooksByGenres } from "./book.service.mjs"
 export async function getBooksByGenres(req, res) {
     try {
         const booksByGenres = await queryBooksByGenres(bookDataService.getGenres())
-        bookCache.set(req.route.path, booksByGenres)
-        logger.info(`Cache set - book route - ${req.route.path}`)
+        cacheUrl.set(req.originalUrl, booksByGenres)
+        logger.info(`Cache set - ${req.originalUrl}`)
         res.send(booksByGenres)
     } catch {
         logger.error('Failed to get books by genres')
@@ -23,8 +23,8 @@ export async function getBooks(req, res) {
     try {
         const genre = req.params.id
         const booksByGenre = await queryBooksByGenre(genre)
-        bookCache.set(req.route.path, booksByGenre)
-        logger.info(`Cache set - book route - ${req.route.path}`)
+        cacheUrl.set(req.originalUrl, booksByGenre)
+        logger.info(`Cache set - ${req.originalUrl}`)
         res.send(booksByGenre)
     } catch (err) {
         logger.error('Failed to get books by genre')
