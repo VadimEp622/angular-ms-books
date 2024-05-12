@@ -5,7 +5,7 @@ import { DynamicSvgService } from '../services/dynamic-svg.service';
   selector: 'dynamic-svg',
   standalone: true,
   imports: [],
-  template: '<div #svgContainer></div>'
+  template: '<div #svgContainer class="flex"></div>'
 })
 export class DynamicSvgComponent {
   @Input() svgPath!: string;
