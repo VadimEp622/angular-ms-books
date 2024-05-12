@@ -1,19 +1,17 @@
 import { bookCache } from "../services/cache.service.mjs"
 import { logger } from "../services/logger.service.mjs"
 
-// TODO: consider doing caching by url, so /api/genre will be the cache key. consider type of request as well (GET, POST, etc). (no reason currently to use others beside GET)
-//   This will allow having only one cache function, which we can reuse for diferent routes.
 
-export function cacheBooksByGenres(req, res, next) {
-    try {
-        if (bookCache.has('booksByGenres')) {
-            logger.info(`Cache hit - booksByGenres`)
-            return res.send(bookCache.get('booksByGenres'))
+
+export function cacheBook(req, res, next) {
+    try{
+        if(req.route.methods.get && bookCache.has(req.route.path)){
+            logger.info(`Cache hit - book route - ${req.route.path}`)
+            return res.send(bookCache.get(req.route.path))
         }
-        logger.info('Cache miss - booksByGenres')
+        logger.info(`Cache miss - book route - ${req.route.path}`)
         return next()
-    } catch (err) {
-        console.log('err', err)
-        throw err
+    }catch(err){
+        logger.error('error in cache', err)
     }
 }
