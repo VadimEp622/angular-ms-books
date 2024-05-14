@@ -14,8 +14,9 @@ export class UserService {
   ) { }
 
   // TODO: make a currentLoggedInUser observable, with which auth functions (login/signup/logout) will be able to communicate with.
+  // TODO: consider moving loggedInUser$ obs to auth service (prevents confusing duplication of login/onLogin)
 
-  // INFO: login & signup WORK with backend DB!
+  // INFO: login/signup/logout WORK with backend DB!
 
 
 
