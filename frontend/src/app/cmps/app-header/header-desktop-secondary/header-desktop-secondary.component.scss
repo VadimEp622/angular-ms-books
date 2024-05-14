@@ -1,7 +1,7 @@
 @import "../../../../assets/styles/setup/_variables.scss";
 
 :host {
-    background-color: darken(map-get($map-clr, "main", "main-3"), 30%);
+    background-color: darken(map-get($map-clr, "main", "main-2"), 0%);
 }
 
 .app-header-container {

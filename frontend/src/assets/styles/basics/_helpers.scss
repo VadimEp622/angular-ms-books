@@ -187,6 +187,10 @@
         flex: 0 0 auto;
     }
 
+    > .align-self-start {
+        align-self: flex-start;
+    }
+
     &.column {
         flex-direction: column;
     }

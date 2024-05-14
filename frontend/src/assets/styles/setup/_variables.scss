@@ -26,7 +26,8 @@ $map-clr: (
         "gray-0": #dcdcdc,
         "gray-1": #858f7e,
         "gray-2": #8f98a0,
-        "gray-3": #cccccc
+        "gray-3": #cccccc,
+        "gray-4": #2f2f2f
     ),
     "red": (
         "red-0": #f98460,
@@ -53,6 +54,7 @@ $desktop-breakpoint: 1440px;
 // ======================== FONTS ========================
 // ************** Font Size Map **************
 $map-font-size: (
+    "11": 11px,
     "12": 12px,
     "14": 14px,
     "18": 18px,
@@ -67,6 +69,7 @@ $map-line-height: (
     "14": 14px,
     "18": 18px,
     "20": 20px,
+    "24": 24px,
     "25": 25px,
     "34": 34px
 );

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { ProfileActionMenuComponent } from './profile-action-menu/profile-action-menu.component';
 
 @Component({
   selector: 'header-desktop-main',
   standalone: true,
-  imports: [],
+  imports: [ProfileActionMenuComponent],
   templateUrl: './header-desktop-main.component.html',
   styleUrl: './header-desktop-main.component.scss'
 })
