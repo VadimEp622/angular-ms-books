@@ -15,6 +15,10 @@ export class UserService {
 
   // TODO: make a currentLoggedInUser observable, with which auth functions (login/signup/logout) will be able to communicate with.
 
+  // INFO: login & signup WORK with backend DB!
+
+
+
 
   private _loggedInUser$ = new BehaviorSubject<any | null>(null) // todo: change any with User model
   public loggedInUser$ = this._loggedInUser$.asObservable()

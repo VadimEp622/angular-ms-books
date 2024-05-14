@@ -66,11 +66,11 @@
 // 0 - 1049px
 @include for-screen(null-to-tablet) {
     // ...
-    header {
-        & .desktop-nav {
-            display: none;
-        }
-    }
+    // header {
+    //     & .desktop-nav {
+    //         display: none;
+    //     }
+    // }
 }
 
 // 0 - 1439px
@@ -95,9 +95,9 @@
 // 1050px - infinity
 @include for-screen(tablet-to-infinity) {
     // ...
-    header {
-        & .mobile-menu-icon {
-            display: none;
-        }
-    }
+    // header {
+    //     & .mobile-menu-icon {
+    //         display: none;
+    //     }
+    // }
 }
