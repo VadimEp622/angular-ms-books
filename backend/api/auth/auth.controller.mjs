@@ -42,6 +42,7 @@ export async function signup(req, res) {
 export async function logout(req, res) {
     try {
         // TODO: check if deleting loggedinUser like this is in line with asyncLocalStorage best practices
+        logger.info('user logout')
         const store = asyncLocalStorage.getStore()
         delete store.loggedinUser
         res.clearCookie('loginToken')

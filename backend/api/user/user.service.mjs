@@ -68,7 +68,7 @@ async function add(user) {
         `
         const connection = await dbService.connect()
         const [results] = await connection.query(query)
-        console.log('results', results)
+        logger.debug('added user to db', results)
     } catch (err) {
         logger.error('cannot add user', err)
         throw err

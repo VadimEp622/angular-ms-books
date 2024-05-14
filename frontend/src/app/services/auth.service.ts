@@ -12,7 +12,7 @@ const ENTITY = 'auth'
 export class AuthService {
 
   private baseUrl = environment.api_url + ENTITY
-  
+
   private _loggedInUser$ = new BehaviorSubject<any | null>(null) // todo: change any with User model
   public loggedInUser$ = this._loggedInUser$.asObservable()
 
@@ -23,7 +23,7 @@ export class AuthService {
 
   // TODO: research angular + node.js auth, and whether logout needs to be a post with body containing credentials
 
-  
+
   public login(credentials: any) {
     return this.http.post<any>(`${this.baseUrl}/login`, credentials)
       .pipe(
@@ -41,7 +41,7 @@ export class AuthService {
   public logout(credentials: any) {
     return this.http.post<any>(`${this.baseUrl}/logout`, credentials)
       .pipe(
-        tap(res => this._loggedInUser$.next(null))
+        tap(() => this._loggedInUser$.next(null))
       )
   }
 }
