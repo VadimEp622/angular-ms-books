@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
-import { storageService } from './async-storage.service'
+import { BehaviorSubject, tap } from 'rxjs'
+import { AuthService } from './auth.service'
 
 const ENTITY = 'user'
 
@@ -8,15 +9,49 @@ const ENTITY = 'user'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
+
+  // TODO: make a currentLoggedInUser observable, with which auth functions (login/signup/logout) will be able to communicate with.
 
 
-  public query() {
-    return storageService.query(ENTITY)
-      // .then(users => users.length < 1 ? _createDemoUsers() : users)
+  private _loggedInUser$ = new BehaviorSubject<any | null>(null) // todo: change any with User model
+  public loggedInUser$ = this._loggedInUser$.asObservable()
+
+
+
+  public onLogin(credentials: any) {
+    return this.authService.login(credentials)
+      .pipe(
+        tap(res => {
+          console.log('frontend login res', res)
+        })
+      )
   }
 
-  
+  public onSignup(credentials: any) {
+    return this.authService.signup(credentials)
+      .pipe(
+        tap(res => {
+          console.log('frontend signup res', res)
+        })
+      )
+  }
+
+  public onLogout(credentials: any) {
+    return this.authService.logout(credentials)
+      .pipe(
+        tap(res => {
+          console.log('frontend logout res', res)
+        })
+      )
+  }
+
+
+
+
+
   // ------------------ Private Functions ------------------
 
 }
