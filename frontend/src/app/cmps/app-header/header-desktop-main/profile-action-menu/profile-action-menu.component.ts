@@ -13,7 +13,7 @@ import { AuthService } from './../../../../services/auth.service'
 export class ProfileActionMenuComponent implements OnDestroy {
 
   constructor(
-    public userService: UserService
+    private authService: AuthService
   ) { }
 
   loginObs$!: Subscription
@@ -21,19 +21,19 @@ export class ProfileActionMenuComponent implements OnDestroy {
   logoutObs$!: Subscription
 
   onLogin() {
-    this.loginObs$ = this.userService.onLogin(this._tempLoginCredentials()).pipe(
+    this.loginObs$ = this.authService.login(this._tempLoginCredentials()).pipe(
       take(1)
     ).subscribe()
   }
 
   onSignup() {
-    this.signupObs$ = this.userService.onSignup(this._tempSignupCredentials()).pipe(
+    this.signupObs$ = this.authService.signup(this._tempSignupCredentials()).pipe(
       take(1)
     ).subscribe()
   }
 
   onLogout() {
-    this.logoutObs$ = this.userService.onLogout(this._tempLoginCredentials()).pipe(
+    this.logoutObs$ = this.authService.logout(this._tempLoginCredentials()).pipe(
       take(1)
     ).subscribe()
   }
