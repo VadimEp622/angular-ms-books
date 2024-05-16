@@ -19,5 +19,11 @@ The back-end of the app was made using **Node.js** (uses the front-end's build),
 
 The Database used is **MySQL**, which runs persistently with a volume, using **docker-compose**.
 
+## Detailed Overview
+
+### Docker
+
+- Docker file is divided into layers, in latest (2023~2024) recommended way, for maximum leverage of docker's caching, for faster subsequent docker builds.
+
 
 
