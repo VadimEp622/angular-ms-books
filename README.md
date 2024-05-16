@@ -25,5 +25,7 @@ The Database used is **MySQL**, which runs persistently with a volume, using **d
 
 - Docker file is divided into layers, in latest (2023~2024) recommended way, for maximum leverage of docker's caching, for faster subsequent docker builds.
 
+- docker-compose file, configures the app service and the database service, and persists the database and it's contents, through future app builds
+
 
 
