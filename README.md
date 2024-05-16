@@ -45,6 +45,13 @@ The Database used is **MySQL**, which runs persistently with a volume, using **d
 
 - uses asyncLocalStorage, which collects cookie token for each API request, to track guests or loggedInUsers, for API middleware authGuards and log purposes
 
+
+### MySQL Database
+
+- persistent
+
+- initialize tables, along with trigger for UUID generation upon row creation
+
   
 
 
