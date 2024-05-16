@@ -25,6 +25,8 @@ The Database used is **MySQL**, which runs persistently with a volume, using **d
 
 - SPA with lazy-loaded routes
 
+- Dynamic page layout based on current route
+
 - uses a custom component for dynamic-async-reusable-lazy rendering of local SVG icons
 
 - uses **Sass** for styling
