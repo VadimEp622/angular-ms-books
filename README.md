@@ -21,6 +21,15 @@ The Database used is **MySQL**, which runs persistently with a volume, using **d
 
 ## Detailed Overview
 
+### Angular
+
+- SPA with lazy-loaded routes
+
+- uses a custom component for dynamic-async-reusable-lazy rendering of local SVG icons
+
+- uses **Sass** for styling
+
+  
 ### Docker
 
 - Docker file is divided into layers, in latest (2023~2024) recommended way, for maximum leverage of docker's caching, for faster subsequent docker builds.
@@ -37,13 +46,6 @@ The Database used is **MySQL**, which runs persistently with a volume, using **d
 - uses asyncLocalStorage, which collects cookie token for each API request, to track guests or loggedInUsers, for API middleware authGuards and log purposes
 
   
-### Angular
-
-- SPA application with lazy-loaded routes
-
-- uses a custom component for dynamic-async-reusable-lazy rendering of local SVG icons
-
-- uses **Sass** for styling
 
 
 
