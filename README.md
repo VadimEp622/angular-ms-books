@@ -6,7 +6,7 @@ This project is a designed to showcase skill and understanding of Angular.
 
 ## Tools used
 
-- **Angular 17** (Standalone)
+- **Angular 17** (Standalone) + **Sass**
 - **Node.js**
 - **Docker** (docker-compose)
 - **MySQL**
