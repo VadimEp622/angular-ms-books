@@ -1,8 +1,8 @@
-# Ms. Books (Angular)
+# Ms. Books (Angular 17)
 
 Link: [**Ms. Books**](https://testing-ms-books.onrender.com/)
 
-This project is a designed to showcase skill and understanding of Angular.
+This project is a designed to showcase skill and understanding of **Angular**.
 
 ## Tools used
 
