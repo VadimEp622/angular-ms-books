@@ -11,6 +11,13 @@ This project is a designed to showcase skill and understanding of Angular.
 - **Docker** (docker-compose)
 - **MySQL**
 
-## More content In Progress
+## Basic Overview
 
-Project is currently in very early stages of content, yet overall app structure is exiting design phase.
+The front-end of the app was made using **Angular 17**.
+
+The back-end of the app was made using **Node.js** (uses the front-end's build), and is **Dockerized**.
+
+The Database used is **MySQL**, which runs persistently with a volume, using **docker-compose**.
+
+
+
