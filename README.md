@@ -27,5 +27,13 @@ The Database used is **MySQL**, which runs persistently with a volume, using **d
 
 - docker-compose file, configures the app service and the database service, and persists the database and it's contents, through future deployment builds
 
+### Node.js server
+
+- made using ES6 module (.mjs)
+
+- uses caching middleware (**node-cache**) for frequent API calls
+
+- uses asyncLocalStorage, which collects cookie token for each API request, to track guests or loggedInUsers, for API middleware authGuards and log purposes
+
 
 
