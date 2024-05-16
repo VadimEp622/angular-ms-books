@@ -11,6 +11,8 @@ import { RouterOutlet } from '@angular/router'
 export class AppComponent {
   title = 'angular-ms-books'
 
+  // TODO: consider making a dynamicCenteredModal component, for any future modal that needs to be centered in the middle of the screen, with a gray background 
+
   // TODO: in app header, DESKTOP, change it up to have an upper header and lower header.
   //    - upper header: will have logo + search bar + user profile button, that on click will open menu
   //    - lower header: will have menu button, that will open a nav sidebar + book genres (maybe have "our favorites","top rated" etc)
