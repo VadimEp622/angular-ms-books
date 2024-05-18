@@ -1,0 +1,36 @@
+@import "../../../assets/styles/setup/_variables.scss";
+
+:host {
+    position: absolute;
+    top: 0;
+}
+
+.dynamic-centered-modal-container {
+    transition: visibility 0.2s ease-in-out;
+
+    &:not(.active) {
+        visibility: hidden;
+
+        & .overlay {
+            opacity: 0;
+        }
+    }
+
+    &.active {
+        & .overlay {
+            opacity: 0.5;
+        }
+    }
+}
+
+.overlay {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.modal-container{
+    position: absolute;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
