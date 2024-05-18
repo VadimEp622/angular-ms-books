@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core'
+import { NgIf } from '@angular/common'
 import { DynamicCenteredModalService } from './../../../../services/dynamic-centered-modal.service'
+import { FormLoginComponent } from '../../../forms/form-login/form-login.component'
+import { FormSignupComponent } from '../../../forms/form-signup/form-signup.component'
 
 
 enum ModalType {
@@ -9,7 +12,7 @@ enum ModalType {
 @Component({
   selector: 'login-modal',
   standalone: true,
-  imports: [],
+  imports: [FormLoginComponent, FormSignupComponent, NgIf],
   templateUrl: './login-modal.component.html',
   styleUrl: './login-modal.component.scss'
 })
@@ -20,12 +23,8 @@ export class LoginModalComponent {
   ) { }
 
 
-  // TODO: make a login reactive-form
-
   @Input() isSigup!: boolean
 
-  onSetModal() {
-    this.dynamicCenteredModalService.setModal(ModalType.LOGIN, { isSigup: true })
-  }
+  
 
 }

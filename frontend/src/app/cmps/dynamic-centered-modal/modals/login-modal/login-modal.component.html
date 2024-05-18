@@ -1,5 +1,8 @@
 <section class="login-modal pd-10">
-    <p>login-modal works!</p>
-    <p>isSigup: {{isSigup}}</p>
-    <button (click)="onSetModal()">change isSignup state</button>
+    <ng-container *ngIf="isSigup; else elseBlock">
+        <form-signup></form-signup>
+    </ng-container>
+    <ng-template #elseBlock>
+        <form-login></form-login>
+    </ng-template>
 </section>
