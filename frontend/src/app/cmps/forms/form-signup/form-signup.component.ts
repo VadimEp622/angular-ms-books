@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { DynamicCenteredModalService } from '../../../services/dynamic-centered-modal.service'
+import { AuthService } from '../../../services/auth.service'
+import { Subscription, take } from 'rxjs'
 
 
 enum ModalType {
@@ -14,12 +16,15 @@ enum ModalType {
   templateUrl: './form-signup.component.html',
   styleUrl: './form-signup.component.scss'
 })
-export class FormSignupComponent implements OnInit {
+export class FormSignupComponent implements OnInit, OnDestroy {
 
   formSignup!: FormGroup
 
+  signupSub!: Subscription
+
   constructor(
-    private dynamicCenteredModalService: DynamicCenteredModalService
+    private dynamicCenteredModalService: DynamicCenteredModalService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -30,8 +35,15 @@ export class FormSignupComponent implements OnInit {
     })
   }
 
+  ngOnDestroy() {
+    this.signupSub?.unsubscribe()
+  }
+
   onSubmit() {
     console.log('this.formSignup.value', this.formSignup.value)
+    this.signupSub = this.authService.login(this.formSignup.value).pipe(
+      take(1)
+    ).subscribe()
   }
 
   onSetModalLogin() {
