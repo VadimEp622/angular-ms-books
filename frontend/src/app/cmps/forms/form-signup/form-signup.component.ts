@@ -41,7 +41,7 @@ export class FormSignupComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     console.log('this.formSignup.value', this.formSignup.value)
-    this.signupSub = this.authService.login(this.formSignup.value).pipe(
+    this.signupSub = this.authService.signup(this.formSignup.value).pipe(
       take(1)
     ).subscribe()
   }
