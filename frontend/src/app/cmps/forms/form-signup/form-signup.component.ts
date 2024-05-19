@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { DynamicCenteredModalService } from '../../../services/dynamic-centered-modal.service'
 import { AuthService } from '../../../services/auth.service'
-import { Subscription, take } from 'rxjs'
+import { Subscription, take, tap } from 'rxjs'
 
 
 enum ModalType {
@@ -42,7 +42,8 @@ export class FormSignupComponent implements OnInit, OnDestroy {
   onSubmit() {
     console.log('this.formSignup.value', this.formSignup.value)
     this.signupSub = this.authService.signup(this.formSignup.value).pipe(
-      take(1)
+      take(1),
+      tap(() => this.dynamicCenteredModalService.closeModal())
     ).subscribe()
   }
 

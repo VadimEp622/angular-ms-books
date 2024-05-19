@@ -2,7 +2,7 @@ import { AuthService } from './../../../services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { DynamicCenteredModalService } from '../../../services/dynamic-centered-modal.service'
-import { Subscription, take } from 'rxjs';
+import { Subscription, take, tap } from 'rxjs';
 
 enum ModalType {
   LOGIN = 'login',
@@ -28,6 +28,8 @@ export class FormLoginComponent implements OnInit, OnDestroy {
   ) { }
 
   // TODO: improve naming - call ModalType enum as REGISTER='register', which will refer dynamic modal with with props isSigup=true/false
+  // TODO: add logging out
+  // TODO: add some form success promt to login/signup 
 
 
   ngOnInit() {
@@ -44,7 +46,8 @@ export class FormLoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     console.log('this.formLogin.value', this.formLogin.value)
     this.loginSub = this.authService.login(this.formLogin.value).pipe(
-      take(1)
+      take(1),
+      tap(() => this.dynamicCenteredModalService.closeModal())
     ).subscribe()
   }
 
