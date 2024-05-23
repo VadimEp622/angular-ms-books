@@ -38,7 +38,9 @@ services:
       - db:/var/lib/mysql
 
   # INFO: frontend live reload works!
-  # TODO: fix backend fetch api's
+  # TODO: fix backend fetch api's, my ideas:
+  #    1) make front-end Dockerfile run using staging, build -> nginx
+  #    2) add front-end proxy?
   frontend:
     stdin_open: true
     hostname: frontend
