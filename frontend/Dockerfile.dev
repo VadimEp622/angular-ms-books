@@ -1,0 +1,11 @@
+# syntax=docker/dockerfile:1
+
+ARG NODE_VERSION=22
+
+FROM node:${NODE_VERSION}-slim
+WORKDIR /usr/src/app
+RUN npm install -g @angular/cli
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD ["ng","serve","--host","0.0.0.0","--poll","2000"]
