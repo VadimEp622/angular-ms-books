@@ -10,7 +10,6 @@ import dotenv from 'dotenv'
 //   * research healthcheck, what it is, and how to use. (from what I gather, it's useful as a condition inside depents_on)
 //   * research docker newtwork (for shared db maybe?)
 //   * research cmd in dockerfile, best practices, what not to do, and what may break (maybe solution requires node graceful shutdown?)
-//   * add frontend to docker, to access database in dev mode
 // ################################################################################
 
 
