@@ -1,5 +1,5 @@
-import { Observable, Subscription, take } from 'rxjs'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Observable } from 'rxjs'
+import { Component, OnInit } from '@angular/core'
 import { AsyncPipe, NgIf } from '@angular/common'
 import { DynamicCenteredModalService } from './../../../../services/dynamic-centered-modal.service'
 import { AuthService } from './../../../../services/auth.service'
@@ -15,8 +15,7 @@ enum ModalType {
   templateUrl: './profile-action-menu.component.html',
   styleUrl: './profile-action-menu.component.scss'
 })
-export class ProfileActionMenuComponent implements OnDestroy, OnInit {
-
+export class ProfileActionMenuComponent implements OnInit {
 
   loggedInUser$!: Observable<any>
 
@@ -25,9 +24,7 @@ export class ProfileActionMenuComponent implements OnDestroy, OnInit {
     private dynamicCenteredModalService: DynamicCenteredModalService
   ) { }
 
-  // loginSub!: Subscription
-  // signupSub!: Subscription
-  // logoutSub!: Subscription
+  // TODO: add option to logout 
 
   ngOnInit() {
     this.loggedInUser$ = this.authService.loggedInUser$
@@ -37,45 +34,5 @@ export class ProfileActionMenuComponent implements OnDestroy, OnInit {
     this.dynamicCenteredModalService.setModal(ModalType.LOGIN, { isSigup: false })
   }
 
-  // onLogin() {
-  //   this.loginSub = this.authService.login(this._tempLoginCredentials()).pipe(
-  //     take(1)
-  //   ).subscribe()
-  // }
-
-  // onSignup() {
-  //   this.signupSub = this.authService.signup(this._tempSignupCredentials()).pipe(
-  //     take(1)
-  //   ).subscribe()
-  // }
-
-  // onLogout() {
-  //   this.logoutSub = this.authService.logout(this._tempLoginCredentials()).pipe(
-  //     take(1)
-  //   ).subscribe()
-  // }
-
-  ngOnDestroy() {
-    // this.loginSub.unsubscribe()
-    // this.signupSub.unsubscribe()
-    // this.logoutSub.unsubscribe()
-  }
-
-
-  // // private
-  // private _tempLoginCredentials() {
-  //   return {
-  //     "username": "Tommy",
-  //     "password": "password",
-  //   }
-  // }
-
-  // private _tempSignupCredentials() {
-  //   return {
-  //     "username": "Tommy",
-  //     "password": "password",
-  //     "fullname": "Tommy Verrcity"
-  //   }
-  // }
 
 }
