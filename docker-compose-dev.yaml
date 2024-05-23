@@ -4,7 +4,7 @@ services:
  # **************** BACK-END ****************
   ms-books-app:
     hostname: backend
-    image: $DOCKER_HUB_USER/ms-books-dev:latest
+    image: $DOCKER_HUB_USER/ms-books/dev/backend:latest
     build:
       context: ./backend
       dockerfile: ./Dockerfile.dev
@@ -41,8 +41,9 @@ services:
 
   # **************** FRONT-END ****************
   frontend:
-    stdin_open: true
+    image: $DOCKER_HUB_USER/ms-books/dev/frontend:latest
     hostname: frontend
+    stdin_open: true
     depends_on:
       - ms-books-app
     build:
@@ -56,6 +57,7 @@ services:
 
   # **************** NGINX ****************
   nginx:
+    image: $DOCKER_HUB_USER/ms-books/dev/nginx:latest
     depends_on:
       - ms-books-app
       - frontend
