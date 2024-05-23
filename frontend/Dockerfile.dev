@@ -1,7 +1,5 @@
 # syntax=docker/dockerfile:1
 
-
-# ********** Working Version A **********
 ARG NODE_VERSION=22
 
 FROM node:${NODE_VERSION}-slim
@@ -10,24 +8,4 @@ RUN npm install -g @angular/cli
 COPY package*.json ./
 RUN npm install
 COPY . .
-CMD ["ng","serve","--host","0.0.0.0","--poll","2000", "--port", "4200","--disable-host-check"]
-# **************************************
-
-
-
-# ARG NODE_VERSION=22
-
-# # Stage 1: Build the Angular application
-# FROM node:${NODE_VERSION}-slim AS build
-# WORKDIR /usr/src/app
-# RUN npm install -g @angular/cli
-# COPY package*.json ./
-# RUN npm install
-# COPY . .
-# CMD ["npm","run","build"]
-
-
-# # Stage 2: Serve the Angular application from Stage 1 using nginx
-# FROM nginx:1.25.5-alpine
-# COPY nginx.conf /etc/nginx/nginx.conf
-# COPY --from=build /usr/src/app/dist/browser /usr/share/nginx/html
+CMD ["ng","serve","--host","0.0.0.0","--poll","2000"]

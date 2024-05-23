@@ -1,6 +1,7 @@
 # devleopment compose file
 services:
 
+ # **************** BACK-END ****************
   ms-books-app:
     hostname: backend
     image: $DOCKER_HUB_USER/ms-books-dev:latest
@@ -25,6 +26,7 @@ services:
       - /usr/src/app/node_modules
       - ./backend:/usr/src/app
 
+  # **************** DATABASE ****************
   mysqldb:
     image: mysql:8.3
     container_name: mysqlcontainer
@@ -37,10 +39,7 @@ services:
       - ./backend/dbinit/init.sql:/docker-entrypoint-initdb.d/0_init.sql
       - db:/var/lib/mysql
 
-  # INFO: frontend live reload works!
-  # TODO: fix backend fetch api's, my ideas:
-  #    1) make front-end Dockerfile run using staging, build -> nginx
-  #    2) add front-end proxy?
+  # **************** FRONT-END ****************
   frontend:
     stdin_open: true
     hostname: frontend
@@ -52,10 +51,10 @@ services:
     volumes:
       - /usr/src/app/node_modules
       - ./frontend:/usr/src/app
-      # - "./:/var/www/html"
     ports:
       - 4200:4200
 
+  # **************** NGINX ****************
   nginx:
     depends_on:
       - ms-books-app
