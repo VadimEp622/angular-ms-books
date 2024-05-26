@@ -1,5 +1,6 @@
-.login-btn {
+.login-btn,
+.logout-btn {
     &:hover {
-        cursor: not-allowed;
+        cursor: pointer;
     }
 }

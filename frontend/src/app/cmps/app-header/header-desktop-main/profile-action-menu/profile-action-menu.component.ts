@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { Component, OnInit } from '@angular/core'
 import { AsyncPipe, NgIf } from '@angular/common'
 import { DynamicCenteredModalService } from './../../../../services/dynamic-centered-modal.service'
@@ -19,6 +19,8 @@ export class ProfileActionMenuComponent implements OnInit {
 
   loggedInUser$!: Observable<any>
 
+  logoutSub!: Subscription
+
   constructor(
     private authService: AuthService,
     private dynamicCenteredModalService: DynamicCenteredModalService
@@ -32,6 +34,10 @@ export class ProfileActionMenuComponent implements OnInit {
 
   onLogin() {
     this.dynamicCenteredModalService.setModal(ModalType.LOGIN, { isSigup: false })
+  }
+
+  onLogout(loggedInUser: any) {
+    this.logoutSub = this.authService.logout(loggedInUser).subscribe()
   }
 
 
