@@ -21,6 +21,29 @@ export async function login(req, res) {
     }
 }
 
+export async function tokenLogin(req, res) {
+    const { token } = req.body
+    console.log('token', token)
+    try {
+        const user = await authService.validateToken(token)
+        console.log('user', user)
+        if (!user) {
+            res.clearCookie('loginToken')
+            // TODO: make a better result object, for errors like - user not found, since it's not an error, but a faulty token
+            throw new Error('invalid token')
+        }
+
+        // TODO: getUserById(), or "check if user exists" from database
+        // TODO: remove password
+        // TODO: send user to client side
+
+        res.json(user)
+    } catch (err) {
+        logger.error('Failed to Login ' + err)
+        res.status(401).send({ err: 'Failed to Login' })
+    }
+}
+
 export async function signup(req, res) {
     try {
         const credentials = req.body

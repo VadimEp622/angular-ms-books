@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { BehaviorSubject, tap } from 'rxjs'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs'
 import { environment } from '../../environments/environment'
 
 
@@ -31,6 +31,25 @@ export class AuthService {
       )
   }
 
+  public loginUsingCookie(token: string) {
+    return this.http.post<any>(`${this.baseUrl}/token-login`, { token }, { withCredentials: true })
+      .pipe(
+        tap(res => this._loggedInUser$.next(res)),
+        catchError((error: HttpErrorResponse) => {
+          this._loggedInUser$.next(null)
+          if (error.status === 0) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.error('An error occurred:', error.error);
+          } else {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong.
+            console.error(`Backend returned code ${error.status}, body was: `, error.error)
+          }
+          return throwError(() => new Error('Failed to login using cookie token.'))
+        })
+      )
+  }
+
   public signup(credentials: any) {
     return this.http.post<any>(`${this.baseUrl}/signup`, credentials, { withCredentials: true })
       .pipe(
@@ -43,5 +62,13 @@ export class AuthService {
       .pipe(
         tap(() => this._loggedInUser$.next(null))
       )
+  }
+
+
+
+  // private functions
+
+  private handleErrorLoginUsingCookie(error: HttpErrorResponse) {
+
   }
 }
