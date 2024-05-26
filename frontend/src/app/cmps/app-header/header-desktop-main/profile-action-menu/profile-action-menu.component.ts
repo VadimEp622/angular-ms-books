@@ -1,5 +1,5 @@
 import { Observable, Subscription } from 'rxjs'
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { AsyncPipe, NgIf } from '@angular/common'
 import { DynamicCenteredModalService } from './../../../../services/dynamic-centered-modal.service'
 import { AuthService } from './../../../../services/auth.service'
@@ -15,7 +15,9 @@ enum ModalType {
   templateUrl: './profile-action-menu.component.html',
   styleUrl: './profile-action-menu.component.scss'
 })
-export class ProfileActionMenuComponent implements OnInit {
+export class ProfileActionMenuComponent implements OnInit, OnDestroy {
+
+  // TODO: add login on page load
 
   loggedInUser$!: Observable<any>
 
@@ -26,10 +28,12 @@ export class ProfileActionMenuComponent implements OnInit {
     private dynamicCenteredModalService: DynamicCenteredModalService
   ) { }
 
-  // TODO: add option to logout 
-
   ngOnInit() {
     this.loggedInUser$ = this.authService.loggedInUser$
+  }
+
+  ngOnDestroy(): void {
+    if (this.logoutSub) this.logoutSub.unsubscribe()
   }
 
   onLogin() {
