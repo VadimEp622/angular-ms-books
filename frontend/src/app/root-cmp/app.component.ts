@@ -31,6 +31,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.tokenLoginSub.unsubscribe()
   }
 
+
+  // TODO:
+  //   1) make proper backend error handling + response codes + response objects (at least only for login/signup/logout atm)
+  //   2) make proper frontend error handling (at least only for login/signup/logout atm)
+  //   3) notify user about errors when trying to login/signup
+  
+
   // TODO: consider making a dynamicCenteredModal component, for any future modal that needs to be centered in the middle of the screen, with a gray background
   //     along with it, make a dynamicCenteredModalService service, which will have an observable object, which will decided modal type + properties
   //     { modalType: string|null, properties?: any }  -> properties example: { modalType: 'login', properties: {isSignUp: boolean} } -> for toggling between login/signup modal
