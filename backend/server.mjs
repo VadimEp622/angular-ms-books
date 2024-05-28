@@ -10,6 +10,9 @@ import dotenv from 'dotenv'
 //   * research healthcheck, what it is, and how to use. (from what I gather, it's useful as a condition inside depents_on)
 //   * research docker newtwork (for shared db maybe?)
 //   * research cmd in dockerfile, best practices, what not to do, and what may break (maybe solution requires node graceful shutdown?)
+
+// INFO:
+//   * package.json: (npm run dev) => With Docker for Windows watching a mapped folder, you need to use nodemon --legacy-watch   
 // ################################################################################
 
 

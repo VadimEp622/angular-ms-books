@@ -5,7 +5,7 @@
   "license": "ISC",
   "scripts": {
     "start": "node server.mjs",
-    "dev": "nodemon server.mjs",
+    "dev": "nodemon --legacy-watch server.mjs",
     "prod": "set NODE_ENV=production&&node server.mjs",
     "prod:mac": "export NODE_ENV=production&&node server.mjs"
   },

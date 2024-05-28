@@ -2,10 +2,12 @@ import { authService } from './auth.service.mjs'
 import { logger } from '../../services/logger.service.mjs'
 
 
-// TODO: consider if needed -> on successful login/signup, update store.loggedinUser, and on logout, update store.loggedinUser to guest or null/undefined
-
 // INFO: from what I gather, regarding als, with my current setup,
 //      if user has performed login/signup, but have not logged out, the store.loggedinUser will still remember the user object.
+
+
+// TODO: research API error numbers, and proper backend error handling 
+
 
 export async function login(req, res) {
     const { username, password } = req.body
@@ -23,20 +25,8 @@ export async function login(req, res) {
 
 export async function tokenLogin(req, res) {
     const { token } = req.body
-    console.log('token', token)
     try {
-        const user = await authService.validateToken(token)
-        console.log('user', user)
-        if (!user) {
-            res.clearCookie('loginToken')
-            // TODO: make a better result object, for errors like - user not found, since it's not an error, but a faulty token
-            throw new Error('invalid token')
-        }
-
-        // TODO: getUserById(), or "check if user exists" from database
-        // TODO: remove password
-        // TODO: send user to client side
-
+        const user = await authService.loginByToken(token)
         res.json(user)
     } catch (err) {
         logger.error('Failed to Login ' + err)

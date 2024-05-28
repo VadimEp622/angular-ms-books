@@ -51,7 +51,7 @@ async function getById(userId = '3853383007CF11EF94347C10C9D06414') {
         WHERE id = UNHEX('${userId}')
         `
         const [results] = await connection.query(query)
-        return results
+        return results[0]
     } catch (err) {
         logger.error(`while finding user by id: ${userId}`, err)
         throw err
