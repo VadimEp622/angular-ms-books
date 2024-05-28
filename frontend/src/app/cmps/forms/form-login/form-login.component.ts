@@ -44,7 +44,7 @@ export class FormLoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log('this.formLogin.value', this.formLogin.value)
+    // console.log('this.formLogin.value', this.formLogin.value)
     this.loginSub = this.authService.login(this.formLogin.value).pipe(
       take(1),
       tap(() => this.dynamicCenteredModalService.closeModal())

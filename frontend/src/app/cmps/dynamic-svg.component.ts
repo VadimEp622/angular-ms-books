@@ -13,6 +13,9 @@ export class DynamicSvgComponent {
 
   constructor(private dynamicSvgService: DynamicSvgService, private renderer: Renderer2) { }
 
+
+  // TODO: check if need to unsubscribe on destroy
+
   ngOnInit() {
     this.loadSvg()
   }

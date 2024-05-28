@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { BehaviorSubject, catchError, tap, throwError } from 'rxjs'
+import { BehaviorSubject, catchError, of, tap, throwError } from 'rxjs'
 import { environment } from '../../environments/environment'
 
 
@@ -31,7 +31,7 @@ export class AuthService {
       )
   }
 
-  public loginUsingCookie(token: string) {
+  public loginByToken(token: string) {
     return this.http.post<any>(`${this.baseUrl}/token-login`, { token }, { withCredentials: true })
       .pipe(
         tap(res => this._loggedInUser$.next(res)),
@@ -45,7 +45,8 @@ export class AuthService {
             // The response body may contain clues as to what went wrong.
             console.error(`Backend returned code ${error.status}, body was: `, error.error)
           }
-          return throwError(() => new Error('Failed to login using cookie token.'))
+          // return throwError(() => new Error ('Failed to login using cookie token.'))
+          return of()
         })
       )
   }
@@ -68,7 +69,4 @@ export class AuthService {
 
   // private functions
 
-  private handleErrorLoginUsingCookie(error: HttpErrorResponse) {
-
-  }
 }

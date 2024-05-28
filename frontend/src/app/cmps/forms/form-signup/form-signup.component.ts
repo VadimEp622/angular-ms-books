@@ -40,7 +40,7 @@ export class FormSignupComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log('this.formSignup.value', this.formSignup.value)
+    // console.log('this.formSignup.value', this.formSignup.value)
     this.signupSub = this.authService.signup(this.formSignup.value).pipe(
       take(1),
       tap(() => this.dynamicCenteredModalService.closeModal())
