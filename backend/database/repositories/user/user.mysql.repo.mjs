@@ -8,6 +8,9 @@ export default {
     getByUsername
 }
 
+// TODO: find a way to get timestamp from uuid, such that you don't have created_at column in the database itself,
+//      but so that the result that returns, already includes the create_at key
+// TODO: before doing the above, consider the database models for the different databases
 
 async function query() {
     try {

@@ -4,6 +4,12 @@ import { config } from '../config/index.mjs'
 import { logger } from './logger.service.mjs'
 
 
+// INFO: mysql dbinit-
+// if you use the native UUIDs in MySQL as Primary Key, you need to specify them like this:
+// 
+// uuid BINARY(16) DEFAULT (UUID_TO_BIN(UUID(), 1)) PRIMARY KEY
+
+
 export const dbService = {
     connectMysql,
     getMongoCollection

@@ -16,7 +16,7 @@ async function query() {
         let users = await collection.find({}).toArray()
         users = users.map(user => {
             delete user.password
-            user.createdAt = user._id.getTimestamp()
+            // user.createdAt = user._id.getTimestamp()
             return user
         })
         return users
@@ -31,7 +31,7 @@ async function getById(userId) {
         const collection = await dbService.getMongoCollection('user')
         let user = await collection.findOne({ _id: ObjectId.createFromHexString(userId) })
         delete user.password
-        user.createdAt = user._id.getTimestamp()
+        // user.createdAt = user._id.getTimestamp()
         return user
     } catch (error) {
         logger.error(`Failed mongo user database getById: ${userId}`, error)
@@ -57,7 +57,7 @@ async function getByUsername(username) {
         const collection = await dbService.getMongoCollection('user')
         let user = await collection.findOne({ username: username })
         if (!user) return null
-        user.createdAt = user._id.getTimestamp()
+        // user.createdAt = user._id.getTimestamp()
         return user
     } catch (error) {
         logger.error(`Failed mongo user database getByUsername: ${username}`, error)
