@@ -1,6 +1,4 @@
-import { ObjectId } from 'mongodb'
 import { logger } from '../../services/logger.service.mjs'
-import { dbService } from "../../services/db.service.mjs"
 import { database } from '../../database/index.mjs'
 
 
@@ -8,17 +6,11 @@ export const userService = {
     query,
     getById,
     add,
-    getByUsername,
-    //     addTrip,
-    //     updateWishlist,
-    //     query,
-    //     remove,
-    //     update,
+    getByUsername
 }
 
 
 // TODO: make an exportable query list that any function here can use
-// TODO: abstract database to make just dbservice.user.query(), to handle database difference there, to make code here simpler 
 
 
 async function query() {
@@ -63,26 +55,6 @@ async function getByUsername(username) {
     }
 }
 
-
-// private functions
-// function _buildCriteria(filterBy) {
-//     const criteria = {}
-//     if (filterBy.txt) {
-//         const txtCriteria = { $regex: filterBy.txt, $options: 'i' }
-//         criteria.$or = [
-//             {
-//                 username: txtCriteria
-//             },
-//             {
-//                 fullname: txtCriteria
-//             }
-//         ]
-//     }
-//     if (filterBy.minBalance) {
-//         criteria.score = { $gte: filterBy.minBalance }
-//     }
-//     return criteria
-// }
 
 
 // ************ IGNORE BELOW - PURELY FOR REFERENCE ************
