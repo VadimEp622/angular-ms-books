@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { logger } from '../../services/logger.service.mjs'
 import { dbService } from "../../services/db.service.mjs"
+import { database } from '../../database/index.mjs'
 
 
 export const userService = {
@@ -22,31 +23,8 @@ export const userService = {
 
 async function query() {
     try {
-        if(process.env.NODE_ENV === 'production') {
-
-            // const criteria = _buildCriteria()
-            const collection = await dbService.getMongoCollection('user')
-            let users = await collection.find({}).toArray()
-            users = users.map(user => {
-                delete user.password
-                user.createdAt = user._id.getTimestamp()
-                return user
-            })
-            return users
-
-        }else{
-            const connection = await dbService.connectMysql()
-            const query = `
-            SELECT 
-                HEX(_id) AS _id,
-                username,
-                password,
-                fullname
-            FROM user
-            `
-            const [results] = await connection.query(query)
-            return results
-        }
+        const users = await database.user.query()
+        return users
     } catch (err) {
         logger.error(`Failed fetching users`, err)
         throw err
@@ -56,28 +34,8 @@ async function query() {
 
 async function getById(userId = '3853383007CF11EF94347C10C9D06414') {
     try {
-        if(process.env.NODE_ENV === 'production') {
-            // const criteria = _buildCriteria()
-            const collection = await dbService.getMongoCollection('user')
-            let user = await collection.findOne({_id: ObjectId.createFromHexString(userId)})
-            delete user.password
-            user.createdAt = user._id.getTimestamp()
-            return user
-
-        }else{
-            const connection = await dbService.connectMysql()
-            const query = `
-            SELECT 
-                HEX(_id) AS _id,
-                username,
-                password,
-                fullname
-            FROM user 
-            WHERE _id = UNHEX('${userId}')
-            `
-            const [results] = await connection.query(query)
-            return results[0]
-        }
+        const user = await database.user.getById(userId)
+        return user
     } catch (err) {
         logger.error(`while finding user by id: ${userId}`, err)
         throw err
@@ -86,24 +44,8 @@ async function getById(userId = '3853383007CF11EF94347C10C9D06414') {
 
 async function add(user) {
     try {
-        const { username, password, fullname } = user
-
-        if(process.env.NODE_ENV === 'production') {
-            // TODO: make a way to create new user properly in mongoDB
-            const userToAdd={username, password, fullname}
-            const collection = await dbService.getMongoCollection('user')
-            await collection.insertOne(userToAdd)
-        }else{
-
-            // TODO: make a way to return the newly created user
-            const query = `
-            INSERT INTO user (username, password, fullname) 
-            VALUES ('${username}', '${password}', '${fullname}')
-            `
-            const connection = await dbService.connectMysql()
-            const [results] = await connection.query(query)
-            logger.debug('added user to db', results)
-        }
+        // TODO: make a way to return the newly created user
+        await database.user.add(user)
     } catch (err) {
         logger.error('cannot add user', err)
         throw err
@@ -113,28 +55,8 @@ async function add(user) {
 
 async function getByUsername(username) {
     try {
-        if(process.env.NODE_ENV === 'production') {
-            // TODO: make a way to return the newly created user for mongodb
-            const collection = await dbService.getMongoCollection('user')
-            let user = await collection.findOne({username: username})
-            if(!user) return null
-            user.createdAt = user._id.getTimestamp()
-            return user
-        }else{
-
-            const connection = await dbService.connectMysql()
-            const query = `
-            SELECT 
-            HEX(_id) AS _id,
-            username,
-            password,
-            fullname 
-            FROM user 
-            WHERE username = '${username}'
-            `
-            const [results] = await connection.query(query)
-            return results[0]
-        }
+        const user = await database.user.getByUsername(username)
+        return user
     } catch (err) {
         logger.error(`while finding user by username: ${username}`, err)
         throw err
