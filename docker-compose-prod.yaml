@@ -1,56 +1,28 @@
-# production compose file
-# CURRENTLY WORK IN PROGRESS !!!
+# prod compose file - for docker hub ==> render.com deployment
+
+# INFO: render.com does not have docker-compose support, as of now.
+# INFO: render.com does not have support for free mysql in any way, as of now.
+
+
 services:
 
   # **************** BACK-END ****************
   ms-books-app:
     hostname: backend
-    image: $DOCKER_HUB_USER/ms-books/prod/backend:latest
+    image: ${DOCKER_HUB_USER}/ms-books-prod:latest
     build:
       context: ./backend
       dockerfile: ./Dockerfile
     depends_on:
-      - mysqldb
+      - mongodb
     restart: unless-stopped
-    env_file: .env
     ports:
-      - $NODE_HOST_PORT:$PORT
+      - ${NODE_HOST_PORT}:${PORT}
     environment:
-      - DB_HOST=mysqldb
-      - DB_USER=$MYSQLDB_USER
-      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-      - DB_NAME=$MYSQLDB_DATABASE
-      - DB_PORT=$MYSQLDB_LOCAL_PORT
+      - MONGODB_URL=${MONGODB_URL_CLOUD}
+      - MONGODB_DATBASE=${MONGODB_DATABASE}
     stdin_open: true
     tty: true
     volumes:
       - /usr/src/app/node_modules
       - ./backend:/usr/src/app
-
-  # **************** DATABASE ****************
-  mysqldb:
-    image: mysql:8.3
-    container_name: mysqlcontainer
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-      - MYSQL_DATABASE=$MYSQLDB_DATABASE
-    volumes:
-      - ./backend/dbinit/init.sql:/docker-entrypoint-initdb.d/0_init.sql
-      - db:/var/lib/mysql
-
-  # **************** NGINX ****************
-  nginx:
-    image: $DOCKER_HUB_USER/ms-books/prod/nginx:latest
-    depends_on:
-      - ms-books-app
-    restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
-    ports:
-      - "3050:80"
-
-volumes:
-  db:
