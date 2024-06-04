@@ -1,6 +1,6 @@
+import { ObjectId } from 'mongodb'
 import { logger } from '../../services/logger.service.mjs'
 import { dbService } from "../../services/db.service.mjs"
-import { ObjectId } from 'mongodb'
 
 
 export const userService = {
