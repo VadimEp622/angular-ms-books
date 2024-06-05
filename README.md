@@ -66,7 +66,7 @@ The entire app (dev + prod) is **Dockerized**
 
 ### Nginx
 
-- used in local development, for connecting front-end and back-end, which run on different hosts
+- used in local development, for connecting dockerized front-end and back-end images, which run on different hosts
 
   
 
