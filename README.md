@@ -38,10 +38,15 @@ The entire app (dev + prod) is **Dockerized**
 
 - Docker file is divided into layers, in latest (2023~2024) recommended way, for maximum leverage of docker's caching, for faster subsequent docker builds.
 
-- docker-compose file, configures the app service and the database service, and persists the database and it's contents, through future deployment builds
+- The docker-compose file, configures the app service and the database service, and persists the database and it's contents, through future deployment builds
+
+- Project has 3 different compose yml files:
+  1) **Dev**      --------> Angular (Frontend) + Express.js (Backend) + Nginx (reverse-proxy) + Mysql (Database)
+  2) **Pre-prod** --> Express.js (Backend) + MongoDB (Database)
+  3) **Prod**     -------> Express.js (Backend)
 
 
-### Node.js server
+### Node.js server (Express.js)
 
 - made using ES6 module (.mjs)
 
