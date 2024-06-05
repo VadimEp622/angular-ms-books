@@ -61,7 +61,7 @@ The entire app (dev + prod) is **Dockerized**
 
 ### MongoDB Database
 
-- used for production to allow cloud deployment
+- used in production, to allow cloud deployment
 
 
 ### Nginx
