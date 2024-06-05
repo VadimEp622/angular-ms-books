@@ -7,15 +7,17 @@ This project is a designed to showcase skill and understanding of **Angular**.
 ## Tools used
 
 - **Angular 17** (Standalone) + **Sass**
-- **Node.js**
+- **Express.js**
 - **Docker** (docker-compose)
 - **MySQL**
+- **MongoDB**
+- **Nginx**
 
 ## Basic Overview
 
 The front-end of the app was made using **Angular 17** + **Sass**.
 
-The back-end of the app was made using **Node.js** (uses the front-end's build).
+The back-end of the app was made using **Express.js** (uses the front-end's build).
 
 The Database used is **MySQL**, which runs persistently with a volume, using **docker-compose**.
 
@@ -46,7 +48,7 @@ The entire app (dev + prod) is **Dockerized**
   3) **Prod**     -------> Express.js (Backend)
 
 
-### Node.js server (Express.js)
+### Express.js (Node.js server)
 
 - made using ES6 module (.mjs)
 
