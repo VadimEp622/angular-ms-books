@@ -56,6 +56,18 @@ The entire app (dev + prod) is **Dockerized**
 
 - initialize tables, along with trigger for UUID generation upon row creation
 
+- used for local development
+
+
+### MongoDB Database
+
+- used for production to allow cloud deployment
+
+
+### Nginx
+
+- used in local development, for connecting front-end and back-end, which run on different hosts
+
   
 
 
