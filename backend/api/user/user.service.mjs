@@ -1,17 +1,12 @@
 import { logger } from '../../services/logger.service.mjs'
-import { dbService } from "../../services/db.service.mjs"
+import { database } from '../../database/index.mjs'
 
 
 export const userService = {
     query,
     getById,
     add,
-    getByUsername,
-    //     addTrip,
-    //     updateWishlist,
-    //     query,
-    //     remove,
-    //     update,
+    getByUsername
 }
 
 
@@ -20,17 +15,8 @@ export const userService = {
 
 async function query() {
     try {
-        const connection = await dbService.connect()
-        const query = `
-        SELECT 
-            HEX(id) AS id,
-            username,
-            password,
-            fullname
-        FROM user
-        `
-        const [results] = await connection.query(query)
-        return results
+        const users = await database.user.query()
+        return users
     } catch (err) {
         logger.error(`Failed fetching users`, err)
         throw err
@@ -40,18 +26,8 @@ async function query() {
 
 async function getById(userId = '3853383007CF11EF94347C10C9D06414') {
     try {
-        const connection = await dbService.connect()
-        const query = `
-        SELECT 
-            HEX(id) AS id,
-            username,
-            password,
-            fullname
-        FROM user 
-        WHERE id = UNHEX('${userId}')
-        `
-        const [results] = await connection.query(query)
-        return results
+        const user = await database.user.getById(userId)
+        return user
     } catch (err) {
         logger.error(`while finding user by id: ${userId}`, err)
         throw err
@@ -61,14 +37,7 @@ async function getById(userId = '3853383007CF11EF94347C10C9D06414') {
 async function add(user) {
     try {
         // TODO: make a way to return the newly created user
-        const { username, password, fullname } = user
-        const query = `
-        INSERT INTO user (username, password, fullname) 
-        VALUES ('${username}', '${password}', '${fullname}')
-        `
-        const connection = await dbService.connect()
-        const [results] = await connection.query(query)
-        console.log('results', results)
+        await database.user.add(user)
     } catch (err) {
         logger.error('cannot add user', err)
         throw err
@@ -78,23 +47,17 @@ async function add(user) {
 
 async function getByUsername(username) {
     try {
-        const connection = await dbService.connect()
-        const query = `
-        SELECT 
-            HEX(id) AS id,
-            username,
-            password,
-            fullname 
-        FROM user 
-        WHERE username = '${username}'
-        `
-        const [results] = await connection.query(query)
-        return results[0]
+        const user = await database.user.getByUsername(username)
+        return user
     } catch (err) {
         logger.error(`while finding user by username: ${username}`, err)
         throw err
     }
 }
+
+
+
+// ************ IGNORE BELOW - PURELY FOR REFERENCE ************
 
 // async function addTrip(userId, orderId) {
 //     try {

@@ -1,22 +1,30 @@
 import { Injectable } from '@angular/core'
-import { storageService } from './async-storage.service'
+
 
 const ENTITY = 'user'
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(
+
+  ) { }
+
+  // TODO: make a currentLoggedInUser observable, with which auth functions (login/signup/logout) will be able to communicate with.
+  // TODO: consider moving loggedInUser$ obs to auth service (prevents confusing duplication of login/onLogin)
+
+  // INFO: login/signup/logout WORK with backend DB!
 
 
-  public query() {
-    return storageService.query(ENTITY)
-      // .then(users => users.length < 1 ? _createDemoUsers() : users)
-  }
 
-  
+
+
+
+
+
   // ------------------ Private Functions ------------------
 
 }

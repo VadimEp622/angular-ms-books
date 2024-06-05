@@ -2,18 +2,31 @@ import { authService } from './auth.service.mjs'
 import { logger } from '../../services/logger.service.mjs'
 
 
-// TODO: consider if needed -> on successful login/signup, update store.loggedinUser, and on logout, update store.loggedinUser to guest or null/undefined
-
 // INFO: from what I gather, regarding als, with my current setup,
 //      if user has performed login/signup, but have not logged out, the store.loggedinUser will still remember the user object.
+
+
+// TODO: research API error numbers, and proper backend error handling 
+
 
 export async function login(req, res) {
     const { username, password } = req.body
     try {
         const user = await authService.login(username, password)
         const loginToken = authService.getLoginToken(user)
-        logger.info('User login: ', user.id)
+        logger.info('User login: ', user._id)
         res.cookie('loginToken', loginToken, { sameSite: 'None', secure: true })
+        res.json(user)
+    } catch (err) {
+        logger.error('Failed to Login ' + err)
+        res.status(401).send({ err: 'Failed to Login' })
+    }
+}
+
+export async function tokenLogin(req, res) {
+    const { token } = req.body
+    try {
+        const user = await authService.loginByToken(token)
         res.json(user)
     } catch (err) {
         logger.error('Failed to Login ' + err)
@@ -29,7 +42,7 @@ export async function signup(req, res) {
         const account = await authService.signup(credentials)
         logger.debug(`auth.route - new account created: ` + JSON.stringify(account))
         const user = await authService.login(credentials.username, credentials.password)
-        logger.info('User signup:', user.id)
+        logger.info('User signup:', user._id)
         const loginToken = authService.getLoginToken(user)
         res.cookie('loginToken', loginToken, { sameSite: 'None', secure: true })
         res.json(user)
@@ -41,9 +54,7 @@ export async function signup(req, res) {
 
 export async function logout(req, res) {
     try {
-        // TODO: check if deleting loggedinUser like this is in line with asyncLocalStorage best practices
-        const store = asyncLocalStorage.getStore()
-        delete store.loggedinUser
+        logger.info('user logout')
         res.clearCookie('loginToken')
         res.send({ msg: 'Logged out successfully' })
     } catch (err) {

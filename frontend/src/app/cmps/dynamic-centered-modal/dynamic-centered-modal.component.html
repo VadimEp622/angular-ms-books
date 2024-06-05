@@ -1,0 +1,9 @@
+<ng-container *ngIf="activeModal!==null">
+    <section class="dynamic-centered-modal-container pos-fix width-100vw height-100vh overflow-hidden" [ngClass]="getModalContainerClass(activeModal)">
+        <div class="overlay width-full height-full bg-clr-black" (click)="onCloseModal()"></div>
+
+        <section class="modal-container">
+            <ng-container *ngComponentOutlet="getCmp(activeModal); inputs: activeModal.props"></ng-container>
+        </section>
+    </section>
+</ng-container>

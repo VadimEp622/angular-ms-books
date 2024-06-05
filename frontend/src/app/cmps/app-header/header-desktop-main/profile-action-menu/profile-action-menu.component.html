@@ -1,0 +1,13 @@
+<ng-container *ngIf="loggedInUser$ | async as loggedInUser; else notLoggedIn">
+    <section class="logged-in">
+        <section class="flex gap5">
+            <span>hello, {{ loggedInUser.fullname }}</span>
+            <span class="logout-btn fs11 lh24 clr-gray-4" (click)="onLogout(loggedInUser)">| logout</span>
+        </section>
+    </section>
+</ng-container>
+<ng-template #notLoggedIn>
+    <section class="not-logged-in">
+        <span class="login-btn fs11 lh24 clr-gray-4" (click)="onLogin()">login</span>
+    </section>
+</ng-template>

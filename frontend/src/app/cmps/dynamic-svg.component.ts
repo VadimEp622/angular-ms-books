@@ -5,13 +5,16 @@ import { DynamicSvgService } from '../services/dynamic-svg.service';
   selector: 'dynamic-svg',
   standalone: true,
   imports: [],
-  template: '<div #svgContainer></div>'
+  template: '<div #svgContainer class="flex"></div>'
 })
 export class DynamicSvgComponent {
   @Input() svgPath!: string;
   @ViewChild('svgContainer', { static: true }) svgContainer!: ElementRef;
 
   constructor(private dynamicSvgService: DynamicSvgService, private renderer: Renderer2) { }
+
+
+  // TODO: check if need to unsubscribe on destroy
 
   ngOnInit() {
     this.loadSvg()

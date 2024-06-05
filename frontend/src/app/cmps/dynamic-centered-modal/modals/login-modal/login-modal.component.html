@@ -1,0 +1,8 @@
+<section class="login-modal pd-10">
+    <ng-container *ngIf="isSigup; else elseBlock">
+        <form-signup></form-signup>
+    </ng-container>
+    <ng-template #elseBlock>
+        <form-login></form-login>
+    </ng-template>
+</section>

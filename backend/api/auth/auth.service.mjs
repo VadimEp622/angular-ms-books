@@ -10,6 +10,7 @@ export const authService = {
     signup,
     login,
     getLoginToken,
+    loginByToken,
     validateToken
 }
 
@@ -23,7 +24,16 @@ async function login(username, password) {
     if (!match) return Promise.reject('Invalid username or password')
 
     delete user.password
-    user.id = user.id.toString()
+    user._id = user._id.toString()
+    return user
+}
+
+async function loginByToken(token) {
+    logger.debug(`auth.service - login with token: ${token}`)
+    const tokenUserObj = validateToken(token)
+    if (!tokenUserObj) throw new Error('invalid token')
+    const user = await userService.getById(tokenUserObj._id)
+    delete user.password
     return user
 }
 
@@ -38,13 +48,13 @@ async function signup({ username, password, fullname }) {
 
     const hash = await bcrypt.hash(password, saltRounds)
     await userService.add({ username, password: hash, fullname })
-    
+
     const user = await userService.getByUsername(username)
     return user
 }
 
 function getLoginToken(user) {
-    const userInfo = { id: user.id, fullname: user.fullname, isAdmin: user.isAdmin }
+    const userInfo = { _id: user._id, fullname: user.fullname, isAdmin: user.isAdmin }
     return cryptr.encrypt(JSON.stringify(userInfo))
 }
 

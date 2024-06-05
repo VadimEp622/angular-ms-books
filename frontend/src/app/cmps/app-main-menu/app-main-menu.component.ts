@@ -32,7 +32,7 @@ export class AppMainMenuComponent {
   }
 
   getMenuClass(isMenuOpen: boolean) {
-    return isMenuOpen ? ['right-0'] : ['right-neg-full']
+    return isMenuOpen ? ['left-0'] : ['left-neg-full']
   }
 
   onCloseMenu() {

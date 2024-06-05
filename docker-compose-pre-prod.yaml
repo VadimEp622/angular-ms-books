@@ -1,0 +1,38 @@
+# pre-prod compose file - for local development
+
+services:
+
+  # **************** BACK-END ****************
+  ms-books-app:
+    hostname: backend
+    image: ms-books-pre-prod-backend:latest
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+    ports:
+      - ${NODE_HOST_PORT}:${PORT}
+    environment:
+      - MONGODB_URL=${MONGODB_URL_LOCAL}
+      - MONGODB_DATBASE=${MONGODB_DATABASE}
+    stdin_open: true
+    tty: true
+    volumes:
+      - /usr/src/app/node_modules
+      - ./backend:/usr/src/app
+
+  # **************** MONGODB DATABASE ****************
+  mongodb:
+    image: mongo:8.0-rc
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

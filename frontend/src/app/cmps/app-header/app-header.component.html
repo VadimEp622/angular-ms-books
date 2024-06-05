@@ -1,5 +1,14 @@
 <header
     [ngClass]="['full' ,layout]"
+>
+
+    <header-desktop-main [ngClass]="['full' ,layout]"></header-desktop-main>
+    <header-desktop-secondary [ngClass]="['full' ,layout]"></header-desktop-secondary>
+</header>
+
+
+<!-- <header
+    [ngClass]="['full' ,layout]"
     class="bg-clr-main-3"
 >
     <section class="app-header-container flex align-center space-between gap20 pd-bl-5">
@@ -38,4 +47,4 @@
             (click)="onOpenMenu()"
         ></dynamic-svg>
     </section>
-</header>
+</header> -->

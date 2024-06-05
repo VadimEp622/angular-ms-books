@@ -8,11 +8,13 @@ import { AppMainMenuComponent } from '../../cmps/app-main-menu/app-main-menu.com
 import { LayoutService } from '../../services/layout.service'
 import { RoutingService } from './../../services/routing.service'
 import { MainMenuService } from './../../services/main-menu.service'
+import { DynamicCenteredModalComponent } from '../../cmps/dynamic-centered-modal/dynamic-centered-modal.component'
+import { DynamicCenteredModalService } from './../../services/dynamic-centered-modal.service'
 
 @Component({
   selector: 'dynamic-layout',
   standalone: true,
-  imports: [RouterOutlet, NgClass, NgIf, AsyncPipe, ProgressSpinnerModule, AppHeaderComponent, AppMainMenuComponent],
+  imports: [RouterOutlet, NgClass, NgIf, AsyncPipe, ProgressSpinnerModule, AppHeaderComponent, AppMainMenuComponent, DynamicCenteredModalComponent],
   templateUrl: './dynamic-layout.component.html',
   styleUrl: './dynamic-layout.component.scss'
 })
@@ -21,16 +23,20 @@ export class DynamicLayoutComponent implements OnInit {
   isMenuOpen$!: Observable<boolean>
   isRouteLoading$!: Observable<boolean>
 
+  activeModal$!: Observable<any>
+
   constructor(
     public layoutService: LayoutService,
     public routingService: RoutingService,
-    public mainMenuService: MainMenuService
+    public mainMenuService: MainMenuService,
+    public dynamicCenteredModalService: DynamicCenteredModalService
   ) { }
 
 
   ngOnInit() {
     this.isMenuOpen$ = this.mainMenuService.isMenuOpen$
     this.isRouteLoading$ = this.routingService.isRouteLoading$
+    this.activeModal$ = this.dynamicCenteredModalService.activeModal$
   }
 
 }

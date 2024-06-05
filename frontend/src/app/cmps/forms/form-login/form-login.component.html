@@ -1,0 +1,16 @@
+<form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+
+    <h2>Login</h2>
+
+    <section class="flex column">
+        <label for="username">Username:</label>
+        <input id="username" type="text" formControlName="username" autocomplete="off">
+        
+        <label for="password">Password:</label>
+        <input id="password" type="text" formControlName="password" autocomplete="off">
+
+        <input type="submit" value="Submit">
+
+        <input type="button" value="Create an account" (click)="onSetModalSignup()">
+    </section>
+</form>

@@ -23,15 +23,15 @@
 }
 
 .main-menu {
-    transition: right 0.2s ease-in-out;
-    background-color: lighten(map-get($map-clr, main, main-3), 10%);
+    transition: left 0.2s ease-in-out;
+    background-color: lighten(map-get($map-clr, main, main-3), 20%);
 
     & nav a {
         transition: background-color 0.2s ease-in-out;
         border-radius: 8px;
 
         &:hover {
-            background-color: map-get($map-clr, "main", "main-3");
+            background-color: lighten(map-get($map-clr, "main", "main-3"), 5%);
         }
     }
 }
@@ -45,7 +45,7 @@
 
         &:hover {
             cursor: pointer;
-            background-color: map-get($map-clr, "main", "main-3");
+            background-color: lighten(map-get($map-clr, "main", "main-3"), 5%);
             border-radius: 50%;
         }
     }

@@ -1,0 +1,13 @@
+@import "../../../../assets/styles/setup/_variables.scss";
+
+:host {
+    background-color: darken(map-get($map-clr, "main", "main-3"), 0%);
+}
+
+.app-header-container {
+    height: 60px;
+}
+
+.search:hover {
+    cursor: not-allowed;
+}

@@ -1,0 +1,26 @@
+# prod compose file - for docker hub ==> render.com deployment
+
+# INFO: render.com does not have docker-compose support, as of now.
+# INFO: render.com does not have support for free mysql in any way, as of now.
+
+
+services:
+
+  # **************** BACK-END ****************
+  ms-books-app:
+    hostname: backend
+    image: ${DOCKER_HUB_USER}/ms-books-prod:latest
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    ports:
+      - ${NODE_HOST_PORT}:${PORT}
+    environment:
+      - MONGODB_URL=${MONGODB_URL_CLOUD}
+      - MONGODB_DATBASE=${MONGODB_DATABASE}
+    stdin_open: true
+    tty: true
+    volumes:
+      - /usr/src/app/node_modules
+      - ./backend:/usr/src/app
