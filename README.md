@@ -15,9 +15,11 @@ This project is a designed to showcase skill and understanding of **Angular**.
 
 The front-end of the app was made using **Angular 17** + **Sass**.
 
-The back-end of the app was made using **Node.js** (uses the front-end's build), and is **Dockerized**.
+The back-end of the app was made using **Node.js** (uses the front-end's build).
 
 The Database used is **MySQL**, which runs persistently with a volume, using **docker-compose**.
+
+The entire app (dev + prod) is **Dockerized**
 
 ## Detailed Overview
 
