@@ -13,8 +13,6 @@ services:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
-    depends_on:
-      - mongodb
     restart: unless-stopped
     ports:
       - ${NODE_HOST_PORT}:${PORT}
