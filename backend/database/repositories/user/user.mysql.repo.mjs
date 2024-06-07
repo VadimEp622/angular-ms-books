@@ -17,14 +17,7 @@ export default {
 async function query() {
     try {
         const connection = await dbService.connectMysql()
-        const query = `
-        SELECT 
-            HEX(_id) AS _id,
-            username,
-            password,
-            fullname
-        FROM user
-        `
+        const query = `SELECT HEX(_id) AS _id, username, password, fullname FROM user`
         const [results] = await connection.query(query)
         return results
     } catch (error) {
@@ -36,16 +29,8 @@ async function query() {
 async function getById(userId) {
     try {
         const connection = await dbService.connectMysql()
-        const query = `
-        SELECT 
-            HEX(_id) AS _id,
-            username,
-            password,
-            fullname
-        FROM user 
-        WHERE _id = UNHEX('${userId}')
-        `
-        const [results] = await connection.query(query)
+        const query = `SELECT HEX(_id) AS _id, username, password, fullname FROM user WHERE _id = UNHEX(?)`
+        const [results] = await connection.query(query, [userId])
         return results[0]
     } catch (error) {
         logger.error(`Failed mysql user database getById: ${userId}`, error)
@@ -76,16 +61,8 @@ async function add(user) {
 async function getByUsername(username) {
     try {
         const connection = await dbService.connectMysql()
-        const query = `
-        SELECT 
-            HEX(_id) AS _id,
-            username,
-            password,
-            fullname 
-        FROM user 
-        WHERE username = '${username}'
-        `
-        const [results] = await connection.query(query)
+        const query = `SELECT HEX(_id) AS _id, username, password, fullname FROM user WHERE username = ?`
+        const [results] = await connection.query(query, [username])
         return results[0]
     } catch (error) {
         logger.error(`Failed mysql user database getByUsername: ${username}`, error)
