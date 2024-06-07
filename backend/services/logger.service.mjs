@@ -37,8 +37,7 @@ function doLog(level, ...args) {
 
 export const logger = {
     debug(...args) {
-        if (process.env.NODE_NEV === 'production') return
-        doLog('DEBUG', ...args)
+        if (process.env.NODE_NEV !== 'production') doLog('DEBUG', ...args)
     },
     info(...args) {
         doLog('INFO', ...args)
