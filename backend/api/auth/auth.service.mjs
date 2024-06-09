@@ -64,7 +64,7 @@ function validateToken(loginToken) {
         const loggedinUser = JSON.parse(json)
         return loggedinUser
 
-    } catch (err) {
+    } catch (error) {
         logger.info('Invalid login token')
     }
     return null

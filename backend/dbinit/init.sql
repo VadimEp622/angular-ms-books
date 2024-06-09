@@ -1,17 +1,15 @@
 CREATE TABLE user (
-    _id BINARY(16) NOT NULL,
+    _id BINARY(16) NOT NULL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    fullname VARCHAR(255) NOT NULL,
-    PRIMARY KEY (_id)
+    fullname VARCHAR(255) NOT NULL
 );
 
 DELIMITER // 
 CREATE TRIGGER before_insert_user BEFORE
-INSERT
-    ON user FOR EACH ROW BEGIN
-SET
-    NEW._id = UNHEX (REPLACE (UUID (), '-', ''));
-
+INSERT ON user FOR EACH ROW 
+BEGIN
+    SET NEW._id = UNHEX (REPLACE (UUID (), '-', ''));
+    -- SET @INSERT_ID = HEX (NEW._id); 
 END // 
 DELIMITER;

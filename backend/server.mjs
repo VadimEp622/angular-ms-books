@@ -15,21 +15,27 @@ import dotenv from 'dotenv'
 //   * package.json: (npm run dev) => With Docker for Windows watching a mapped folder, you need to use nodemon --legacy-watch   
 // ################################################################################
 
-// TODO: fix render.com logging DEBUG, even though it's in production...
+// TODO: add database schema [Mysql - ?, MongoDB - mongoose(?)]
+
+// TODO: consider adding error handling middleware + custom error class (for example, throw new AppError(...))
 
 // TODO: Research logging practices, what to log, what not to log.
 
 // TODO: in book api, create route getBookById
 
-// TODO: research graceful shutdown - what, why, how.
+
+// DONE: ✔ fix render.com logging DEBUG, even though it's in production...
+// DONE: ✔ research graceful shutdown - what, why, how.
 
 
+
+
+// ***************** Express App Config *****************
 dotenv.config()
 const app = express()
 const server = http.createServer(app)
 
 
-// Express App Config
 app.use(cookieParser())
 app.use(express.json())
 
@@ -52,7 +58,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-// routes
+// ***************** Routes *****************
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.mjs'
 import { authRoutes } from './api/auth/auth.routes.mjs'
 // import { secretRoutes } from './api/secret/secret.routes.mjs'
@@ -69,11 +75,31 @@ app.use('/api/book', bookRoutes)
 app.use('/api/user', userRoutes)
 
 
+// ***************** Graceful shutdown *****************
+process.on('SIGTERM', () => {
+    logger.warn('SIGTERM received, shutting down server...')
+    server.close(() => {
+        logger.warn('SIGTERM received, server closed')
+        process.exit(0)
+    })
+})
 
+process.on('SIGINT', () => {
+    logger.warn('SIGINT received, shutting down server...')
+    server.close(() => {
+        logger.warn('SIGINT received, server closed')
+        process.exit(0)
+    })
+})
+
+
+// ***************** Get static angular app *****************
 app.get('/**', (req, res) => {
     res.sendFile(path.resolve('public/index.html'))
 })
 
+
+// ***************** Run Server *****************
 const port = process.env.PORT || 3030
 server.listen(port, () => {
     logger.info('Server is running on port: ' + port)

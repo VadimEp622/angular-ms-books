@@ -15,9 +15,9 @@ export async function queryBooksByGenres(genres) {
             genres.map(genre => externalApiService.fetchBooksByGenre(genre))
         )
         return results.map(result => result.status === 'fulfilled' ? result.value : result.reason)
-    } catch (err) {
-        logger.error('Failed fetching books by genres', err)
-        throw err
+    } catch (error) {
+        logger.error('Failed fetching books by genres', error)
+        throw error
     }
 }
 
@@ -25,9 +25,9 @@ export async function queryBooksByGenre(genre) {
     try {
         const booksByGenre = await externalApiService.fetchBooksByGenre(genre)
         return booksByGenre
-    } catch (err) {
-        logger.error('Failed fetching books by genre', err)
-        throw err
+    } catch (error) {
+        logger.error('Failed fetching books by genre', error)
+        throw error
     }
 }
 
@@ -44,9 +44,9 @@ export async function getBookById(bookId) {
         // basically everything I might need is in the fetched works object 
         // ** Extra-> though I may need to later combine data with different editions and their varying covers/publish dates/etc..
 
-    } catch (err) {
-        logger.error('Failed to get book by id', err)
-        throw err
+    } catch (error) {
+        logger.error('Failed to get book by id', error)
+        throw error
     }
 }
 

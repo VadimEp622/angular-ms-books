@@ -7,9 +7,9 @@ export async function getUsers(req, res) {
         const users = await userService.query()
         logger.info('Get users')
         res.send(users)
-    } catch (err) {
-        logger.error('Failed to get users', err)
-        res.status(400).send({ err: 'Failed to get users' })
+    } catch (error) {
+        logger.error('Failed to get users', error)
+        res.status(500).send({ error: 'Failed to get users' })
     }
 }
 
@@ -19,9 +19,9 @@ export async function getUser(req, res) {
         const user = await userService.getById(userId)
         logger.info('Get user by userId:', userId)
         res.send(user)
-    } catch (err) {
-        logger.error('Failed to get user', err)
-        res.status(400).send({ err: 'Failed to get user' })
+    } catch (error) {
+        logger.error('Failed to get user', error)
+        res.status(500).send({ error: 'Failed to get user' })
     }
 }
 
