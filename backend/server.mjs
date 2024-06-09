@@ -23,8 +23,9 @@ import dotenv from 'dotenv'
 
 // TODO: in book api, create route getBookById
 
-// TODO: ✔ fix render.com logging DEBUG, even though it's in production...
-// TODO: ✔ research graceful shutdown - what, why, how.
+
+// DONE: ✔ fix render.com logging DEBUG, even though it's in production...
+// DONE: ✔ research graceful shutdown - what, why, how.
 
 
 
@@ -74,20 +75,7 @@ app.use('/api/book', bookRoutes)
 app.use('/api/user', userRoutes)
 
 
-// ***************** Get static angular app *****************
-app.get('/**', (req, res) => {
-    res.sendFile(path.resolve('public/index.html'))
-})
-
-
-// ***************** Run Server *****************
-const port = process.env.PORT || 3030
-server.listen(port, () => {
-    logger.info('Server is running on port: ' + port)
-})
-
-
-// ***************** Graceful shutdown (WIP) *****************
+// ***************** Graceful shutdown *****************
 process.on('SIGTERM', () => {
     logger.warn('SIGTERM received, shutting down server...')
     server.close(() => {
@@ -102,4 +90,17 @@ process.on('SIGINT', () => {
         logger.warn('SIGINT received, server closed')
         process.exit(0)
     })
+})
+
+
+// ***************** Get static angular app *****************
+app.get('/**', (req, res) => {
+    res.sendFile(path.resolve('public/index.html'))
+})
+
+
+// ***************** Run Server *****************
+const port = process.env.PORT || 3030
+server.listen(port, () => {
+    logger.info('Server is running on port: ' + port)
 })

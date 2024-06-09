@@ -17,8 +17,11 @@ WORKDIR /usr/src/app
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.npm to speed up subsequent builds.
-# Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them into
-# into this layer.
+# Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them into this layer.
+# Extra: There is no need to specify the node UID/GID explicitly.
+#   This command is focused on mounting files and using Docker's caching mechanism, followed by running npm ci to install dependencies.
+#   None of these operations require changing the ownership of the files being worked with to the node user.
+#   Instead, they operate on the files as they are presented to the container, whether through the bind mounts or the cache mount.
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
