@@ -12,6 +12,8 @@ export default {
 //      but so that the result that returns, already includes the create_at key
 // TODO: before doing the above, consider the database models for the different databases
 
+// TODO: consider changing to ts, for better type safety
+
 
 
 async function query() {
@@ -46,11 +48,7 @@ async function add(user) {
 
         await connection.query(query, [username, password, fullname])
 
-        // const data2 = await connection.query(`SELECT @INSERT_ID`)
-        // logger.debug('added user to mysql database -> data2[0][0]?.[@INSERT_ID]', data2[0][0]?.["@INSERT_ID"])
-        // TODO:
-        //      in mysql, possible to use variable @INSERT_ID to get the id of the inserted row 
-        //      consider whether it's worth implementing, or just keep to finding user using getByUsername after inserting into mysql database
+        // TODO: do a getByUsername, if the user exists, then it has been added, then return it. otherwise return null 
 
     } catch (error) {
         logger.error(`Failed mysql user database add`, error)
