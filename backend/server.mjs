@@ -19,13 +19,12 @@ import dotenv from 'dotenv'
 
 // TODO: consider adding error handling middleware + custom error class (for example, throw new AppError(...))
 
-// TODO: ✔ fix render.com logging DEBUG, even though it's in production...
-
 // TODO: Research logging practices, what to log, what not to log.
 
 // TODO: in book api, create route getBookById
 
-// TODO: research graceful shutdown - what, why, how.
+// TODO: ✔ fix render.com logging DEBUG, even though it's in production...
+// TODO: ✔ research graceful shutdown - what, why, how.
 
 
 
