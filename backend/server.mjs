@@ -24,10 +24,6 @@ import dotenv from 'dotenv'
 // TODO: in book api, create route getBookById
 
 
-// DONE: ✔ fix render.com logging DEBUG, even though it's in production...
-// DONE: ✔ research graceful shutdown - what, why, how.
-
-
 
 
 // ***************** Express App Config *****************
