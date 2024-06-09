@@ -2,12 +2,17 @@
 
 ARG NODE_VERSION=22
 
+# Always use slim
 FROM node:${NODE_VERSION}-slim
 
-# Use production node environment by default.
+# Assigns node environment as production  
 ENV NODE_ENV production
 
+# Run the application as a non-root user.
+USER node
+
 # Sets the working directory for any subsequent RUN, CMD, ENTRYPOINT, COPY, and ADD instructions.
+# Assigns proper permissions, based on the USER above it.
 WORKDIR /usr/src/app
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
@@ -19,14 +24,13 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=cache,target=/root/.npm \
     npm ci --omit=dev
 
-# Run the application as a non-root user.
-USER node
-
 # Copy the rest of the source files into the image.
-COPY . .
+# --chown=node:node is for running as non-root
+COPY --chown=node:node . .
 
 # Expose the port that the application listens on.
 EXPOSE 3030
 
 # Run the application.  
-CMD ["npm", "start"]
+# We don't want npm (aspecially in production) to start processes in Dockerfile
+CMD ["node", "server.mjs"]

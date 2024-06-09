@@ -2,12 +2,20 @@
 
 ARG NODE_VERSION=22
 
+# Always use slim
 FROM node:${NODE_VERSION}-slim
 
-# Use production node environment by default.
+# Assigns node environment as development  
 ENV NODE_ENV development
 
+# We have to install nodemon globally before moving into the working directory
+RUN npm install -g nodemon
+
+# Run the application as a non-root user.
+USER node
+
 # Sets the working directory for any subsequent RUN, CMD, ENTRYPOINT, COPY, and ADD instructions.
+# Assigns proper permissions, based on the USER above it.
 WORKDIR /usr/src/app
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
@@ -16,17 +24,16 @@ WORKDIR /usr/src/app
 # into this layer.
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
+    --mount=type=cache,target=/root/.npm\
     npm ci --include=dev
 
-# Run the application as a non-root user.
-USER node
-
 # Copy the rest of the source files into the image.
-COPY . .
+# --chown=node:node is for running as non-root
+COPY --chown=node:node . .
 
 # Expose the port that the application listens on.
 EXPOSE 3030
 
 # Run the application.  
-CMD ["npm", "run", "dev"]
+# We don't want npm (aspecially in production) to start processes in Dockerfile
+CMD ["nodemon", "--legacy-watch","server.mjs"]
