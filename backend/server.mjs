@@ -15,7 +15,9 @@ import dotenv from 'dotenv'
 //   * package.json: (npm run dev) => With Docker for Windows watching a mapped folder, you need to use nodemon --legacy-watch   
 // ################################################################################
 
-// TODO: fix render.com logging DEBUG, even though it's in production...
+// TODO: consider adding error handling middleware + custom error class (for example, throw new AppError(...))
+
+// TODO: ✔ fix render.com logging DEBUG, even though it's in production...
 
 // TODO: Research logging practices, what to log, what not to log.
 
