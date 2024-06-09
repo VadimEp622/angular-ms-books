@@ -17,9 +17,9 @@ async function query() {
     try {
         const users = await database.user.query()
         return users
-    } catch (err) {
-        logger.error(`Failed fetching users`, err)
-        throw err
+    } catch (error) {
+        logger.error(`Failed fetching users`, error)
+        throw error
     }
 }
 
@@ -28,9 +28,9 @@ async function getById(userId = '3853383007CF11EF94347C10C9D06414') {
     try {
         const user = await database.user.getById(userId)
         return user
-    } catch (err) {
-        logger.error(`while finding user by id: ${userId}`, err)
-        throw err
+    } catch (error) {
+        logger.error(`while finding user by id: ${userId}`, error)
+        throw error
     }
 }
 
@@ -38,9 +38,9 @@ async function add(user) {
     try {
         // TODO: make a way to return the newly created user
         await database.user.add(user)
-    } catch (err) {
-        logger.error('cannot add user', err)
-        throw err
+    } catch (error) {
+        logger.error('cannot add user', error)
+        throw error
     }
 }
 
@@ -49,9 +49,9 @@ async function getByUsername(username) {
     try {
         const user = await database.user.getByUsername(username)
         return user
-    } catch (err) {
-        logger.error(`while finding user by username: ${username}`, err)
-        throw err
+    } catch (error) {
+        logger.error(`while finding user by username: ${username}`, error)
+        throw error
     }
 }
 

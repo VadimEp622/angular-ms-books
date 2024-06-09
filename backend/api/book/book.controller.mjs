@@ -12,10 +12,10 @@ export async function getBooksByGenres(req, res) {
         const booksByGenres = await queryBooksByGenres(bookDataService.getGenres())
         cacheUrl.set(req.originalUrl, booksByGenres)
         logger.info(`Cache set - ${req.originalUrl}`)
-        res.send(booksByGenres)
-    } catch {
-        logger.error('Failed to get books by genres')
-        res.status(400).send({ err: 'Failed to get books by genres' })
+        res.status(200).json(booksByGenres)
+    } catch (error) {
+        logger.error('Failed to get books by genres', error)
+        res.status(500).send({ error: 'Failed to get books by genres' })
     }
 }
 
@@ -25,10 +25,10 @@ export async function getBooks(req, res) {
         const booksByGenre = await queryBooksByGenre(genre)
         cacheUrl.set(req.originalUrl, booksByGenre)
         logger.info(`Cache set - ${req.originalUrl}`)
-        res.send(booksByGenre)
-    } catch (err) {
-        logger.error('Failed to get books by genre')
-        res.status(400).send({ err: 'Failed to get books by genre' })
+        res.status(200).json(booksByGenre)
+    } catch (eerrorrr) {
+        logger.error('Failed to get books by genre', error)
+        res.status(500).send({ error: 'Failed to get books by genre' })
     }
 }
 
@@ -36,10 +36,10 @@ export async function getBook(req, res) {
     try {
         const bookId = req.params.id
         // const book = await getBookById(bookId)
-        // res.send(book)
-    } catch (err) {
-        logger.error('Failed to get book by id')
-        res.status(400).send({ err: 'Failed to get book by id' })
+        // res.status(200).json(book)
+    } catch (error) {
+        logger.error('Failed to get book by id', error)
+        res.status(500).send({ error: 'Failed to get book by id' })
     }
 }
 

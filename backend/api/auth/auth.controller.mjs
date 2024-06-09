@@ -16,10 +16,10 @@ export async function login(req, res) {
         const loginToken = authService.getLoginToken(user)
         logger.info('User login: ', user._id)
         res.cookie('loginToken', loginToken, { sameSite: 'None', secure: true })
-        res.json(user)
-    } catch (err) {
-        logger.error('Failed to Login ' + err)
-        res.status(401).send({ err: 'Failed to Login' })
+        res.status(200).json(user)
+    } catch (error) {
+        logger.error('Failed to Login ', error)
+        res.status(500).send({ error: 'Failed to Login' })
     }
 }
 
@@ -27,10 +27,10 @@ export async function tokenLogin(req, res) {
     const { token } = req.body
     try {
         const user = await authService.loginByToken(token)
-        res.json(user)
-    } catch (err) {
-        logger.error('Failed to Login ' + err)
-        res.status(401).send({ err: 'Failed to Login' })
+        res.status(200).json(user)
+    } catch (error) {
+        logger.error('Failed to Login ', error)
+        res.status(500).send({ error: 'Failed to Login' })
     }
 }
 
@@ -45,10 +45,10 @@ export async function signup(req, res) {
         logger.info('User signup:', user._id)
         const loginToken = authService.getLoginToken(user)
         res.cookie('loginToken', loginToken, { sameSite: 'None', secure: true })
-        res.json(user)
-    } catch (err) {
-        logger.error('Failed to signup ' + err)
-        res.status(400).send({ err: 'Failed to signup' })
+        res.status(201).json(user)
+    } catch (error) {
+        logger.error('Failed to signup ', error)
+        res.status(500).send({ error: 'Failed to signup' })
     }
 }
 
@@ -56,9 +56,10 @@ export async function logout(req, res) {
     try {
         logger.info('user logout')
         res.clearCookie('loginToken')
-        res.send({ msg: 'Logged out successfully' })
-    } catch (err) {
-        res.status(400).send({ err: 'Failed to logout' })
+        res.status(200).json({ msg: 'Logged out successfully' })
+    } catch (error) {
+        logger.error('Failed to logout ', error)
+        res.status(500).send({ error: 'Failed to logout' })
     }
 }
 
