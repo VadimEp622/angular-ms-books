@@ -18,6 +18,8 @@ export class AppHeaderComponent {
 
   // TODO: improve header + side menu background color (may be better to stick to chosen MAIN colors, and not lighten/darken them, since that specific color combo is easy on the eye)
 
+  // TODO: add mobile header
+
   constructor(public mainMenuService: MainMenuService) { }
 
   onToggleMenu() {
