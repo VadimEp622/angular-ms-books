@@ -1,0 +1,8 @@
+// @import "../../../assets/styles/setup/_variables.scss";
+
+:host {
+    position: sticky;
+    bottom: 0;
+    // height: 50px;
+    // background-color: darken(map-get($map-clr, "main", "main-3"), 0%);
+}

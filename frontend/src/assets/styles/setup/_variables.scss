@@ -39,7 +39,19 @@ $map-clr: (
 );
 
 /* =================== Breakpoints =================== */
+// TODO: improve breakpoints + media query structure
+$map-breakpoint: (
+    "s": 375px,  // used
+    "m": 700px,  // used
+    "xm": 900px, // used
+    "l": 1050px, // used
+    "xl": 1440px // used
+);
+
 $map-content-width: (
+    "global-header-footer-layout": (
+        "tablet": 700px
+    ),
     "home-page-layout": (
         "mobile": 700px,
         "tablet": 900px,

@@ -1,0 +1,9 @@
+@import "../../../../assets/styles/setup/_variables.scss";
+
+:host {
+    background-color: darken(map-get($map-clr, "main", "main-2"), 0%);
+}
+
+.app-footer-mobile-secondary-container {
+    height: 25px;
+}

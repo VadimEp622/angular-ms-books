@@ -62,6 +62,20 @@
             @content;
         }
     }
+
+    // 0 - 699px
+    @if $breakpoint == global-header-footer-null-to-tablet {
+        @media (max-width: calc(map-get($map-content-width, "global-header-footer-layout","tablet") - 1px)) {
+            @content;
+        }
+    }
+
+    // 700px - infinity
+    @if $breakpoint == global-header-footer-tablet-to-infinity {
+        @media (min-width: calc(map-get($map-content-width, "global-header-footer-layout","tablet"))) {
+            @content;
+        }
+    }
 }
 
 /* ======================================================== */

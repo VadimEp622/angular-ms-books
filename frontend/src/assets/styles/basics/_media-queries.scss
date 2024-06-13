@@ -32,13 +32,6 @@
             minmax(auto, map-get($map-content-width, "home-page-layout", "desktop"))
             minmax(20px, 1fr);
     }
-    // .main-layout {
-    //     grid-template-columns: 20px 1fr 20px;
-    // }
-
-    // .details-layout {
-    //     grid-template-columns: 73px 1fr 73px;
-    // }
 }
 
 /* =================== from-to =================== */
@@ -66,20 +59,11 @@
 // 0 - 1049px
 @include for-screen(null-to-tablet) {
     // ...
-    // header {
-    //     & .desktop-nav {
-    //         display: none;
-    //     }
-    // }
 }
 
 // 0 - 1439px
 @include for-screen(null-to-desktop) {
     // ...
-    // .main-layout,
-    // .details-layout {
-    //     grid-template-columns: 5px 1fr 5px;
-    // }
 }
 
 // 375px - 1439px
@@ -95,9 +79,40 @@
 // 1050px - infinity
 @include for-screen(tablet-to-infinity) {
     // ...
-    // header {
-    //     & .mobile-menu-icon {
-    //         display: none;
-    //     }
-    // }
+}
+
+// =================== Other ===================
+
+// 0 - 699px
+@include for-screen(global-header-footer-null-to-tablet) {
+    // ...
+    .main-app {
+        position: relative;
+        min-height: 100vh;
+        grid-template-rows: auto 1fr auto;
+    }
+
+    header {
+        & .app-header-desktop-main-container,
+        & .app-header-desktop-secondary-container {
+            display: none;
+        }
+    }
+}
+
+// 700px - infinity
+@include for-screen(global-header-footer-tablet-to-infinity) {
+    // ...
+    header {
+        & .app-header-mobile-main-container {
+            display: none;
+        }
+    }
+
+    footer {
+        & .app-footer-mobile-main-container,
+        & .app-footer-mobile-secondary-container {
+            display: none;
+        }
+    }
 }

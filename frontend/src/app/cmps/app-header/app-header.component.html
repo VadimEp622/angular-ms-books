@@ -1,50 +1,5 @@
-<header
-    [ngClass]="['full' ,layout]"
->
-
+<header [ngClass]="['full' ,layout]">
     <header-desktop-main [ngClass]="['full' ,layout]"></header-desktop-main>
     <header-desktop-secondary [ngClass]="['full' ,layout]"></header-desktop-secondary>
+    <header-mobile-main [ngClass]="['full' ,layout]"></header-mobile-main>
 </header>
-
-
-<!-- <header
-    [ngClass]="['full' ,layout]"
-    class="bg-clr-main-3"
->
-    <section class="app-header-container flex align-center space-between gap20 pd-bl-5">
-        <section class="logo">
-            <h1 class="fs25 pd-bl-10">Ms. Books</h1>
-        </section>
-
-        <nav class="desktop-nav">
-            <ul class="flex gap10">
-
-                <li class="flex">
-                    <a
-                        routerLink="/"
-                        class="pd-bl-10 pd-in-10"
-                    >Home</a>
-                </li>
-                <li class="flex">
-                    <a
-                        routerLink="/book"
-                        class="pd-bl-10 pd-in-10"
-                    >Book</a>
-                </li>
-                <li class="flex">
-                    <a
-                        routerLink="/about"
-                        class="pd-bl-10 pd-in-10"
-                    >About</a>
-                </li>
-
-            </ul>
-        </nav>
-
-        <dynamic-svg
-            class="mobile-menu-icon pd-5"
-            [svgPath]="'assets/imgs/icon/config/icon-hamburger.svg'"
-            (click)="onOpenMenu()"
-        ></dynamic-svg>
-    </section>
-</header> -->
