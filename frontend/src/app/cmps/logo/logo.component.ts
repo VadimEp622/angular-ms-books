@@ -5,6 +5,9 @@ import { DynamicSvgComponent } from '../dynamic-svg.component';
   selector: 'logo',
   standalone: true,
   imports: [DynamicSvgComponent],
+  host: {
+    class: 'pd-10 flex',
+  },
   templateUrl: './logo.component.html',
   styleUrl: './logo.component.scss',
 })
