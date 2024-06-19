@@ -13,10 +13,11 @@ import { FooterMobileMainComponent } from './footer-mobile-main/footer-mobile-ma
 export class AppFooterComponent {
   @Input() layout: string = 'main-layout';
 
-  // TODO: add 4(?) icons --> Home | User | Cart (?) | Config
+  // TODO: add routes/links to main footer icons
 
+  // TODO: add search bar to secondary footer
   
-  // TODO: if deciding to add price to books, them may have to generate a price for each new book in Backend, and use caching/database to store prices...
+  // INFO: if deciding to add price to books, them may have to generate a price for each new book in Backend, and use caching/database to store prices...
   //    Alternatively, we can make an app that functions purely as a database. we DO need to generate a book object in the database regardless...
 
 }
