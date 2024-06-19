@@ -24,6 +24,8 @@ import { HeaderDesktopSecondaryComponent } from './header-desktop-secondary/head
 export class AppHeaderComponent {
   @Input() layout: string = 'main-layout';
 
+  // TODO: in mobile-footer, when clicking on user route, if NOT logged-in, will prompt to log-in. if logged-in, will route to user route, greet user, and allow to log-out (redirect to home-page?)
+
   // TODO: in desktop-header-main, when logged-in, have a clickable "arrow-down", which will open a menu, which will have a logout button (among other future buttons)
 
   // TODO: cart route -> 
