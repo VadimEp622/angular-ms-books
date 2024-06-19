@@ -24,9 +24,11 @@ import { HeaderDesktopSecondaryComponent } from './header-desktop-secondary/head
 export class AppHeaderComponent {
   @Input() layout: string = 'main-layout';
 
-  // TODO: improve header + side menu background color (may be better to stick to chosen MAIN colors, and not lighten/darken them, since that specific color combo is easy on the eye)
+  // TODO: in desktop-header-main, when logged-in, have a clickable "arrow-down", which will open a menu, which will have a logout button (among other future buttons)
 
-  // TODO: add mobile header
+  // TODO: cart route -> 
+  // in mobile, cart button will route to cart-page. 
+  // in desktop, only when there are items in cart, a shiny cart button will appear near header-profile, with a count of items pending in cart, and clicking it will route to cart-page
 
   constructor(public mainMenuService: MainMenuService) {}
 
