@@ -8,18 +8,8 @@
     // height: 26px;
 }
 
-// nav {
-    // & ul > :not(:first-child) {
-        // position: relative;
-        // &::before {
-            // content: "";
-            // display: block;
-            // position: absolute;
-            // width: 1px;
-            // height: 100%;
-            // top: 0;
-            // left: -9vw;
-            // background-color: map-get($map-clr, "gray", "gray-3");
-        // }
-    // }
-// }
+nav li {
+    &:hover {
+        cursor: pointer;
+    }
+}

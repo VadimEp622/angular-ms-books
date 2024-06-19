@@ -13,9 +13,7 @@ import { FooterMobileMainComponent } from './footer-mobile-main/footer-mobile-ma
 export class AppFooterComponent {
   @Input() layout: string = 'main-layout';
 
-  // TODO: add routes/links to main footer icons
-
-  // TODO: add search bar to secondary footer
+  // TODO: abstract form-search, to its own component, and have seperate header-search-bar & footer-search-bar, which will decide styling in form-search 
   
   // INFO: if deciding to add price to books, them may have to generate a price for each new book in Backend, and use caching/database to store prices...
   //    Alternatively, we can make an app that functions purely as a database. we DO need to generate a book object in the database regardless...

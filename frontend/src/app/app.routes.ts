@@ -25,6 +25,13 @@ export const routes: Routes = [
       import('./pages/user/user.routes').then((m) => m.routes),
   },
   {
+    path: 'cart',
+    title: 'cart',
+    component: DynamicLayoutComponent,
+    loadChildren: () =>
+      import('./pages/cart/cart.routes').then((m) => m.routes),
+  },
+  {
     path: 'about',
     title: 'about',
     component: DynamicLayoutComponent,

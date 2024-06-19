@@ -3,7 +3,7 @@
 <section [ngClass]="layoutService.getLayout()" class="main-app">
     <app-header [ngClass]="['full' ,layoutService.getLayout()]" [layout]="layoutService.getLayout()"/>
     
-    <main [ngClass]="['full' ,layoutService.getLayout()]" class="min-height-0">
+    <main [ngClass]="['full' ,layoutService.getLayout()]" class="min-height-0 height-fit-content">
         <ng-container *ngIf="isRouteLoading$ | async; else content">
             <p-progressSpinner class="flex justify-center mg-bl-st-20" ariaLabel="loading"></p-progressSpinner>
         </ng-container>
