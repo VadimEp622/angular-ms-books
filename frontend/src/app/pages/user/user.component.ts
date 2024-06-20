@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })
-export class UserComponent {
+export class UserComponent implements OnInit, OnDestroy {
   // TODO: do resolver which awaits backend user data from cookie token, and then renders user page.
 
   // TODO: mobile footer user icon -> (?) when clicked,
