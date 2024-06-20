@@ -20,6 +20,6 @@ export class LoginModalComponent {
     private dynamicCenteredModalService: DynamicCenteredModalService
   ) {}
 
-  @Input() isSigup!: boolean;
+  @Input() isSigup: boolean = false;
   @Input() isMobile: boolean = false;
 }
