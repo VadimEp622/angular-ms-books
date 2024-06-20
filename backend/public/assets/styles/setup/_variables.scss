@@ -39,7 +39,19 @@ $map-clr: (
 );
 
 /* =================== Breakpoints =================== */
+// TODO: improve breakpoints + media query structure
+$map-breakpoint: (
+    "s": 375px,  // used
+    "m": 700px,  // used
+    "xm": 900px, // used
+    "l": 1050px, // used
+    "xl": 1440px // used
+);
+
 $map-content-width: (
+    "global-header-footer-layout": (
+        "tablet": 700px
+    ),
     "home-page-layout": (
         "mobile": 700px,
         "tablet": 900px,
@@ -103,6 +115,7 @@ $map-padding: (
     "0": map-get($map-spacing, "0"),
     "5": map-get($map-spacing, "5"),
     "10": map-get($map-spacing, "10"),
+    "15": map-get($map-spacing, "15"),
     "20": map-get($map-spacing, "20")
 );
 
@@ -147,6 +160,7 @@ $map-padding-block-end: (
 // ************** Margin Map **************
 $map-margin: (
     "0": map-get($map-spacing, "0"),
+    "5": map-get($map-spacing, "5"),
     "20": map-get($map-spacing, "20"),
     "40": map-get($map-spacing, "40")
 );

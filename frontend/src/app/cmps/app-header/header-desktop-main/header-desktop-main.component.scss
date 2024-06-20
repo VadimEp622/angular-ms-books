@@ -4,10 +4,6 @@
     background-color: darken(map-get($map-clr, "main", "main-3"), 0%);
 }
 
-.app-header-container {
-    height: 60px;
-}
-
-.search:hover {
-    cursor: not-allowed;
+.app-header-desktop-main-container {
+    height: 70px;
 }

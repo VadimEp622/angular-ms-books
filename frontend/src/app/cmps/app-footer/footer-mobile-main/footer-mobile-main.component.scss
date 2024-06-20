@@ -1,0 +1,15 @@
+@import "../../../../assets/styles/setup/_variables.scss";
+
+:host {
+    background-color: darken(map-get($map-clr, "main", "main-3"), 0%);
+}
+
+.app-footer-mobile-main-container {
+    // height: 26px;
+}
+
+nav li {
+    &:hover {
+        cursor: pointer;
+    }
+}
