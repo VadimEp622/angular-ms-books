@@ -300,6 +300,18 @@
     width: 10px;
 }
 
+.width-29 {
+    width: 29px;
+}
+
+.width-45 {
+    width: 45px;
+}
+
+.width-47 {
+    width: 47px;
+}
+
 .width-300 {
     width: 300px;
 }
@@ -312,10 +324,46 @@
     max-width: 300px;
 }
 
+.min-height-0 {
+    min-height: 0;
+}
+
+.height-20 {
+    height: 20px;
+}
+
 .height-full {
     height: 100%;
 }
 
+.height-fit-content{
+    height: fit-content;
+}
+
 .height-100vh {
     height: 100vh;
+}
+
+// ======================= border-radius =======================
+.br-tl-0 {
+    border-top-left-radius: 0;
+}
+
+.br-tr-0 {
+    border-top-right-radius: 0;
+}
+
+.br-bl-0 {
+    border-bottom-left-radius: 0;
+}
+
+.br-br-0 {
+    border-bottom-right-radius: 0;
+}
+
+// ======================= Other ========================
+.hover-not-allowed {
+    &:hover {
+        cursor: not-allowed;
+    }
 }
