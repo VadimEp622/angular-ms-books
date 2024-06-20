@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, tap } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'user',
@@ -16,13 +17,19 @@ export class UserComponent implements OnInit, OnDestroy {
   //      IF not logged in (no cookie token), open grayed-background login modal.
   //      IF logged in (has cookie token), route to user page.
 
-  sub!: Subscription;
+  userSub!: Subscription;
+
+  logoutSub!: Subscription;
   user!: any;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.sub = this.route.data
+    this.userSub = this.route.data
       .pipe(
         tap(({ user }) => {
           this.user = user;
@@ -32,6 +39,13 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.userSub.unsubscribe();
+    if (this.logoutSub) this.logoutSub.unsubscribe();
+  }
+
+  onLogout(loggedInUser: any) {
+    this.logoutSub = this.authService.logout(loggedInUser).subscribe((data) => {
+      this.router.navigate(['']);
+    });
   }
 }
