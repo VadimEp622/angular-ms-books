@@ -4,10 +4,13 @@
            id="search"
            aria-describedby="search-help"
            formControlName="txt"
-           class="search-box fs18 width-full br-tr-0 br-br-0 hover-not-allowed" />
+           [ngClass]="inputClass"
+           class="search-box width-full br-tr-0 br-br-0 hover-not-allowed" 
+           />
+           
     <p-button
               type="submit"
-              styleClass="br-tl-0 br-bl-0 pd-0 height-full width-47 flex justify-center hover-not-allowed"
+              [styleClass]="getButtonStyleClass()"
               class="search-btn">
         <dynamic-svg class="search-icon clr-white" [svgPath]="'assets/imgs/icon/search/search.svg'"></dynamic-svg>
     </p-button>
