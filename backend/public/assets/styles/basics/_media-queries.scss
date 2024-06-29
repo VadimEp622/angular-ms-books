@@ -87,9 +87,20 @@
 @include for-screen(global-header-footer-null-to-tablet) {
     // ...
     .main-app {
-        position: relative;
-        min-height: 100vh;
         grid-template-rows: auto 1fr auto;
+
+        min-height: 100lvh;
+        position: absolute;
+        min-width: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        // position: relative;
+        // min-height: 100vh;
+        // overflow-x: hidden;
+        // overflow-y: scroll;
+        // touch-action:pinch-zoom;
     }
 
     header {
