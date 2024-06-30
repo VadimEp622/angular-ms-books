@@ -6,6 +6,9 @@ export const externalApiService = {
 
 // TODO: think about how to handle books with missing images - do we cull them in back-end? front-end? or simply add a placeholder image?
 
+// TODO: add fetchBookById -> get the actual openlibrary book data
+// TODO: add fetchBooksByQuery -> search books by text string
+
 async function fetchBooksByGenre(genre) {
     try {
         const data = await fetch(_getUrlBooksByGenre(genre)).then(res => res.json())
