@@ -32,6 +32,17 @@ export async function getBooks(req, res) {
     }
 }
 
+export async function queryBooks(req, res) {
+    try {
+        console.log('req.query', req.query) 
+        // const books = await bookDataService.query()
+        // res.status(200).json(books)
+    } catch (error) {
+        logger.error('Failed to query books', error)
+        res.status(500).send({ error: 'Failed to query books' })
+    }
+}
+
 export async function getBook(req, res) {
     try {
         const bookId = req.params.id
