@@ -22,7 +22,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     this.sub = this.route.data
       .pipe(
         tap(({ book }) => {
-          this.book = book;
+          this.book = book.book;
         })
       )
       .subscribe();

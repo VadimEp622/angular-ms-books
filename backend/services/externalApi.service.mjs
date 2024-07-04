@@ -66,11 +66,12 @@ function _createBook(apiBook) {
 }
 
 function _createBookObject(openLibBookId, title, authors, description, openLibCoverId) {
+    // from openLib's API, sometimes, description is a string, other times an object...
     return {
         _id: openLibBookId,
         title,
         authors,
-        description,
+        description: description?.value ?? description,
         openLibBookId,
         openLibCoverId
     }

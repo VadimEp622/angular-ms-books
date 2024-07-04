@@ -1,2 +1,21 @@
-<p>book-details works!</p>
-<p>{{book|json}}</p>
+<section class="book-details pd-bl-st-40 flex gap24">
+    <section class="left-section">
+        <section class="pd-20">
+            <section class="book-cover">
+                <img src="https://covers.openlibrary.org/b/id/{{book.openLibCoverId}}-M.jpg" alt="book-cover">
+            </section>
+            <section class="pd-bl-st-20 text-align-center">
+                <p>WIP Wishlist</p>
+            </section>
+            <section class="pd-bl-st-20 text-align-center">
+                <p>WIP Ratings</p>
+            </section>
+        </section>
+    </section>
+    <section class="right-section">
+        <p>{{book.authors|json}}</p>
+        <pre class="white-space-pre-wrap fs14 lh21 pd-bl-40">{{book.description}}</pre>
+    </section>
+</section>
+
+<!-- <p>{{book.description|json}}</p> -->
