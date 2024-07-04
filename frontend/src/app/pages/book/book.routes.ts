@@ -3,6 +3,7 @@ import { BookIndexComponent } from './book-index/book-index.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { bookIndexResolver } from '../../routes/resolvers/book-index.resolver';
 import { BookSearchComponent } from './book-search/book-search.component';
+import { bookDetailsResolver } from '../../routes/resolvers/book-details.resolver';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,6 @@ export const routes: Routes = [
   {
     path: 'works/:id',
     component: BookDetailsComponent,
-    // resolve: { book: bookDetailsResolver }
+    resolve: { book: bookDetailsResolver },
   },
 ];
