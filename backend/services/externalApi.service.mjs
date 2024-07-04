@@ -23,7 +23,7 @@ async function fetchBooksByGenre(genre) {
 async function fetchBookById(bookId) {
     try {
         const data = await fetch(_getUrlBookById(bookId)).then(res => res.json())
-        console.log('data - fetchBookById', data)
+        // console.log('data - fetchBookById', data)
         return _transformBookById(bookId, data)
     } catch (error) {
         logger.error('Failed fetching books by id', error)

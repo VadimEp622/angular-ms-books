@@ -47,6 +47,8 @@ export async function getBook(req, res) {
     try {
         const bookId = req.params.id
         const book = await getBookById(bookId)
+        cacheUrl.set(req.originalUrl, book)
+        logger.info(`Cache set - ${req.originalUrl}`)
         res.status(200).json(book)
     } catch (error) {
         logger.error('Failed to get book by id', error)
