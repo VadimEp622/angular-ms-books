@@ -23,7 +23,7 @@ async function fetchBooksByGenre(genre) {
 async function fetchBookById(bookId) {
     try {
         const data = await fetch(_getUrlBookById(bookId)).then(res => res.json())
-        // console.log('data - fetchBookById', data)
+        console.log('data - fetchBookById', data)
         return _transformBookById(bookId, data)
     } catch (error) {
         logger.error('Failed fetching books by id', error)
@@ -61,19 +61,20 @@ function _createBook(apiBook) {
     const title = apiBook?.title
     const authors = apiBook?.authors
     const description = apiBook?.description
-    const openLibCoverId = apiBook?.covers[0]
-    return _createBookObject(openLibBookId, title, authors, description, openLibCoverId)
+    const openLibCoverIds = apiBook?.covers
+    return _createBookObject(openLibBookId, title, authors, description, openLibCoverIds)
 }
 
-function _createBookObject(openLibBookId, title, authors, description, openLibCoverId) {
-    // from openLib's API, sometimes, description is a string, other times an object...
+function _createBookObject(openLibBookId, title, authors, description, openLibCoverIds) {
+    // INFO: from openLib's API, sometimes, description is a string, other times an object...
+    // INFO: sometimes coverId's are missing entirely
     return {
         _id: openLibBookId,
         title,
         authors,
-        description: description?.value ?? description,
-        openLibBookId,
-        openLibCoverId
+        description: description?.value ?? description ?? '',
+        openLibBookId: openLibBookId ?? -1,
+        openLibCoverIds: (openLibCoverIds?.length > 0) ? openLibCoverIds : [-1]
     }
 }
 
