@@ -8,10 +8,10 @@ const router = express.Router()
 
 router.get('/genre', cache, getBooksByGenres)
 router.get('/genre/:id', cache, getBooks)
+router.get('/works/:id', getBook)
 
 // WIP
 router.get('/search', queryBooks)
-router.get('/works/:id', getBook)
 
 
 export const bookRoutes = router

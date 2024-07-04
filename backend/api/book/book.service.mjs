@@ -33,6 +33,9 @@ export async function queryBooksByGenre(genre) {
 
 export async function getBookById(bookId) {
     try {
+        const book = await externalApiService.fetchBookById(bookId)
+        return book
+
         // TODO: 
         //     1. use bookId to get data from open-library
         //     2. move fetch request to externalApiService
