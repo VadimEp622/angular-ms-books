@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.get('/genre', cache, getBooksByGenres)
 router.get('/genre/:id', cache, getBooks)
-router.get('/works/:id', cache, getBook) // TODO: make caching for getBook
+router.get('/works/:id', cache, getBook)
 
 // WIP
 router.get('/search', queryBooks)
