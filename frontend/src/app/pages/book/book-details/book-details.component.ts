@@ -16,7 +16,10 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute) {}
 
-  // TODO: Make a book-details page using the book object
+  // TODO:
+  //    1) Make page responsive
+  //    2) make layout centered (with wider left-right "padding-like")
+  //    3) add authors from backend
 
   ngOnInit() {
     this.sub = this.route.data
