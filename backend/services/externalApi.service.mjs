@@ -10,6 +10,9 @@ export const externalApiService = {
 // TODO: add fetchAuthorById -> fetchBooksById returns only author key, without any other info, not even name. need to add this, and include in fetchBookById process.
 // TODO: add fetchBooksByQuery -> search books by text string
 
+// TODO: in fetchBookById, add option to fetch "https://openlibrary.org/works/OL36434192W/editions.json" in addition to regular ".../works/OL36434192W.json",
+//    because it may contain missing descriptions/images that we can supplement to the returning object
+
 async function fetchBooksByGenre(genre) {
     try {
         const data = await fetch(_getUrlBooksByGenre(genre)).then(res => res.json())
