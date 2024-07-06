@@ -1,8 +1,9 @@
 <section class="book-details pd-bl-st-40 flex gap24">
-    <section class="left-section">
-        <section class="book-cover-wishlist-rating pd-20">
-            <section class="book-cover">
-                <img src="https://covers.openlibrary.org/b/id/{{book.openLibCoverIds[0]}}-M.jpg" alt="book-cover">
+
+    <section class="book-cover-container">
+        <section class="book-cover pd-20">
+            <section class="book-picture">
+                <img src="https://covers.openlibrary.org/b/id/{{book.openLibCoverIds[0]}}-M.jpg" alt="book">
             </section>
             <section class="pd-bl-st-20 text-align-center">
                 <p>WIP Wishlist</p>
@@ -12,12 +13,21 @@
             </section>
         </section>
     </section>
-    <section class="right-section">
-        <section class="author-names flex gap10">
-            <p *ngFor="let author of book.authors; last as isLast">
-                {{author.authorName}}<span *ngIf="!isLast">,</span>
-            </p>
+
+    <section class="book-about-container">
+        <section class="book-title-and-author">
+            <h1 class="book-title fs32 fw600">{{book.title}}</h1>
+
+            <section class="book-author flex gap5 fs16 fw400 mg-bl-st-10 mg-bl-ed-20">
+                <p>by</p>
+                <section class="flex" *ngFor="let author of book.authors; last as isLast">
+                    <p class="underline">{{author.authorName}}</p>
+                    <span *ngIf="!isLast">,</span>
+                </section>
+            </section>
         </section>
-        <pre class="white-space-pre-wrap fs14 lh21 pd-bl-40">{{book.description}}</pre>
+
+        <pre class="white-space-pre-wrap fs14 lh21 pd-bl-20">{{book.description}}</pre>
     </section>
+
 </section>

@@ -7,6 +7,9 @@ import { Subscription, tap } from 'rxjs';
   selector: 'book-details',
   standalone: true,
   imports: [JsonPipe, NgFor, NgIf],
+  host: {
+    class: 'full details-layout',
+  },
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.scss',
 })

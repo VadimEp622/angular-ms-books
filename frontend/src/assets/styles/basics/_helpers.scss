@@ -24,6 +24,9 @@
         line-height: rem($line-height);
     }
 }
+.lh-normal {
+    line-height: normal;
+}
 
 // ======================= Font Weight =======================
 @each $class-name, $font-weight in $map-font-weight {
@@ -238,7 +241,7 @@
     white-space: nowrap;
 }
 
-.white-space-pre-wrap{
+.white-space-pre-wrap {
     white-space: pre-wrap;
 }
 

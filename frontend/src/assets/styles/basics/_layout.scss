@@ -23,5 +23,8 @@
 }
 
 .details-layout {
-    grid-template-columns: 60px 1fr 60px;
+    grid-template-columns:
+        minmax(60px, 1fr)
+        minmax(auto, map-get($map-content-width, "details-layout", "desktop"))
+        minmax(60px, 1fr);
 }
