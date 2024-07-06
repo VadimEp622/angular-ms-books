@@ -26,7 +26,6 @@ export class LayoutService {
   // --------- Private Functions ---------
   private _updateLayout() {
     const url = this.router.url;
-    console.log('url', url);
     // TODO: switch case may be faster?
     if (url === '/') {
       this.layout = 'home-page-layout';

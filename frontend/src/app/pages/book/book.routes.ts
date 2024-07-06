@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { BookIndexComponent } from './book-index/book-index.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
-import { bookIndexResolver } from '../../routes/resolvers/book-index.resolver';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { bookDetailsResolver } from '../../routes/resolvers/book-details.resolver';
+import { BookGenreComponent } from './book-genre/book-genre.component';
+import { bookGenreResolver } from '../../routes/resolvers/book-genre.resolver';
 
 export const routes: Routes = [
   {
@@ -14,8 +14,8 @@ export const routes: Routes = [
   {
     path: 'genre/:genre',
     // TODO: index, is the route/page redirected to, when "ms-books-site.com/book" route is visited.
-    component: BookIndexComponent,
-    resolve: { booksByGenre: bookIndexResolver },
+    component: BookGenreComponent,
+    resolve: { booksByGenre: bookGenreResolver },
   },
   {
     path: 'search',
