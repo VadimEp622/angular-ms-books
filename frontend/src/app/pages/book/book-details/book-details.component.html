@@ -13,7 +13,11 @@
         </section>
     </section>
     <section class="right-section">
-        <p>{{book.authors|json}}</p>
+        <section class="author-names flex gap10">
+            <p *ngFor="let author of book.authors; last as isLast">
+                {{author.authorName}}<span *ngIf="!isLast">,</span>
+            </p>
+        </section>
         <pre class="white-space-pre-wrap fs14 lh21 pd-bl-40">{{book.description}}</pre>
     </section>
 </section>

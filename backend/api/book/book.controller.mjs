@@ -1,7 +1,7 @@
 import { bookDataService } from "../../services/bookData.service.mjs"
 import { cacheUrl } from "../../services/cache.service.mjs"
 import { logger } from "../../services/logger.service.mjs"
-import { getBookById, queryBooksByGenre, queryBooksByGenres } from "./book.service.mjs"
+import { getAuthorById, getBookById, queryBooksByGenre, queryBooksByGenres } from "./book.service.mjs"
 
 
 // TODO: research correct status codes for different errors
@@ -34,7 +34,7 @@ export async function getBooks(req, res) {
 
 export async function queryBooks(req, res) {
     try {
-        console.log('req.query', req.query) 
+        console.log('req.query', req.query)
         // const books = await bookDataService.query()
         // res.status(200).json(books)
     } catch (error) {
@@ -52,7 +52,20 @@ export async function getBook(req, res) {
         res.status(200).json(book)
     } catch (error) {
         logger.error('Failed to get book by id', error)
-        res.status(500).send({ error: 'Failed to get book by id' })
+        res.status(500).send(error)
+    }
+}
+
+export async function getAuthor(req, res) {
+    try {
+        const authorId = req.params.id
+        const author = await getAuthorById(authorId)
+        cacheUrl.set(req.originalUrl, author)
+        logger.info(`Cache set - ${req.originalUrl}`)
+        res.status(200).json(author)
+    } catch (error) {
+        logger.error('Failed to get author by id', error)
+        res.status(500).send(error)
     }
 }
 

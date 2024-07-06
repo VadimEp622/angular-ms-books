@@ -1,4 +1,4 @@
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, tap } from 'rxjs';
@@ -6,7 +6,7 @@ import { Subscription, tap } from 'rxjs';
 @Component({
   selector: 'book-details',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [JsonPipe, NgFor, NgIf],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.scss',
 })

@@ -53,6 +53,15 @@ export async function getBookById(bookId) {
     }
 }
 
+export async function getAuthorById(authorId) {
+    try {
+        const booksByAuthor = await externalApiService.fetchAuthorById(authorId)
+        return booksByAuthor
+    } catch (error) {
+        logger.error('Failed fetching books by authorId', error)
+        throw error
+    }
+}
 
 
 
