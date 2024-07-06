@@ -21,9 +21,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
   // TODO:
   //    1) Make page responsive
-  //    2) make layout centered (with wider left-right "padding-like")
-  //    3) add authors from backend
-  //    4) add missing cover icon/image
+  //    2) add missing cover icon/image
 
   ngOnInit() {
     this.sub = this.route.data
