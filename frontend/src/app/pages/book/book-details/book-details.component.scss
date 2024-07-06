@@ -3,14 +3,10 @@
 }
 
 .book-cover {
-    border: 1px solid #ddd;
     border-radius: 5px;
 }
 
 .book-title {
     font-family: Georgia, "Palatino Linotype", "Book Antiqua", Palatino, serif;
-}
-
-.book-author {
-    font-family: "Lucida Grande", Verdana, Geneva, Helvetica, Arial, sans-serif;
+    overflow-wrap: break-word;
 }
