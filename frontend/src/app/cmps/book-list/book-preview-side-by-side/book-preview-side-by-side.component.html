@@ -1,4 +1,4 @@
-<section class="book-preview flex align-center gap20 pd-10 mg-in-10 pos-rel">
+<section class="book-preview flex align-center gap20 pos-rel">
     <a class="pos-abs inset-0" routerLink="/book/works/{{ book.openLibBookId }}" aria-label="book" [ariaLabel]="book.title"></a>
     <section class="book-img">
         <ng-container *ngIf="book.openLibCoverId !== -1;else noCover">
@@ -13,7 +13,5 @@
     <section class="book-info">
         <h3 class="title" [title]="book.title">{{ book.title }}</h3>
         <p class="authors mg-bl-5" [title]="book.author_name.join(', ')">{{ book.author_name.join(', ') }}</p>
-
-        <!-- <p>{{ book.openLibBookId }}</p> -->
     </section>
 </section>
