@@ -35,6 +35,8 @@ export class AppComponent implements OnInit, OnDestroy {
   // ***********************************************************************************************************************
   // **************************************************** PRIORITY HIGH ****************************************************
   // ***********************************************************************************************************************
+  // TODO: search bar quick results + debounce
+
   // TODO: in side main menu, consider what "book" button,
   //      that will direct to "/book", which will then redirect to "/book/genre/love",
   //      should be instead.
