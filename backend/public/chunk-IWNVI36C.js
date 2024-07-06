@@ -1,0 +1,1 @@
+import{Oa as n,Pa as i,W as r,db as a,hb as p}from"./chunk-GYHKD6BH.js";var s=(()=>{let e=class e{};e.\u0275fac=function(o){return new(o||e)},e.\u0275cmp=r({type:e,selectors:[["error"]],standalone:!0,features:[p],decls:2,vars:0,template:function(o,c){o&1&&(n(0,"p"),a(1,"error works!"),i())}});let t=e;return t})();var u=[{path:"",component:s}];export{u as routes};
