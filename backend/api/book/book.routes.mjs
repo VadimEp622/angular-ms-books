@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAuthor, getBook, getBooks, getBooksByGenres, queryBooks } from './book.controller.mjs'
+import { getAuthor, getBook, getBooks, getBooksByGenres, getSearchedBooks } from './book.controller.mjs'
 import { cache } from '../../middlewares/cache.middleware.mjs'
 
 
@@ -11,7 +11,7 @@ router.get('/genre/:id', cache, getBooks)
 router.get('/works/:id', cache, getBook)
 
 // WIP
-router.get('/search', queryBooks)
+router.get('/search', cache, getSearchedBooks)
 router.get('/author/:id', cache, getAuthor)
 
 

@@ -3,7 +3,8 @@ import { logger } from "./logger.service.mjs"
 export const externalApiService = {
     fetchBooksByGenre,
     fetchBookById,
-    fetchAuthorById
+    fetchAuthorById,
+    fetchSearchedBooksByQuery
 }
 
 // TODO: think about how to handle books with missing images - do we cull them in back-end? front-end? or simply add a placeholder image?
@@ -60,7 +61,7 @@ async function fetchBookById(bookId) {
 async function fetchAuthorById(authorId) {
     try {
         const data = await fetch(_getUrlAuthorById(authorId)).then(res => res.json())
-        if(data?.error) throw new Error('failed fetching author')
+        if (data?.error) throw new Error('failed fetching author')
         return _transformAuthorById(authorId, data)
     } catch (error) {
         logger.error('Failed fetching author by id', error)
@@ -68,6 +69,15 @@ async function fetchAuthorById(authorId) {
     }
 }
 
+async function fetchSearchedBooksByQuery(queryTxt) {
+    try {
+        const data = await fetch(_getUrlSearchedBooksByQuery(queryTxt)).then(res => res.json())
+        return _transformSearchedBooksByQuery(queryTxt, data)
+    } catch (error) {
+        logger.error('Failed fetching by search', error)
+        return _createErrorSearchedBooksByQuery(error, queryTxt)
+    }
+}
 
 
 
@@ -84,6 +94,33 @@ function _getUrlBookById(bookId = 'OL45804W') {
 function _getUrlAuthorById(authorId = 'OL23919A') {
     return `https://openlibrary.org/authors/${authorId}.json`
 }
+
+function _getUrlSearchedBooksByQuery(queryTxt = 'the lord of the rings') {
+    return `https://openlibrary.org/search.json?q=${queryTxt}&fields=*,key,title,author_name,cover_i&limit=5&offset=0`
+}
+
+
+// ------------------------------------ Searched Books ------------------------------------
+function _transformSearchedBooksByQuery(queryTxt, data) {
+    const transformedBooks = data?.docs.map((book) => _createMiniBook(book))
+    return _createSearchedBooksByQuery(queryTxt, transformedBooks)
+}
+
+function _createSearchedBooksByQuery(queryTxt, books) {
+    return {
+        queryTxt,
+        books
+    }
+}
+
+function _createErrorSearchedBooksByQuery(error, queryTxt) {
+    return {
+        queryTxt,
+        books: [],
+        error
+    }
+}
+
 
 // ------------------------------------ Regular Author ------------------------------------
 function _transformAuthorById(authorId, data) {
