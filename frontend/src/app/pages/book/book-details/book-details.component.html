@@ -16,7 +16,13 @@
         <section class="book-cover pd-20">
             <section class="flex justify-center">
                 <section class="book-picture">
-                    <img src="https://covers.openlibrary.org/b/id/{{book.openLibCoverIds[0]}}-M.jpg" alt="book">
+                    <ng-container *ngIf="book.openLibCoverIds[0] !== -1; else noCover">
+                        <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverIds[0] }}-M.jpg" alt="book">
+                    </ng-container>
+
+                    <ng-template #noCover>
+                        <div class="text-align-center flex align-center justify-center bg-clr-gray-0 height-full width-full">missing cover</div>
+                    </ng-template>
                 </section>
             </section>
             <section class="pd-bl-st-20 text-align-center">

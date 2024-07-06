@@ -20,8 +20,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute) {}
 
   // TODO:
-  //    1) add missing cover icon/image
-  //    2) add template score icons
+  //    1) add template score icons
 
   ngOnInit() {
     this.sub = this.route.data
