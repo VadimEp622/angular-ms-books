@@ -1,26 +1,32 @@
-import { Component, Input } from '@angular/core'
-import { CarouselModule } from 'primeng/carousel'
-import { BooksByGenre } from '../../models/books-by-genre.model'
-import { BookPreviewSideBySideComponent } from '../book-list/book-preview-side-by-side/book-preview-side-by-side.component'
-import { BookPreviewCoverOnlyComponent } from '../book-list/book-preview-cover-only/book-preview-cover-only.component'
+import { Component, Input } from '@angular/core';
+import { CarouselModule } from 'primeng/carousel';
+import { BooksByGenre } from '../../models/books-by-genre.model';
+import { BookPreviewSideBySideComponent } from '../book-list/book-preview-side-by-side/book-preview-side-by-side.component';
+import { BookPreviewCoverOnlyComponent } from '../book-list/book-preview-cover-only/book-preview-cover-only.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'book-carousel',
   standalone: true,
-  imports: [CarouselModule, BookPreviewSideBySideComponent, BookPreviewCoverOnlyComponent],
+  imports: [
+    CarouselModule,
+    BookPreviewSideBySideComponent,
+    BookPreviewCoverOnlyComponent,
+    RouterLink,
+  ],
   templateUrl: './book-carousel.component.html',
-  styleUrl: './book-carousel.component.scss'
+  styleUrl: './book-carousel.component.scss',
 })
 export class BookCarouselComponent {
-  @Input() booksByGenre!: BooksByGenre
+  @Input() booksByGenre!: BooksByGenre;
 
-  responsiveOptions: any[] = this.getResponsiveOptions()
+  responsiveOptions: any[] = this.getResponsiveOptions();
 
   // TODO: increase book picture's dimensions
   // TODO: rethink if it's better for horizontal carousel to only have book pictures,
   //          and have lists for books + title + authors that are either not carousels or maybe horizontal carousels?
 
-  constructor() { }
+  constructor() {}
 
   // below is for cover-only
   getResponsiveOptions() {
@@ -28,29 +34,29 @@ export class BookCarouselComponent {
       {
         breakpoint: '1439px',
         numVisible: 5,
-        numScroll: 3
+        numScroll: 3,
       },
       {
         breakpoint: '1049px',
         numVisible: 4,
-        numScroll: 3
+        numScroll: 3,
       },
       {
         breakpoint: '750px',
         numVisible: 3,
-        numScroll: 3
+        numScroll: 3,
       },
       {
         breakpoint: '600px',
         numVisible: 2,
-        numScroll: 2
+        numScroll: 2,
       },
       {
         breakpoint: '470px',
         numVisible: 1,
-        numScroll: 1
-      }
-    ]
+        numScroll: 1,
+      },
+    ];
   }
 
   // // below is for cover-only (older)
@@ -118,7 +124,6 @@ export class BookCarouselComponent {
   //     }
   //   ]
   // }
-
 
   // // below is for side-by-side
   // getResponsiveOptions() {
