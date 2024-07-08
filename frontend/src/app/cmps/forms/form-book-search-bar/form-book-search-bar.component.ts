@@ -49,7 +49,7 @@ export class FormBookSearchBarComponent implements OnInit {
   onSubmit() {
     console.log('hi from submit', this.formSearch.value);
     // INFO: this works!
-    // TODO: make the query subsciption happen in the parent component search-bar
+    // TODO: make the query subsciption happen in the parent component search-bar + unsubscribe there of course.
     this.Sub = this.bookService
       .queryBooksBySearch(this.formSearch.value.txt)
       .pipe(

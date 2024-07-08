@@ -24,7 +24,8 @@ export class BookService {
     return this.http.get<any>(`${this.baseUrl}/works/${bookId}`);
   }
 
-  // TODO: create this function
+  // TODO: decide whether to have two functions, one for mini debounced instant search results, and one for regular routing to search page,
+  //        or just combine the two into one function.
   public queryBooksBySearch(queryTxt: string) {
     return this.http.get<any>(`${this.baseUrl}/search`, {
       params: { q: queryTxt },
