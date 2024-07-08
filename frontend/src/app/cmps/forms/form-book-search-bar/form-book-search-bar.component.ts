@@ -1,9 +1,11 @@
+import { Observable, Subscription, take, tap } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DynamicSvgComponent } from '../../dynamic-svg.component';
-import { NgClass } from '@angular/common';
+import { BookService } from './../../../services/book.service';
 
 @Component({
   selector: 'form-book-search-bar',
@@ -23,8 +25,12 @@ export class FormBookSearchBarComponent implements OnInit {
 
   formSearch!: FormGroup;
 
+  Sub!: Subscription;
+
   @Input() inputClass!: string[];
   @Input() buttonStyleClass!: string[];
+
+  constructor(private bookService: BookService) {}
 
   ngOnInit() {
     this.formSearch = new FormGroup({
@@ -42,6 +48,14 @@ export class FormBookSearchBarComponent implements OnInit {
 
   onSubmit() {
     console.log('hi from submit', this.formSearch.value);
-    // TODO: redirect to book/search?q=
+    // INFO: this works!
+    // TODO: make the query subsciption happen in the parent component search-bar
+    this.Sub = this.bookService
+      .queryBooksBySearch(this.formSearch.value.txt)
+      .pipe(
+        take(1),
+        tap((data) => console.log('form-book-search-bar return data', data))
+      )
+      .subscribe();
   }
 }
