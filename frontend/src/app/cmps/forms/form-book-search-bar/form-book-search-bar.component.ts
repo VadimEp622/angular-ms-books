@@ -1,4 +1,4 @@
-import { Observable, Subscription, take, tap } from 'rxjs';
+import { debounceTime, Observable, Subscription, take, tap } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DynamicSvgComponent } from '../../dynamic-svg.component';
 import { BookService } from './../../../services/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'form-book-search-bar',
@@ -30,7 +31,7 @@ export class FormBookSearchBarComponent implements OnInit {
   @Input() inputClass!: string[];
   @Input() buttonStyleClass!: string[];
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit() {
     this.formSearch = new FormGroup({
@@ -47,15 +48,23 @@ export class FormBookSearchBarComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('hi from submit', this.formSearch.value);
-    // INFO: this works!
     // TODO: make the query subsciption happen in the parent component search-bar + unsubscribe there of course.
-    this.Sub = this.bookService
-      .queryBooksBySearch(this.formSearch.value.txt)
-      .pipe(
-        take(1),
-        tap((data) => console.log('form-book-search-bar return data', data))
-      )
-      .subscribe();
+
+    this.router.navigate(['book', 'search'], {
+      queryParams: { q: this.formSearch.value.txt },
+    });
+
+    // TODO: make this work (debounced) so that when contents of "this.formSearch.value.txt" change, api call to fetch books happens,
+    //    and it renders it a small modal list of 5 mini books 
+
+    // this.Sub = this.bookService
+    //   .queryBooksBySearch(this.formSearch.value.txt)
+    //   .pipe(
+    //     take(1),
+    //     tap((data) => {
+    //       console.log('form-book-search-bar return data', data);
+    //     })
+    //   )
+    //   .subscribe();
   }
 }
