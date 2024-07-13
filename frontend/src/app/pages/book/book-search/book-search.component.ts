@@ -21,6 +21,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
 
   // TODO: make book-list-vertical cmp accept queryTxt prop
   //    maybe make a central book-list, which according to props, decides which type of list to render?
+  //    maybe central book-list will render title, and the rest of the specific book-list-types, will have just the books[] prop (carousel may have "title" prop, for all cases)
 
   constructor(private route: ActivatedRoute) {}
 
