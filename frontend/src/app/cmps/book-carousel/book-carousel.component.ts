@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
-import { BooksByGenre } from '../../models/books-by-genre.model';
 import { BookPreviewSideBySideComponent } from '../book-list/book-preview-side-by-side/book-preview-side-by-side.component';
 import { BookPreviewCoverOnlyComponent } from '../book-list/book-preview-cover-only/book-preview-cover-only.component';
 import { RouterLink } from '@angular/router';
+import { APIBooksByGenre } from '../../models/api.model';
 
 @Component({
   selector: 'book-carousel',
@@ -18,7 +18,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './book-carousel.component.scss',
 })
 export class BookCarouselComponent {
-  @Input() booksByGenre!: BooksByGenre;
+  @Input() booksByGenre!: APIBooksByGenre;
 
   responsiveOptions: any[] = this.getResponsiveOptions();
 

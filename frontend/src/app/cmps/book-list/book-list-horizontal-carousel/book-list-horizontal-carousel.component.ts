@@ -1,19 +1,18 @@
-import { JsonPipe, NgFor, NgIf } from '@angular/common'
-import { Component, Input } from '@angular/core'
-import { BookCarouselComponent } from '../../book-carousel/book-carousel.component'
-import { BooksByGenre } from '../../../models/books-by-genre.model'
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { BookCarouselComponent } from '../../book-carousel/book-carousel.component';
+import { APIBooksByGenre } from '../../../models/api.model';
 
 @Component({
   selector: 'book-list-horizontal-carousel',
   standalone: true,
   imports: [JsonPipe, NgFor, NgIf, BookCarouselComponent],
   templateUrl: './book-list-horizontal-carousel.component.html',
-  styleUrl: './book-list-horizontal-carousel.component.scss'
+  styleUrl: './book-list-horizontal-carousel.component.scss',
 })
 export class BookListHorizontalCarouselComponent {
-  @Input() booksByGenre!: BooksByGenre
+  @Input() booksByGenre!: APIBooksByGenre;
 
-  
   // ========================================================================
   // INFO: there will be several preview types -
   //   - preview A -> cover to the left, info to the right

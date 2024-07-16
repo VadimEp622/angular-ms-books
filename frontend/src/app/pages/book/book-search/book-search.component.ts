@@ -2,11 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, tap } from 'rxjs';
-
-interface BooksBySearch {
-  queryTxt: string;
-  books: any[];
-}
+import { APIBooksBySearch } from '../../../models/api.model';
 
 @Component({
   selector: 'book-search',
@@ -17,7 +13,7 @@ interface BooksBySearch {
 })
 export class BookSearchComponent implements OnInit, OnDestroy {
   sub!: Subscription;
-  booksBySearch!: BooksBySearch;
+  booksBySearch!: APIBooksBySearch;
 
   // TODO: make book-list-vertical cmp accept queryTxt prop
   //    maybe make a central book-list, which according to props, decides which type of list to render?

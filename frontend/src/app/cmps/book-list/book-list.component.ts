@@ -1,17 +1,32 @@
-import { JsonPipe, NgFor, NgIf } from '@angular/common'
-import { Component, Input } from '@angular/core'
-import { BooksByGenre } from '../../models/books-by-genre.model'
-import { BookCarouselComponent } from '../book-carousel/book-carousel.component'
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { BookCarouselComponent } from '../book-carousel/book-carousel.component';
+import {
+  BookListDataType,
+  ListType,
+  PreviewType,
+} from '../../models/types.model';
+import { APIBooksByGenre, APIBooksBySearch } from '../../models/api.model';
+
+interface BookListProps {
+  data: APIBooksByGenre | APIBooksBySearch;
+  dataType: BookListDataType;
+  listType: ListType;
+  previewType: PreviewType;
+}
+
+// TODO: create an abstracted book-list cmp, which will render different book-list cmps based on "BookListProps"
 
 @Component({
   selector: 'book-list',
   standalone: true,
   imports: [JsonPipe, NgFor, NgIf, BookCarouselComponent],
   templateUrl: './book-list.component.html',
-  styleUrl: './book-list.component.scss'
+  styleUrl: './book-list.component.scss',
 })
 export class BookListComponent {
-  @Input() booksByGenre!: BooksByGenre
+  // @Input() booksByGenre!: APIBooksByGenre;
+  @Input() bookListProps!: BookListProps;
 
   // ========================================================================
   // INFO: there will be several preview types -
@@ -32,5 +47,4 @@ export class BookListComponent {
   // TODO: decide on how to handle book-lists:
   //   1) different component for each list type.
   //   2) one list component, with dynamic list-type input.
-
 }

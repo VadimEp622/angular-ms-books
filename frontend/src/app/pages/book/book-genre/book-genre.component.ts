@@ -2,8 +2,8 @@ import { Subscription, tap } from 'rxjs';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BooksByGenre } from '../../../models/books-by-genre.model';
 import { BookListVerticalComponent } from '../../../cmps/book-list/book-list-vertical/book-list-vertical.component';
+import { APIBooksByGenre } from '../../../models/api.model';
 
 @Component({
   selector: 'book-genre',
@@ -17,7 +17,7 @@ import { BookListVerticalComponent } from '../../../cmps/book-list/book-list-ver
 })
 export class BookGenreComponent implements OnInit, OnDestroy {
   sub!: Subscription;
-  booksByGenre!: BooksByGenre;
+  booksByGenre!: APIBooksByGenre;
 
   constructor(private route: ActivatedRoute) {}
 

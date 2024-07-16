@@ -22,13 +22,13 @@ export class AppComponent implements OnInit, OnDestroy {
     private cookieService: CookieService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.tokenLoginSub = this.authService
       .loginByToken(this.cookieService.get('loginToken'))
       .subscribe();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.tokenLoginSub.unsubscribe();
   }
 
