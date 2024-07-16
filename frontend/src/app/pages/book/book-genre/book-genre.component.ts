@@ -4,11 +4,18 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookListVerticalComponent } from '../../../cmps/book-list/book-list-vertical/book-list-vertical.component';
 import { APIBooksByGenre } from '../../../models/api.model';
+import { BookListComponent } from '../../../cmps/book-list/book-list.component';
 
 @Component({
   selector: 'book-genre',
   standalone: true,
-  imports: [NgIf, NgFor, AsyncPipe, BookListVerticalComponent],
+  imports: [
+    NgIf,
+    NgFor,
+    AsyncPipe,
+    BookListVerticalComponent,
+    BookListComponent,
+  ],
   host: {
     class: 'full details-layout',
   },

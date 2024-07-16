@@ -7,6 +7,9 @@ import {
   PreviewType,
 } from '../../models/types.model';
 import { APIBooksByGenre, APIBooksBySearch } from '../../models/api.model';
+import { BookListVerticalComponent } from './book-list-vertical/book-list-vertical.component';
+import { BookListHorizontalCarouselComponent } from './book-list-horizontal-carousel/book-list-horizontal-carousel.component';
+import { BookListGridComponent } from './book-list-grid/book-list-grid.component';
 
 interface BookListProps {
   data: APIBooksByGenre | APIBooksBySearch;
@@ -17,16 +20,27 @@ interface BookListProps {
 
 // TODO: create an abstracted book-list cmp, which will render different book-list cmps based on "BookListProps"
 
+// TODO: create an abstracted "book-preview" cmp, which will render different book-preview cmps based on "PreviewType"
+//      basically - make a book-preview folder, create a book-preview cmp in it, and then put the different book-preview cmps in it as well.
+
 @Component({
   selector: 'book-list',
   standalone: true,
-  imports: [JsonPipe, NgFor, NgIf, BookCarouselComponent],
+  imports: [
+    JsonPipe,
+    NgFor,
+    NgIf,
+    BookCarouselComponent,
+    BookListVerticalComponent,
+    BookListHorizontalCarouselComponent,
+    BookListGridComponent,
+  ],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss',
 })
 export class BookListComponent {
   // @Input() booksByGenre!: APIBooksByGenre;
-  @Input() bookListProps!: BookListProps;
+  @Input() props!: BookListProps;
 
   // ========================================================================
   // INFO: there will be several preview types -

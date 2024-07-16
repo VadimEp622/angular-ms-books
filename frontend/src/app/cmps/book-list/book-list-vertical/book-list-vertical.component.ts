@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { BookPreviewSideBySideComponent } from '../book-preview-side-by-side/book-preview-side-by-side.component';
 import { NgFor } from '@angular/common';
-import { APIBooksByGenre } from '../../../models/api.model';
+import { APIBooksByGenre, APIBooksBySearch } from '../../../models/api.model';
+import { BookListDataType, PreviewType } from '../../../models/types.model';
 
 @Component({
   selector: 'book-list-vertical',
@@ -12,4 +13,8 @@ import { APIBooksByGenre } from '../../../models/api.model';
 })
 export class BookListVerticalComponent {
   @Input() booksByGenre!: APIBooksByGenre;
+
+  // @Input() data!: APIBooksByGenre | APIBooksBySearch;
+  // @Input() dataType!: BookListDataType;
+  // @Input() previewType!: PreviewType;
 }
