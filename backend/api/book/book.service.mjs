@@ -33,23 +33,34 @@ export async function queryBooksByGenre(genre) {
 
 export async function getBookById(bookId) {
     try {
-        // TODO: 
-        //     1. use bookId to get data from open-library
-        //     2. move fetch request to externalApiService
-        //     3. extract ONLY data you need
-
-
-        // Data will have:
-        // title, authors, openLibBookId, openLibCoverId, description
-        // basically everything I might need is in the fetched works object 
-        // ** Extra-> though I may need to later combine data with different editions and their varying covers/publish dates/etc..
-
+        const book = await externalApiService.fetchBookById(bookId)
+        return book
     } catch (error) {
         logger.error('Failed to get book by id', error)
         throw error
     }
 }
 
+export async function getAuthorById(authorId) {
+    try {
+        const booksByAuthor = await externalApiService.fetchAuthorById(authorId)
+        return booksByAuthor
+    } catch (error) {
+        logger.error('Failed fetching books by authorId', error)
+        throw error
+    }
+}
+
+export async function getSearchedBooksByQuery(queryTxt) {
+    try {
+        const queryResults = await externalApiService.fetchSearchedBooksByQuery(queryTxt)
+        return queryResults
+    } catch (error) {
+        logger.error('Failed fetching books by query', searchTxt)
+        throw error
+    }
+
+}
 
 
 

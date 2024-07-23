@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FormHeaderSearchComponent } from '../../../forms/form-header-search/form-header-search.component';
+import { FormBookSearchBarComponent } from '../../../forms/form-book-search-bar/form-book-search-bar.component';
 
 @Component({
   selector: 'search-bar',
   standalone: true,
-  imports: [FormHeaderSearchComponent],
+  imports: [FormBookSearchBarComponent],
   host: { class: 'width-full flex' },
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',

@@ -1,1 +1,50 @@
-<p>book-details works!</p>
+<section class="book-details-page pd-bl-st-40 flex gap24">
+
+    <section class="mobile-book-title-and-author">
+        <h1 class="book-title fs22 fw600">{{book.title}}</h1>
+
+        <section class="book-author flex gap5 fs14 fw400 mg-bl-st-10 mg-bl-ed-10">
+            <p>by</p>
+            <section class="flex" *ngFor="let author of book.authors; last as isLast">
+                <p class="underline">{{author.authorName}}</p>
+                <span *ngIf="!isLast">,</span>
+            </section>
+        </section>
+    </section>
+
+    <section class="book-cover-container">
+        <section class="book-cover pd-20">
+            <section class="flex justify-center">
+                <section class="book-picture">
+                    <ng-container *ngIf="book.openLibCoverIds[0] !== -1; else noCover">
+                        <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverIds[0] }}-M.jpg" alt="book">
+                    </ng-container>
+
+                    <ng-template #noCover>
+                        <div class="text-align-center flex align-center justify-center bg-clr-gray-0 height-full width-full">missing cover</div>
+                    </ng-template>
+                </section>
+            </section>
+            <section class="pd-bl-st-20 text-align-center">
+                <p>WIP Ratings</p>
+            </section>
+        </section>
+    </section>
+
+    <section class="book-about-container">
+        <section class="book-title-and-author">
+            <h1 class="book-title fs32 fw600">{{book.title}}</h1>
+
+            <section class="book-author flex gap5 fs16 fw400 mg-bl-st-10 mg-bl-ed-20">
+                <p>by</p>
+                <section class="flex" *ngFor="let author of book.authors; last as isLast">
+                    <p class="underline">{{author.authorName}}</p>
+                    <span *ngIf="!isLast">,</span>
+                </section>
+            </section>
+        </section>
+
+        <pre class="white-space-pre-wrap fs14 lh21 pd-bl-20">{{book.description}}</pre>
+    </section>
+
+</section>

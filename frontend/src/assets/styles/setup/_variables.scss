@@ -27,7 +27,8 @@ $map-clr: (
         "gray-1": #858f7e,
         "gray-2": #8f98a0,
         "gray-3": #cccccc,
-        "gray-4": #2f2f2f
+        "gray-4": #2f2f2f,
+        "gray-5": #333333
     ),
     "red": (
         "red-0": #f98460,
@@ -41,8 +42,8 @@ $map-clr: (
 /* =================== Breakpoints =================== */
 // TODO: improve breakpoints + media query structure
 $map-breakpoint: (
-    "s": 375px,  // used
-    "m": 700px,  // used
+    "s": 375px, // used
+    "m": 700px, // used
     "xm": 900px, // used
     "l": 1050px, // used
     "xl": 1440px // used
@@ -56,6 +57,9 @@ $map-content-width: (
         "mobile": 700px,
         "tablet": 900px,
         "desktop": 1200px
+    ),
+    "details-layout": (
+        "desktop": 1050px
     )
 );
 
@@ -69,9 +73,12 @@ $map-font-size: (
     "11": 11px,
     "12": 12px,
     "14": 14px,
+    "16": 16px,
     "18": 18px,
     "20": 20px,
+    "22": 22px,
     "25": 25px,
+    "32": 32px,
     "34": 34px
 );
 
@@ -79,8 +86,10 @@ $map-font-size: (
 $map-line-height: (
     "12": 12px,
     "14": 14px,
+    "16": 16px,
     "18": 18px,
     "20": 20px,
+    "21": 21px,
     "24": 24px,
     "25": 25px,
     "34": 34px
@@ -107,6 +116,7 @@ $map-spacing: (
     "10": 10px,
     "15": 15px,
     "20": 20px,
+    "24": 24px,
     "40": 40px
 );
 
@@ -148,7 +158,8 @@ $map-padding-block: (
 $map-padding-block-start: (
     "0": map-get($map-spacing, "0"),
     "15": map-get($map-spacing, "15"),
-    "20": map-get($map-spacing, "20")
+    "20": map-get($map-spacing, "20"),
+    "40": map-get($map-spacing, "40")
 );
 
 $map-padding-block-end: (
@@ -199,6 +210,7 @@ $map-margin-block-start: (
 
 $map-margin-block-end: (
     "0": map-get($map-spacing, "0"),
+    "5": map-get($map-spacing, "5"),
     "10": map-get($map-spacing, "10"),
     "20": map-get($map-spacing, "20")
 );
@@ -209,5 +221,6 @@ $map-gap: (
     "5": map-get($map-spacing, "5"),
     "10": map-get($map-spacing, "10"),
     "20": map-get($map-spacing, "20"),
+    "24": map-get($map-spacing, "24"),
     "40": map-get($map-spacing, "40")
 );

@@ -1,11 +1,18 @@
 <section class="book-list-vertical-container mg-bl-20 pd-20">
+
     <section>
-        <h1 class="category-title fs18 capitalize pd-10 mg-bl-ed-20">{{ booksByGenre.genre }}</h1>
+        <h1 *ngIf="props.dataType==='genre'" class="category-title fs18 capitalize pd-10 mg-bl-ed-20">{{
+            getGenre(props.data) }}
+        </h1>
+
+        <section *ngIf="props.dataType==='search'" class="category-title pd-10 mg-bl-ed-20 flex gap5 align-center">
+            <p class="fs16">Search results for:</p>
+            <p class="fs18 fw600">{{getGenre(props.data) }}</p>
+        </section>
     </section>
+
     <section class="book-list">
-        <book-preview-side-by-side
-            *ngFor="let book of booksByGenre.books"
-            [book]="book"
-        ></book-preview-side-by-side>
+        <book-preview [props]="props"></book-preview>
     </section>
+
 </section>

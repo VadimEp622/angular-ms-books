@@ -1,0 +1,17 @@
+<form [formGroup]="formSearch" (ngSubmit)="onSubmit()" class="flex">
+    <input
+           pInputText
+           id="search"
+           aria-describedby="search-help"
+           formControlName="txt"
+           [ngClass]="inputClass"
+           class="search-box width-full br-tr-0 br-br-0 hover-not-allowed" 
+           />
+           
+    <p-button
+              type="submit"
+              [styleClass]="getButtonStyleClass()"
+              class="search-btn">
+        <dynamic-svg class="search-icon clr-white" [svgPath]="'assets/imgs/icon/search/search.svg'"></dynamic-svg>
+    </p-button>
+</form>

@@ -8,3 +8,7 @@
     background-color: darken(map-get($map-clr, "pure", "white"), 2%);
     z-index: -1;
 }
+
+.spacing-for-footer {
+    padding-block-end: 120px;
+}

@@ -1,3 +1,19 @@
-<section class="book-list pd-20">
-    <book-carousel [booksByGenre]="booksByGenre"></book-carousel>
+<section class="book-list full" [ngClass]="layoutService.getLayout()">
+    <book-list-vertical
+                        *ngIf="props.listType === 'vertical'"
+                        [props]="props"
+                        class="full"
+                        [ngClass]="layoutService.getLayout()"></book-list-vertical>
+
+    <book-list-horizontal-carousel
+                                   *ngIf="props.listType === 'horizontal-carousel'"
+                                   [props]="props"
+                                   class="full"
+                                   [ngClass]="layoutService.getLayout()"></book-list-horizontal-carousel>
+
+    <book-list-grid
+                    *ngIf="props.listType === 'grid'"
+                    [props]="props"
+                    class="full"
+                    [ngClass]="layoutService.getLayout()"></book-list-grid>
 </section>

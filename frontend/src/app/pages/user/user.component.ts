@@ -38,7 +38,7 @@ export class UserComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.userSub.unsubscribe();
     if (this.logoutSub) this.logoutSub.unsubscribe();
   }

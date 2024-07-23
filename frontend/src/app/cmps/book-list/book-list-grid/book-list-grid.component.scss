@@ -12,4 +12,12 @@
 
 .category-title {
     border-bottom: 2px solid map-get($map-clr, "gray", "gray-3");
+
+    & a {
+        color: #007185;
+
+        &:hover {
+            color: #c7511f;
+        }
+    }
 }

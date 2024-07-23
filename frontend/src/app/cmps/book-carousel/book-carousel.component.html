@@ -1,20 +1,25 @@
 <p-carousel
-    [value]="booksByGenre.books"
-    [numVisible]="7"
-    [numScroll]="3"
-    [circular]="false"
-    [responsiveOptions]="responsiveOptions"
-    indicatorsContentClass="pd-20 mg-bl-st-20"
->
+            [value]="props.data.books"
+            [numVisible]="7"
+            [numScroll]="3"
+            [circular]="false"
+            [responsiveOptions]="responsiveOptions"
+            indicatorsContentClass="pd-20 mg-bl-st-20">
     <ng-template pTemplate="header">
-        <h1 class="category-title fs18 capitalize pd-10 mg-bl-ed-20">{{booksByGenre.genre}}</h1>
+
+        <section *ngIf="props.dataType==='genre'" class="category-title flex space-between align-center mg-bl-ed-20">
+            <h1 class="fs18 capitalize pd-10">{{getGenre(props.data) }}</h1>
+            <a routerLink="/book/genre/{{getGenre(props.data) }}" class="fs14 lh16 align-self-end mg-bl-ed-5">See
+                more</a>
+        </section>
+
     </ng-template>
 
     <ng-template
-        let-book
-        pTemplate="item"
-    >
-        <!-- <book-preview-side-by-side [book]="book"></book-preview-side-by-side> -->
-        <book-preview-cover-only [book]="book"></book-preview-cover-only>
+                 let-book
+                 pTemplate="item">
+
+        <book-preview-cover-only *ngIf="props.previewType==='cover-only'" [book]="book"></book-preview-cover-only>
+
     </ng-template>
 </p-carousel>

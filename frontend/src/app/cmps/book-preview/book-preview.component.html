@@ -1,0 +1,11 @@
+<ng-container *ngIf="props.previewType==='side-by-side'">
+    <book-preview-side-by-side *ngFor="let book of props.data.books" [book]="book"></book-preview-side-by-side>
+</ng-container>
+
+<ng-container *ngIf="props.previewType==='top-to-bottom'">
+    <book-preview-top-to-bottom *ngFor="let book of props.data.books" [book]="book"></book-preview-top-to-bottom>
+</ng-container>
+
+<ng-container *ngIf="props.previewType==='cover-only'">
+    <book-preview-top-to-bottom *ngFor="let book of props.data.books" [book]="book"></book-preview-top-to-bottom>
+</ng-container>

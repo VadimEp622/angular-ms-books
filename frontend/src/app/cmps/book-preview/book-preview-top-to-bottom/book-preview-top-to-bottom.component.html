@@ -1,0 +1,23 @@
+<section class="book-preview-container flex pd-bl-10 pd-in-10 mg-in-10 mg-bl-10 pos-rel">
+    <a class="pos-abs inset-0" routerLink="book/works/{{ book.openLibBookId }}" aria-label="book" [ariaLabel]="book.title"></a>
+    <section class="book-preview flex column">
+
+        <section class="book-img-container flex justify-center align-center">
+            <section class="book-img">
+                <ng-container *ngIf="book.openLibCoverId !== -1;else noCover">
+                    <img src="https://covers.openlibrary.org/b/id/{{ book.openLibCoverId }}-M.jpg" alt="book">
+                </ng-container>
+
+                <ng-template #noCover>
+                    <div class="text-align-center flex align-center justify-center bg-clr-gray-0 height-full width-full">missing cover</div>
+                </ng-template>
+            </section>
+        </section>
+
+        <section class="book-info mg-bl-st-20">
+            <h3 class="title text-align-center" [title]="book.title">{{ book.title }}</h3>
+            <p class="authors text-align-center mg-bl-5" [title]="book.author_name.join(', ')">{{ book.author_name.join(', ') }}</p>
+        </section>
+
+    </section>
+</section>

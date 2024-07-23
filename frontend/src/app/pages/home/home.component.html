@@ -1,7 +1,7 @@
 <section class="home-page full home-page-layout">
     <home-hero></home-hero>
-    
-    <ng-container *ngFor="let booksByGenre of booksByGenres; let i = index">
+
+    <!-- <ng-container *ngFor="let booksByGenre of booksByGenres; let i = index">
     
         <ng-container *ngIf="(i>=0 && i<=1) || i>=3">
             <book-list-horizontal-carousel [booksByGenre]="booksByGenre"></book-list-horizontal-carousel>
@@ -11,5 +11,9 @@
             <book-list-grid [booksByGenre]="booksByGenre" class="full home-page-layout"></book-list-grid>
         </ng-container>
     
+    </ng-container> -->
+
+    <ng-container *ngFor="let props of propsArray;">
+        <book-list class="full home-page-layout" [props]="props"></book-list>
     </ng-container>
 </section>

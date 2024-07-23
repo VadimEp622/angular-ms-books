@@ -59,6 +59,21 @@
 // 0 - 1049px
 @include for-screen(null-to-tablet) {
     // ...
+    .details-layout {
+        grid-template-columns:
+            minmax(5px, 1fr)
+            minmax(auto, map-get($map-content-width, "details-layout", "desktop"))
+            minmax(5px, 1fr);
+    }
+
+    .book-details-page {
+        flex-direction: column;
+        padding-inline: 20px;
+
+        & .book-title-and-author {
+            display: none;
+        }
+    }
 }
 
 // 0 - 1439px
@@ -79,6 +94,23 @@
 // 1050px - infinity
 @include for-screen(tablet-to-infinity) {
     // ...
+
+    .details-layout {
+        grid-template-columns:
+            minmax(60px, 1fr)
+            minmax(auto, map-get($map-content-width, "details-layout", "desktop"))
+            minmax(60px, 1fr);
+    }
+
+    .book-details-page {
+        & .mobile-book-title-and-author {
+            display: none;
+        }
+
+        & .book-cover {
+            border: 1px solid #ddd;
+        }
+    }
 }
 
 // =================== Other ===================

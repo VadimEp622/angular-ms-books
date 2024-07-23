@@ -1,11 +1,9 @@
 <section class="book-list-grid-container mg-bl-20 pd-20">
-    <section>
-        <h1 class="category-title fs18 capitalize pd-10 mg-bl-ed-20">{{ booksByGenre.genre }}</h1>
+    <section *ngIf="props.dataType==='genre'" class="category-title flex space-between mg-bl-ed-20">
+        <h1 class="fs18 capitalize pd-10">{{getGenre(props.data) }}</h1>
+        <a routerLink="/book/genre/{{ getGenre(props.data) }}" class="fs14 lh16 align-self-end mg-bl-ed-5">See more</a>
     </section>
-    <section class="book-list">
-        <book-preview-top-to-bottom
-            *ngFor="let book of booksByGenre.books"
-            [book]="book"
-        ></book-preview-top-to-bottom>
+    <section class="book-list-wrapper">
+        <book-preview class="book-list" [props]="props"></book-preview>
     </section>
 </section>
