@@ -55,7 +55,7 @@ export class FormBookSearchBarComponent implements OnInit {
     });
 
     // TODO: make this work (debounced) so that when contents of "this.formSearch.value.txt" change, api call to fetch books happens,
-    //    and it renders it a small modal list of 5 mini books 
+    //    and it renders it a small modal list of 5 mini books
 
     // this.Sub = this.bookService
     //   .queryBooksBySearch(this.formSearch.value.txt)

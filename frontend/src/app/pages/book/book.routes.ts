@@ -22,6 +22,7 @@ export const routes: Routes = [
     path: 'search',
     component: BookSearchComponent,
     resolve: { booksBySearch: bookSearchResolver },
+    runGuardsAndResolvers: 'always', // allows to enter route again from this route, by query params change
   },
   {
     path: 'works/:id',

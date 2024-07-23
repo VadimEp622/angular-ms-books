@@ -15,15 +15,7 @@ import { BookListComponent } from '../../../cmps/book-list/book-list.component';
 })
 export class BookSearchComponent implements OnInit, OnDestroy {
   sub!: Subscription;
-  // booksBySearch!: APIBooksBySearch;
-
   props!: BookListProps<APIBooksBySearch>;
-
-  // TODO: implement book-search using new list/preview abstraction
-
-  // TODO: make book-list-vertical cmp accept queryTxt prop
-  //    maybe make a central book-list, which according to props, decides which type of list to render?
-  //    maybe central book-list will render title, and the rest of the specific book-list-types, will have just the books[] prop (carousel may have "title" prop, for all cases)
 
   constructor(private route: ActivatedRoute) {}
 
@@ -31,7 +23,6 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     this.sub = this.route.data
       .pipe(
         tap(({ booksBySearch }) => {
-          // this.booksBySearch = booksBySearch;
           this.props = {
             data: booksBySearch,
             dataType: 'search',

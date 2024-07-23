@@ -1,24 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
-import { BookPreviewSideBySideComponent } from '../book-list/book-preview-side-by-side/book-preview-side-by-side.component';
-import { BookPreviewCoverOnlyComponent } from '../book-list/book-preview-cover-only/book-preview-cover-only.component';
 import { RouterLink } from '@angular/router';
 import { APIBooksByGenre, APIBooksBySearch } from '../../models/api.model';
 import { BookListProps } from '../../models/props.model';
 import { NgIf } from '@angular/common';
-import { BookPreviewComponent } from '../book-preview/book-preview.component';
+import { BookPreviewCoverOnlyComponent } from '../book-preview/book-preview-cover-only/book-preview-cover-only.component';
 
 @Component({
   selector: 'book-carousel',
   standalone: true,
-  imports: [
-    CarouselModule,
-    BookPreviewSideBySideComponent,
-    BookPreviewCoverOnlyComponent,
-    RouterLink,
-    NgIf,
-    BookPreviewComponent,
-  ],
+  imports: [CarouselModule, RouterLink, NgIf, BookPreviewCoverOnlyComponent],
   templateUrl: './book-carousel.component.html',
   styleUrl: './book-carousel.component.scss',
 })

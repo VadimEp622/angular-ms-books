@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { BookPreviewSideBySideComponent } from '../book-preview-side-by-side/book-preview-side-by-side.component';
 import { NgFor, NgIf } from '@angular/common';
 import { BookListProps } from '../../../models/props.model';
 import { APIBooksByGenre, APIBooksBySearch } from '../../../models/api.model';
@@ -8,7 +7,7 @@ import { BookPreviewComponent } from '../../book-preview/book-preview.component'
 @Component({
   selector: 'book-list-vertical',
   standalone: true,
-  imports: [NgFor, BookPreviewSideBySideComponent, NgIf, BookPreviewComponent],
+  imports: [NgFor, NgIf, BookPreviewComponent],
   templateUrl: './book-list-vertical.component.html',
   styleUrl: './book-list-vertical.component.scss',
 })

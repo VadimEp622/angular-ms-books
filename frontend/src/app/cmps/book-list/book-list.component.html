@@ -1,6 +1,4 @@
 <section class="book-list full" [ngClass]="layoutService.getLayout()">
-    <!-- <book-carousel [booksByGenre]="booksByGenre"></book-carousel> -->
-
     <book-list-vertical
                         *ngIf="props.listType === 'vertical'"
                         [props]="props"
