@@ -48,6 +48,7 @@ export class FormBookSearchBarComponent implements OnInit {
   }
 
   onSubmit() {
+    // TODO: remove hover effect "not-allowed" from search
     // TODO: make the query subsciption happen in the parent component search-bar + unsubscribe there of course.
 
     this.router.navigate(['book', 'search'], {
