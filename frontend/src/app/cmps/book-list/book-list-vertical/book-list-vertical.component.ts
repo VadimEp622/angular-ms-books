@@ -1,20 +1,27 @@
 import { Component, Input } from '@angular/core';
 import { BookPreviewSideBySideComponent } from '../book-preview-side-by-side/book-preview-side-by-side.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { BookListProps } from '../../../models/props.model';
 import { APIBooksByGenre, APIBooksBySearch } from '../../../models/api.model';
-import { BookListDataType, PreviewType } from '../../../models/types.model';
+import { BookPreviewComponent } from '../../book-preview/book-preview.component';
 
 @Component({
   selector: 'book-list-vertical',
   standalone: true,
-  imports: [NgFor, BookPreviewSideBySideComponent],
+  imports: [NgFor, BookPreviewSideBySideComponent, NgIf, BookPreviewComponent],
   templateUrl: './book-list-vertical.component.html',
   styleUrl: './book-list-vertical.component.scss',
 })
 export class BookListVerticalComponent {
-  @Input() booksByGenre!: APIBooksByGenre;
+  @Input() props!: BookListProps<APIBooksByGenre | APIBooksBySearch>;
 
-  // @Input() data!: APIBooksByGenre | APIBooksBySearch;
-  // @Input() dataType!: BookListDataType;
-  // @Input() previewType!: PreviewType;
+  getGenre(data: APIBooksByGenre | APIBooksBySearch): string {
+    if ('genre' in data) {
+      return data.genre;
+    } else if ('queryTxt' in data) {
+      return data.queryTxt;
+    } else {
+      return ''; // Handle APIBooksBySearch case accordingly
+    }
+  }
 }

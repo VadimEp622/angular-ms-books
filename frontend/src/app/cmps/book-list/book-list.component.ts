@@ -1,22 +1,12 @@
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { LayoutService } from './../../services/layout.service';
+import { JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { BookCarouselComponent } from '../book-carousel/book-carousel.component';
-import {
-  BookListDataType,
-  ListType,
-  PreviewType,
-} from '../../models/types.model';
-import { APIBooksByGenre, APIBooksBySearch } from '../../models/api.model';
 import { BookListVerticalComponent } from './book-list-vertical/book-list-vertical.component';
 import { BookListHorizontalCarouselComponent } from './book-list-horizontal-carousel/book-list-horizontal-carousel.component';
 import { BookListGridComponent } from './book-list-grid/book-list-grid.component';
-
-interface BookListProps {
-  data: APIBooksByGenre | APIBooksBySearch;
-  dataType: BookListDataType;
-  listType: ListType;
-  previewType: PreviewType;
-}
+import { BookListProps } from '../../models/props.model';
+import { APIBooksByGenre, APIBooksBySearch } from '../../models/api.model';
 
 // TODO: create an abstracted book-list cmp, which will render different book-list cmps based on "BookListProps"
 
@@ -34,13 +24,16 @@ interface BookListProps {
     BookListVerticalComponent,
     BookListHorizontalCarouselComponent,
     BookListGridComponent,
+    NgClass,
   ],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss',
 })
 export class BookListComponent {
   // @Input() booksByGenre!: APIBooksByGenre;
-  @Input() props!: BookListProps;
+  @Input() props!: BookListProps<APIBooksByGenre | APIBooksBySearch>;
+
+  constructor(public layoutService: LayoutService) {}
 
   // ========================================================================
   // INFO: there will be several preview types -

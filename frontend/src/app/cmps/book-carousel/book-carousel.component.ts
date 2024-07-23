@@ -3,7 +3,10 @@ import { CarouselModule } from 'primeng/carousel';
 import { BookPreviewSideBySideComponent } from '../book-list/book-preview-side-by-side/book-preview-side-by-side.component';
 import { BookPreviewCoverOnlyComponent } from '../book-list/book-preview-cover-only/book-preview-cover-only.component';
 import { RouterLink } from '@angular/router';
-import { APIBooksByGenre } from '../../models/api.model';
+import { APIBooksByGenre, APIBooksBySearch } from '../../models/api.model';
+import { BookListProps } from '../../models/props.model';
+import { NgIf } from '@angular/common';
+import { BookPreviewComponent } from '../book-preview/book-preview.component';
 
 @Component({
   selector: 'book-carousel',
@@ -13,12 +16,16 @@ import { APIBooksByGenre } from '../../models/api.model';
     BookPreviewSideBySideComponent,
     BookPreviewCoverOnlyComponent,
     RouterLink,
+    NgIf,
+    BookPreviewComponent,
   ],
   templateUrl: './book-carousel.component.html',
   styleUrl: './book-carousel.component.scss',
 })
 export class BookCarouselComponent {
-  @Input() booksByGenre!: APIBooksByGenre;
+  // @Input() booksByGenre!: APIBooksByGenre;
+
+  @Input() props!: BookListProps<APIBooksByGenre | APIBooksBySearch>;
 
   responsiveOptions: any[] = this.getResponsiveOptions();
 
@@ -57,6 +64,14 @@ export class BookCarouselComponent {
         numScroll: 1,
       },
     ];
+  }
+
+  getGenre(data: APIBooksByGenre | APIBooksBySearch): string {
+    if ('genre' in data) {
+      return data.genre;
+    } else {
+      return ''; // Handle APIBooksBySearch case accordingly
+    }
   }
 
   // // below is for cover-only (older)

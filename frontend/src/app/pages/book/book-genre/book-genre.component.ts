@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookListVerticalComponent } from '../../../cmps/book-list/book-list-vertical/book-list-vertical.component';
 import { APIBooksByGenre } from '../../../models/api.model';
 import { BookListComponent } from '../../../cmps/book-list/book-list.component';
+import { BookListProps } from '../../../models/props.model';
 
 @Component({
   selector: 'book-genre',
@@ -24,7 +25,8 @@ import { BookListComponent } from '../../../cmps/book-list/book-list.component';
 })
 export class BookGenreComponent implements OnInit, OnDestroy {
   sub!: Subscription;
-  booksByGenre!: APIBooksByGenre;
+  // booksByGenre!: APIBooksByGenre;
+  props!: BookListProps<APIBooksByGenre>;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -38,7 +40,13 @@ export class BookGenreComponent implements OnInit, OnDestroy {
     this.sub = this.route.data
       .pipe(
         tap(({ booksByGenre }) => {
-          this.booksByGenre = booksByGenre;
+          this.props = {
+            data: booksByGenre,
+            dataType: 'genre',
+            listType: 'vertical',
+            previewType: 'side-by-side',
+          };
+          // this.booksByGenre = booksByGenre;
         })
       )
       .subscribe();

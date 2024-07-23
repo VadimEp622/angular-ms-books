@@ -1,0 +1,23 @@
+@import "../../../../assets/styles/setup/_variables.scss";
+
+.book-preview-container {
+    height: 100%;
+
+    & .book-preview {
+        box-shadow: 0 3px 10px -2px map-get($map-clr, "pure", "black");
+        transition: box-shadow 0.1s ease-in-out;
+        border-radius: 8px;
+    }
+
+    &:hover {
+        .book-preview {
+            box-shadow: 0 0px 10px 2px map-get($map-clr, "pure", "black");
+            cursor: not-allowed;
+        }
+    }
+}
+
+.book-img {
+    width: 97px;
+    height: 180px;
+}

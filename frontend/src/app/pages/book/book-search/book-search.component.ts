@@ -3,17 +3,23 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, tap } from 'rxjs';
 import { APIBooksBySearch } from '../../../models/api.model';
+import { BookListProps } from '../../../models/props.model';
+import { BookListComponent } from '../../../cmps/book-list/book-list.component';
 
 @Component({
   selector: 'book-search',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [JsonPipe, BookListComponent],
   templateUrl: './book-search.component.html',
   styleUrl: './book-search.component.scss',
 })
 export class BookSearchComponent implements OnInit, OnDestroy {
   sub!: Subscription;
-  booksBySearch!: APIBooksBySearch;
+  // booksBySearch!: APIBooksBySearch;
+
+  props!: BookListProps<APIBooksBySearch>;
+
+  // TODO: implement book-search using new list/preview abstraction
 
   // TODO: make book-list-vertical cmp accept queryTxt prop
   //    maybe make a central book-list, which according to props, decides which type of list to render?
@@ -25,7 +31,13 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     this.sub = this.route.data
       .pipe(
         tap(({ booksBySearch }) => {
-          this.booksBySearch = booksBySearch;
+          // this.booksBySearch = booksBySearch;
+          this.props = {
+            data: booksBySearch,
+            dataType: 'search',
+            listType: 'vertical',
+            previewType: 'side-by-side',
+          };
         })
       )
       .subscribe();

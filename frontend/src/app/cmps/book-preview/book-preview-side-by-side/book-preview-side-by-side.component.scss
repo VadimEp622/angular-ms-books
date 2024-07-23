@@ -1,0 +1,30 @@
+@import "../../../../assets/styles/setup/_variables.scss";
+
+.book-preview {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+
+    & .book-img {
+        width: 97px;
+        height: 180px;
+        min-width: 97px;
+    }
+
+    &:hover {
+        box-shadow: -2px 0px 10px -2px map-get($map-clr, "pure", "black");
+    }
+}
+
+.book-info {
+    overflow: hidden;
+
+    & .title,
+    & .authors {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
