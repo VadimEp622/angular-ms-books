@@ -23,6 +23,8 @@ import dotenv from 'dotenv'
 
 // TODO: in book api, create route getBookById
 
+// TODO: add typescript to backend
+
 
 
 

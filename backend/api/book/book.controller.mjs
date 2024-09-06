@@ -34,8 +34,6 @@ export async function getBooks(req, res) {
 
 export async function getSearchedBooks(req, res) {
     try {
-        // TODO: add typescript q,offset,limit
-        
         // const queryTxt = req.query?.q
         // const offset = req.query?.offset || 0
         // const limit = req.query?.limit || 5
