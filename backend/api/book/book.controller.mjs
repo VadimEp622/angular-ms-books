@@ -26,7 +26,7 @@ export async function getBooks(req, res) {
         cacheUrl.set(req.originalUrl, booksByGenre)
         logger.info(`Cache set - ${req.originalUrl}`)
         res.status(200).json(booksByGenre)
-    } catch (eerrorrr) {
+    } catch (error) {
         logger.error('Failed to get books by genre', error)
         res.status(500).send({ error: 'Failed to get books by genre' })
     }

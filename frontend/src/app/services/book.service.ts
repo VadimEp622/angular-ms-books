@@ -26,9 +26,21 @@ export class BookService {
 
   // TODO: decide whether to have two functions, one for mini debounced instant search results, and one for regular routing to search page,
   //        or just combine the two into one function.
-  public queryBooksBySearch(queryTxt: string) {
+  public queryBooksBySearch({
+    queryTxt,
+    offset = 0,
+    limit = 5,
+  }: {
+    queryTxt: string;
+    offset: number;
+    limit: number;
+  }) {
     return this.http.get<any>(`${this.baseUrl}/search`, {
-      params: { q: queryTxt },
+      params: {
+        q: queryTxt,
+        offset,
+        limit,
+      },
     });
   }
 
