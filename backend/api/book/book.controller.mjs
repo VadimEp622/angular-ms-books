@@ -34,8 +34,18 @@ export async function getBooks(req, res) {
 
 export async function getSearchedBooks(req, res) {
     try {
-        const queryTxt = req.query?.q
-        const queryResults = await getSearchedBooksByQuery(queryTxt)
+        // TODO: add typescript q,offset,limit
+        
+        // const queryTxt = req.query?.q
+        // const offset = req.query?.offset || 0
+        // const limit = req.query?.limit || 5
+
+        const { q: queryTxt, offset, limit } = req.query
+        // console.log('queryTxt', queryTxt)
+        // console.log('offset', offset)
+        // console.log('limit', limit)
+
+        const queryResults = await getSearchedBooksByQuery({ queryTxt, offset, limit })
         cacheUrl.set(req.originalUrl, queryResults)
         logger.info(`Cache set - ${req.originalUrl}`)
         res.status(200).json(queryResults)

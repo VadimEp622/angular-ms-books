@@ -51,9 +51,9 @@ export async function getAuthorById(authorId) {
     }
 }
 
-export async function getSearchedBooksByQuery(queryTxt) {
+export async function getSearchedBooksByQuery({ queryTxt, offset, limit }) {
     try {
-        const queryResults = await externalApiService.fetchSearchedBooksByQuery(queryTxt)
+        const queryResults = await externalApiService.fetchSearchedBooksByQuery({ queryTxt, offset, limit })
         return queryResults
     } catch (error) {
         logger.error('Failed fetching books by query', searchTxt)

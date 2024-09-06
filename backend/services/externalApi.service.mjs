@@ -69,9 +69,11 @@ async function fetchAuthorById(authorId) {
     }
 }
 
-async function fetchSearchedBooksByQuery(queryTxt) {
+async function fetchSearchedBooksByQuery({ queryTxt, offset, limit }) {
     try {
-        const data = await fetch(_getUrlSearchedBooksByQuery(queryTxt)).then(res => res.json())
+        const data = await fetch(_getUrlSearchedBooksByQuery({ queryTxt, offset, limit })).then(res => res.json())
+        // TODO: return to front-end, the number of pages (data.numFound / limit) to be used in pagination
+        // console.log('fetchSearchedBooksByQuery -> data?.numFound', data?.numFound)
         return _transformSearchedBooksByQuery(queryTxt, data)
     } catch (error) {
         logger.error('Failed fetching by search', error)
@@ -95,8 +97,14 @@ function _getUrlAuthorById(authorId = 'OL23919A') {
     return `https://openlibrary.org/authors/${authorId}.json`
 }
 
-function _getUrlSearchedBooksByQuery(queryTxt = 'the lord of the rings') {
-    return `https://openlibrary.org/search.json?q=${queryTxt}&fields=*,key,title,author_name,cover_i&limit=5&offset=0`
+function _getUrlSearchedBooksByQuery(
+    {
+        queryTxt = 'the lord of the rings',
+        offset,
+        limit
+    }
+) {
+    return `https://openlibrary.org/search.json?q=${queryTxt}&fields=*,key,title,author_name,cover_i&limit=${limit}&offset=${offset}`
 }
 
 
